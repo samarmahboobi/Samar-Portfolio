@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dubai Holding Entertainment — Coming Soon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="portfolio.css" />
+  <style>
+    body { cursor: none; min-height: 100vh; display: flex; flex-direction: column; }
+    .cursor {
+      position: fixed; width: 12px; height: 12px;
+      background: var(--accent); border-radius: 50%;
+      pointer-events: none; z-index: 9999;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 12px var(--accent), 0 0 24px var(--accent2);
+    }
+    .cursor-ring {
+      position: fixed; width: 36px; height: 36px;
+      border: 1px solid rgba(192,132,252,0.4); border-radius: 50%;
+      pointer-events: none; z-index: 9998;
+      transform: translate(-50%, -50%);
+    }
+    .coming-wrap {
+      flex: 1;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 8rem 2rem 4rem;
+      position: relative;
+    }
+    .coming-glow {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(124,58,237,0.08) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      animation: pulse 4s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%,100% { transform: translate(-50%,-50%) scale(1); opacity: 1; }
+      50% { transform: translate(-50%,-50%) scale(1.1); opacity: 0.7; }
+    }
+    .coming-tag {
+      font-size: .7rem; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 1.5rem; display: block;
+    }
+    .coming-title {
+      font-family: var(--serif);
+      font-size: clamp(1.6rem, 4vw, 3rem);
+      font-weight: 400; line-height: 1.2; color: var(--text);
+      text-shadow: 0 0 40px rgba(192,132,252,0.2);
+      margin-bottom: 1rem;
+    }
+    .coming-sub {
+      font-size: 1rem; color: var(--text-muted);
+      line-height: 1.8; max-width: 480px;
+      margin: 0 auto 2.5rem;
+    }
+    .coming-back {
+      display: inline-flex; align-items: center; gap: .6rem;
+      text-decoration: none; color: var(--text-muted);
+      font-size: .82rem; letter-spacing: .1em; text-transform: uppercase;
+      border: 1px solid var(--border); border-radius: 40px;
+      padding: .75rem 1.75rem;
+      transition: all .3s ease;
+      position: relative; z-index: 1;
+    }
+    .coming-back:hover {
+      border-color: var(--accent); color: var(--accent);
+      box-shadow: 0 0 16px rgba(192,132,252,0.2);
+    }
+    .coming-badge {
+      display: inline-flex; align-items: center; gap: .5rem;
+      font-size: .7rem; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--text-dim); border: 1px solid var(--border);
+      border-radius: 40px; padding: .4rem 1rem;
+      margin-bottom: 2rem;
+    }
+    .coming-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 6px var(--accent);
+      animation: blink 2s ease-in-out infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    footer {
+      text-align: center; padding: 32px;
+      font-size: 11px; letter-spacing: .15em;
+      text-transform: uppercase; color: var(--text-dim);
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav>
+  <a class="nav-avatar" href="index.html">
+    <span class="nav-name">Samar Mahboubi</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="projects.html" style="color:var(--accent)">Projects</a></li>
+    <li><a href="about.html">About Me</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="coming-wrap">
+  <div class="coming-glow"></div>
+
+  <div class="coming-badge">
+    <div class="coming-dot"></div>
+    Case Study in Progress
+  </div>
+
+  <span class="coming-tag">Dubai Holding Entertainment</span>
+  <h1 class="coming-title">Xplore Amazing —<br>DHE Gamification</h1>
+  <p class="coming-sub">
+    Transforming passive park attendance into an interactive, narrative-driven digital experience. This case study is currently being written and will be published soon.
+  </p>
+
+  <a class="coming-back" href="projects.html">← Back to Projects</a>
+</div>
+
+<footer>© 2025 Samar Mahboubi</footer>
+
+<script>
+  const cursor = document.getElementById('cursor');
+  const ring   = document.getElementById('cursorRing');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove', e => {
+    mx=e.clientX; my=e.clientY;
+    cursor.style.left=mx+'px'; cursor.style.top=my+'px';
+  });
+  (function loop(){ rx+=(mx-rx)*.12; ry+=(my-ry)*.12;
+    ring.style.left=rx+'px'; ring.style.top=ry+'px';
+    requestAnimationFrame(loop); })();
+</script>
+</body>
+</html>
