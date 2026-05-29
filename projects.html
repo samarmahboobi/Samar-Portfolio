@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects — Samar Mahboubi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="portfolio.css" />
+  <style>
+    /* Page-specific overrides */
+    body { cursor: none; }
+
+    .cursor {
+      position: fixed; width: 12px; height: 12px;
+      background: var(--accent); border-radius: 50%;
+      pointer-events: none; z-index: 9999;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 12px var(--accent), 0 0 24px var(--accent2);
+    }
+    .cursor-ring {
+      position: fixed; width: 36px; height: 36px;
+      border: 1px solid rgba(192,132,252,0.4); border-radius: 50%;
+      pointer-events: none; z-index: 9998;
+      transform: translate(-50%, -50%);
+    }
+
+    /* PAGE HERO */
+    .page-hero {
+      padding: 10rem 3rem 5rem;
+      max-width: 1100px; margin: 0 auto;
+    }
+    .page-hero-tag {
+      font-size: .7rem; letter-spacing: .15em; text-transform: uppercase;
+      color: var(--accent); font-weight: 500; margin-bottom: 1.2rem;
+      display: block;
+    }
+    .page-hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 400; line-height: 1.15;
+      color: var(--text);
+      text-shadow: 0 0 40px rgba(192,132,252,0.15);
+      margin-bottom: 1.2rem;
+    }
+    .page-hero p {
+      font-size: 1rem; color: var(--text-muted);
+      max-width: 520px; line-height: 1.8;
+    }
+
+    /* PROJECTS GRID */
+    .projects-grid {
+      max-width: 1100px; margin: 0 auto;
+      padding: 0 3rem 6rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: var(--bg);
+      text-decoration: none;
+      display: block;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s ease;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+    .project-card:hover { background: var(--bg2); }
+
+    .project-card-img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.92) saturate(0.9);
+      transition: filter 0.4s ease, transform 0.5s ease;
+    }
+    .project-card:hover .project-card-img {
+      filter: brightness(1) saturate(1);
+      transform: scale(1.02);
+    }
+
+    .project-card-body {
+      padding: 1.75rem 2rem 2rem;
+    }
+    .project-card-tag {
+      font-size: .65rem; letter-spacing: .15em; text-transform: uppercase;
+      color: var(--accent); font-weight: 500; margin-bottom: .6rem;
+      display: block;
+    }
+    .project-card-title {
+      font-family: var(--serif);
+      font-size: clamp(1rem, 1.4vw, 1.25rem);
+      font-weight: 400; color: var(--text);
+      line-height: 1.3; margin-bottom: .75rem;
+    }
+    .project-card-desc {
+      font-size: .88rem; color: var(--text-muted);
+      line-height: 1.75; margin-bottom: 1.25rem;
+    }
+    .project-card-footer {
+      display: flex; align-items: center;
+      justify-content: space-between;
+    }
+    .project-card-year {
+      font-size: .7rem; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--text-dim);
+    }
+    .project-card-arrow {
+      width: 32px; height: 32px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-dim);
+      transition: all 0.3s ease;
+      font-size: 14px;
+    }
+    .project-card:hover .project-card-arrow {
+      border-color: var(--accent);
+      color: var(--accent);
+      box-shadow: 0 0 12px rgba(192,132,252,0.3);
+      transform: translate(2px, -2px);
+    }
+
+    /* Coming soon card */
+    .project-card.soon {
+      opacity: 0.4;
+      pointer-events: none;
+    }
+    .project-card.soon .project-card-tag {
+      color: var(--text-dim);
+    }
+
+    /* DIVIDER */
+    .section-divider {
+      max-width: 1100px; margin: 0 auto 3rem;
+      padding: 0 3rem;
+      display: flex; align-items: center; gap: 1.5rem;
+    }
+    .section-divider span {
+      font-size: .7rem; letter-spacing: .15em;
+      text-transform: uppercase; color: var(--text-dim);
+      white-space: nowrap;
+    }
+    .section-divider::after {
+      content: ''; flex: 1;
+      height: 1px; background: var(--border);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center; padding: 32px;
+      font-size: 11px; letter-spacing: .15em;
+      text-transform: uppercase; color: var(--text-dim);
+      border-top: 1px solid var(--border);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .page-hero { padding: 8rem 1.5rem 3rem; }
+      .projects-grid { grid-template-columns: 1fr; padding: 0 1.5rem 4rem; }
+      .project-card-body { padding: 1.25rem 1.5rem 1.5rem; }
+    }
+
+    /* Fade in animation */
+    .project-card {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity .6s ease, transform .6s ease, background .3s ease;
+    }
+    .project-card.visible { opacity: 1; transform: translateY(0); }
+    .project-card:nth-child(2) { transition-delay: .1s; }
+    .project-card:nth-child(3) { transition-delay: .2s; }
+    .project-card:nth-child(4) { transition-delay: .3s; }
+  </style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-avatar" href="index.html">
+    <span class="nav-name">Samar Mahboubi</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="projects.html" style="color:var(--accent)">Projects</a></li>
+    <li><a href="about.html">About Me</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <span class="page-hero-tag">Selected Work</span>
+  <h1>Projects</h1>
+  <p>A selection of work spanning product strategy, UX research, interface design, and gamification — each shaped by real users and real constraints.</p>
+</div>
+
+<!-- PROJECTS GRID -->
+<div class="projects-grid" id="projectsGrid">
+
+  <!-- 1. GatherO -->
+  <a class="project-card" href="gathero_case_study.html">
+    <div style="overflow:hidden">
+      <img class="project-card-img" src="hero_image.png" alt="GatherO" />
+    </div>
+    <div class="project-card-body">
+      <span class="project-card-tag">UX Research · Product Strategy · UI Design</span>
+      <h2 class="project-card-title">GatherO — From Gambling to Social Play</h2>
+      <p class="project-card-desc">A research-driven platform pivot that transformed a crypto gambling concept into a social gaming platform where friends compete together.</p>
+      <div class="project-card-footer">
+        <span class="project-card-year">2023 – Present</span>
+        <div class="project-card-arrow">→</div>
+      </div>
+    </div>
+  </a>
+
+  <!-- 2. MOFA -->
+  <a class="project-card" href="mofa_case_study.html">
+    <div style="overflow:hidden">
+      <img class="project-card-img" src="MOFA_Sign_In_Page.png" alt="MOFA Dashboard" />
+    </div>
+    <div class="project-card-body">
+      <span class="project-card-tag">Dashboard · Data Visualisation · Gov-Tech</span>
+      <h2 class="project-card-title">MOFA — National Competitiveness Dashboard</h2>
+      <p class="project-card-desc">A performance management platform for the UAE's National Competitiveness Committee — enabling federal ministries to monitor global indicators and benchmark against G20 peers.</p>
+      <div class="project-card-footer">
+        <span class="project-card-year">2024 – Present</span>
+        <div class="project-card-arrow">→</div>
+      </div>
+    </div>
+  </a>
+
+  <!-- 3. Golrang -->
+  <a class="project-card" href="golrang_case_study.html">
+    <div style="overflow:hidden">
+      <img class="project-card-img" src="Golrang_Banner_1.png" alt="Golrang Industrial Group" />
+    </div>
+    <div class="project-card-body">
+      <span class="project-card-tag">Gamification · Behavioural Design · Mobile</span>
+      <h2 class="project-card-title">Golrang Industrial Group — Habit by Design</h2>
+      <p class="project-card-desc">A modern internal HR app that nobody used. Two gamification campaigns, eleven days each, and a funnel analysis in between — that's what changed the habit.</p>
+      <div class="project-card-footer">
+        <span class="project-card-year">2023 – 2024</span>
+        <div class="project-card-arrow">→</div>
+      </div>
+    </div>
+  </a>
+
+  <!-- 4. DHE -->
+  <a class="project-card" href="dhe_case_study.html">
+    <div style="overflow:hidden">
+      <img class="project-card-img" src="DHE_Banner.png" alt="Dubai Holding Entertainment" />
+    </div>
+    <div class="project-card-body">
+      <span class="project-card-tag">Gamification · Phygital · PWA</span>
+      <h2 class="project-card-title">Dubai Holding Entertainment — Xplore Amazing</h2>
+      <p class="project-card-desc">Transforming passive park attendance into an interactive, narrative-driven digital experience — accessible directly from visitors' phones without a native app download.</p>
+      <div class="project-card-footer">
+        <span class="project-card-year">2025 – 2026</span>
+        <div class="project-card-arrow">→</div>
+      </div>
+    </div>
+  </a>
+
+</div>
+
+<footer>© 2025 Samar Mahboubi</footer>
+
+<script>
+  /* Cursor */
+  const cursor = document.getElementById('cursor');
+  const ring   = document.getElementById('cursorRing');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove', e => {
+    mx=e.clientX; my=e.clientY;
+    cursor.style.left=mx+'px'; cursor.style.top=my+'px';
+  });
+  (function loop(){ rx+=(mx-rx)*.12; ry+=(my-ry)*.12;
+    ring.style.left=rx+'px'; ring.style.top=ry+'px';
+    requestAnimationFrame(loop); })();
+
+  /* Fade in cards */
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.project-card').forEach(c => observer.observe(c));
+</script>
+</body>
+</html>
