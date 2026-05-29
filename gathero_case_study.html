@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GatherO Game Platform — Case Study | Samar Mahboubi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="portfolio.css" />
+  <style>
+    .cover-wrap { padding: 0 3rem; }
+    .cover-img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16/9;
+      object-fit: contain;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      max-height: none;
+      display: block;
+    }
+
+    .mockup-img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16/9;
+      object-fit: contain;
+      border-radius: 8px;
+      display: block;
+    }
+
+    .mockup-full {
+      padding: 0 3rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .mockup-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      padding: 0 3rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .mockup-label {
+      font-size: .7rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      text-align: center;
+      margin-top: .6rem;
+      margin-bottom: 2rem;
+    }
+    .mockup-grid-2 .mockup-label { margin-bottom: 0; }
+
+    .role-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1.5rem;
+      font-size: .88rem;
+    }
+    .role-table th {
+      text-align: left;
+      font-size: .65rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      padding: .75rem 1rem;
+      border-bottom: 1px solid var(--border);
+      font-weight: 500;
+    }
+    .role-table td {
+      padding: .9rem 1rem;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+      line-height: 1.5;
+      vertical-align: top;
+    }
+    .role-table td:first-child {
+      color: var(--text);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .role-table tr:last-child td { border-bottom: none; }
+
+    @media(max-width: 768px) {
+      .cover-wrap,
+      .mockup-full,
+      .mockup-grid-2 { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .mockup-grid-2 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-avatar" href="index.html">
+    <span class="nav-name">Samar Mahboubi</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="projects.html" style="color:var(--accent)">Projects</a></li>
+    <li><a href="about.html">About Me</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <span class="hero-tag">Product Design · Social Gaming</span>
+  <h1>GatherO — <em>From Gambling<br>to Social Play</em></h1>
+  <p class="hero-desc">A research-driven platform pivot that transformed a crypto gambling concept into a social gaming platform where friends compete together.</p>
+
+  <div class="meta-row">
+    <div class="meta-item">
+      <div class="meta-label">Year</div>
+      <div class="meta-value">2023–2024</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Industry</div>
+      <div class="meta-value">Social Gaming</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Company</div>
+      <div class="meta-value">Ledgersi</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Duration</div>
+      <div class="meta-value">15 months</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Role</div>
+      <div class="meta-value">Senior Product Designer</div>
+    </div>
+  </div>
+</section>
+
+<!-- COVER -->
+<div class="cover-wrap">
+  <img class="cover-img" src="https://raw.githubusercontent.com/samarmahboobi/Samar-Portfolio/main/gathero_01.png" alt="GatherO Hero" style="max-height:none;object-fit:cover;border-radius:8px;">
+</div>
+
+<!-- PHONES STRIP -->
+<div class="phones-strip" id="phones-strip">
+  <div class="phone-wrap">
+    <div class="phone"><img src="https://raw.githubusercontent.com/samarmahboobi/Samar-Portfolio/main/gathero_02.png" alt="Registration"></div>
+    <div class="phone-label">Registration</div>
+  </div>
+  <div class="phone-wrap">
+    <div class="phone"><img src="https://raw.githubusercontent.com/samarmahboobi/Samar-Portfolio/main/gathero_03.png" alt="All Games"></div>
+    <div class="phone-label">Game Library</div>
+  </div>
+  <div class="phone-wrap">
+    <div class="phone"><img src="https://raw.githubusercontent.com/samarmahboobi/Samar-Portfolio/main/gathero_04.png" alt="Game Detail"></div>
+    <div class="phone-label">Game Detail</div>
+  </div>
+  <div class="phone-wrap">
+    <div class="phone"><img src="https://raw.githubusercontent.com/samarmahboobi/Samar-Portfolio/main/gathero_05.png" alt="Match Lobby"></div>
+    <div class="phone-label">Match Lobby</div>
+  </div>
+  <div class="phone-wrap">
+    <div class="phone"><img src="https://raw.githubusercontent.com/samarmahboobi/Samar-Portfolio/main/gathero_06.png" alt="Challenges"></div>
+    <div class="phone-label">Missions</div>
+  </div>
+</div>
+
+<hr class="hdivider">
+
+<!-- PROBLEM -->
+<section class="section" id="s1">
+  <span class="section-label">01 — Problem</span>
+  <h2>A hypothesis that<br>needed challenging</h2>
+  <p>The original concept — <strong>Rexinity</strong> — was a competitive gaming platform where players wagered in-platform tokens on casual mini-games, with a roadmap toward NFT conversion and a crypto sub-platform. The founding team believed casual gamers would enjoy light gambling mechanics.</p>
+  <p>My first question was whether the target user actually wanted to gamble on unfamiliar mini-games. Before touching Figma, I needed to find out.</p>
+
+  <div class="stats-row">
+    <div class="stat">
+      <div class="stat-num">36</div>
+      <div class="stat-desc">Screener survey<br>respondents</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">8</div>
+      <div class="stat-desc">Live simulation<br>participants</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">26×</div>
+      <div class="stat-desc">Mentions of "play<br>with friends" theme</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">10</div>
+      <div class="stat-desc">Avg. rounds played<br>per session</div>
+    </div>
+  </div>
+</section>
+
+<div class="img-break">
+  <img src="https://raw.githubusercontent.com/samarmahboobi/Samar-Portfolio/main/gathero_07.png" alt="Game icons" id="img1" style="width:100%;height:auto;display:block;object-fit:contain;background:#0d0d0d;max-height:none;">
+</div>
+
+<!-- RESEARCH -->
+<section class="section" id="s2">
+  <span class="section-label">02 — Research</span>
+  <h2>Two-phase research<br>that changed everything</h2>
+  <p><strong>Phase 1</strong> was a broad screener survey across 36 respondents, combining the Bartle Player Type Test with self-reported gambling and gaming habits. A clear pattern emerged: people who enjoy gambling prefer familiar games — poker, backgammon, sports betting — not unknown mini-games.</p>
+  <p><strong>Phase 2</strong> was a live simulation test. I invited 8 participants to the office and ran a behavioral study using real poker chips as stand-ins for in-platform currency, playing on Plato (a comparable mini-game platform). I tracked rounds played, willingness to increase stakes, and behavior when chips ran out.</p>
+
+  <div class="pull-quote">
+    <p>"I want to play these games with my friends" — repeated by 7 of 8 participants, 26 times across affinity mapping</p>
+  </div>
+
+  <p>Participants were happy to compete, but not against strangers for real stakes. The insight was simple and powerful: the opportunity wasn't gambling — it was <strong>social competitive gaming</strong>.</p>
+</section>
+
+<!-- PIVOT -->
+<section class="section" id="s3">
+  <span class="section-label">03 — The Pivot</span>
+  <h2>Rexinity became<br><em>GatherO</em></h2>
+  <p>I presented the findings to the founding team with a clear recommendation: the gambling mechanic was misaligned with actual user motivation. The real opportunity was giving groups of friends a platform to play casual mini-games together — online or at a physical gathering.</p>
+  <p>The team accepted the pivot. This was not just a naming change — it reframed the entire product vision, monetization model, and emotional design language from the ground up.</p>
+</section>
+
+<div class="img-break">
+  <img src="https://raw.githubusercontent.com/samarmahboobi/Samar-Portfolio/main/gathero_08.png" alt="Social Gaming" id="img2" style="width:100%;height:auto;display:block;object-fit:contain;background:#0d0d0d;max-height:none;">
+</div>
+
+<!-- EMOTIONAL DESIGN -->
+<section class="section" id="s4">
+  <span class="section-label">04 — Emotional Framework</span>
+  <h2>Designing for the<br>right feelings</h2>
+  <p>Before opening Figma, I used <strong>Plutchik's Wheel of Emotions</strong> and the Valence-Arousal model to map the exact emotional states GatherO should evoke across two distinct contexts.</p>
+
+  <div class="emotion-grid">
+    <div class="emotion-card">
+      <div class="emotion-card-label">Platform Experience</div>
+      <h4>Satisfied + Excited</h4>
+      <div class="emotion-tags">
+        <span class="tag">Hopeful</span>
+        <span class="tag">Confident</span>
+        <span class="tag">Pleased</span>
+        <span class="tag">Interested</span>
+        <span class="tag">Expectant</span>
+        <span class="tag">Self-confident</span>
+      </div>
+    </div>
+    <div class="emotion-card">
+      <div class="emotion-card-label">In-Game Experience</div>
+      <h4>Triumph + Tension</h4>
+      <div class="emotion-tags">
+        <span class="tag">Motivated</span>
+        <span class="tag">Triumphant</span>
+        <span class="tag">Adventurous</span>
+        <span class="tag">Impatient</span>
+        <span class="tag">Apprehensive</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="pull-quote" style="margin-top:2rem">
+    <p>Joy + Trust + Anticipation = <strong style="font-style:normal;color:var(--accent2)">Excitement</strong> — the platform's core value proposition</p>
+  </div>
+</section>
+
+<!-- DESIGN SYSTEM -->
+<section class="section" id="s5">
+  <span class="section-label">05 — Design System</span>
+  <h2>Built from scratch,<br>designed to scale</h2>
+  <p>I built GatherO's full design system from zero — every token, component, and pattern created with developer handoff in mind.</p>
+
+  <div class="ds-grid">
+    <div class="ds-card">
+      <div class="ds-card-title">Typography</div>
+      <div class="ds-card-body">Dual-font system: <strong style="color:var(--text)">Kanit</strong> for display and game-facing contexts, <strong style="color:var(--text)">SF Pro</strong> for UI body — balancing gaming energy with readability.</div>
+    </div>
+    <div class="ds-card">
+      <div class="ds-card-title">Color System</div>
+      <div class="ds-card-body">Deep purple primary with pink accent. Full token set from 50–1000 for light and dark surfaces. Semantic colors for all game states.</div>
+      <div class="color-swatches">
+        <div class="swatch" style="background:#8953F0"></div>
+        <div class="swatch" style="background:#572FA1"></div>
+        <div class="swatch" style="background:#311C5A"></div>
+        <div class="swatch" style="background:#F14C79"></div>
+        <div class="swatch" style="background:#CC2754"></div>
+        <div class="swatch" style="background:#0B93DF"></div>
+      </div>
+    </div>
+    <div class="ds-card">
+      <div class="ds-card-title">Components</div>
+      <div class="ds-card-body">Material Design + iOS HIG foundations. PRSE auto-layout system for Developer Friendly handoff. 4-column mobile grid at 393px.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SCREENS GALLERY -->
+<div class="phones-strip" id="phones-strip-2">
+  <div class="phone-wrap">
+    <div class="phone"><img src="https://raw.githubusercontent.com/samarmahboobi/Samar-Portfolio/main/gathero_09.png" alt="Match Lobby"></div>
+    <div class="phone-label">Match Lobby</div>
+  </div>
+  <div class="phone-wrap">
+    <div class="phone"><img src="https://raw.githubusercontent.com/samarmahboobi/Samar-Portfolio/main/gathero_10.png" alt="History"></div>
+    <div class="phone-label">Match History</div>
+  </div>
+  <div class="phone-wrap">
+    <div class="phone"><img src="https://raw.githubusercontent.com/samarmahboobi/Samar-Portfolio/main/gathero_11.png" alt="Community"></div>
+    <div class="phone-label">Community</div>
+  </div>
+  <div class="phone-wrap">
+    <div class="phone"><img src="https://raw.githubusercontent.com/samarmahboobi/Samar-Portfolio/main/gathero_12.png" alt="Shop"></div>
+    <div class="phone-label">Shop</div>
+  </div>
+  <div class="phone-wrap">
+    <div class="phone"><img src="https://raw.githubusercontent.com/samarmahboobi/Samar-Portfolio/main/gathero_13.png" alt="All Games"></div>
+    <div class="phone-label">All Games</div>
+  </div>
+</div>
+
+<hr class="hdivider">
+
+<!-- REFLECTION -->
+<section class="section" id="s6">
+  <span class="section-label">06 — Reflection</span>
+  <h2>What I'm proud of</h2>
+
+  <div class="reflection-grid">
+    <div class="ref-item">
+      <div class="ref-num">01</div>
+      <div class="ref-title">Research changed the product</div>
+      <div class="ref-text">The pivot from Rexinity to GatherO wasn't a founder decision — it was driven by a simulation test I designed and ran. The product exists in its current form because of what 8 people told us in a room with poker chips.</div>
+    </div>
+    <div class="ref-item">
+      <div class="ref-num">02</div>
+      <div class="ref-title">Emotional framework held end-to-end</div>
+      <div class="ref-text">Every major design decision — the currency system, mission structure, match lobby countdown, Play With Friends flow — traces back to the Joy + Trust + Anticipation framework defined before touching Figma.</div>
+    </div>
+    <div class="ref-item">
+      <div class="ref-num">03</div>
+      <div class="ref-title">Design system reduced friction</div>
+      <div class="ref-text">The developer-friendly component library significantly reduced back-and-forth during the MVP build phase and set the foundation for the platform's visual identity as it scaled.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">
+    <div style="font-weight:500;color:var(--text);margin-bottom:.25rem">Samar Mahboubi</div>
+    <div>Senior Product Designer · samarmahboubi.com</div>
+  </div>
+  <ul class="footer-links">
+    <li><a href="mailto:samar.mahboubi@gmail.com">samar.mahboubi@gmail.com</a></li>
+    <li><a href="https://linkedin.com/in/SamarMahboubi">LinkedIn</a></li>
+  </ul>
+</footer>
+
+<script>
+// Intersection Observer for scroll animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+    }
+  });
+}, {threshold:0.1});
+
+document.querySelectorAll('.section,.img-break img,.phone-wrap').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MOFA Dashboard — Case Study | Samar Mahboubi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="portfolio.css" />
+  <style>
+    .cover-wrap { padding: 0 3rem; }
+    .cover-img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16/9;
+      object-fit: contain;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      max-height: none;
+      display: block;
+    }
+
+    .mockup-img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16/9;
+      object-fit: contain;
+      border-radius: 8px;
+      display: block;
+    }
+
+    .mockup-full {
+      padding: 0 3rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .mockup-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      padding: 0 3rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .mockup-label {
+      font-size: .7rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      text-align: center;
+      margin-top: .6rem;
+      margin-bottom: 2rem;
+    }
+    .mockup-grid-2 .mockup-label { margin-bottom: 0; }
+
+    .role-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1.5rem;
+      font-size: .88rem;
+    }
+    .role-table th {
+      text-align: left;
+      font-size: .65rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      padding: .75rem 1rem;
+      border-bottom: 1px solid var(--border);
+      font-weight: 500;
+    }
+    .role-table td {
+      padding: .9rem 1rem;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+      line-height: 1.5;
+      vertical-align: top;
+    }
+    .role-table td:first-child {
+      color: var(--text);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .role-table tr:last-child td { border-bottom: none; }
+
+    @media(max-width: 768px) {
+      .cover-wrap,
+      .mockup-full,
+      .mockup-grid-2 { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .mockup-grid-2 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-avatar" href="index.html">
+    <span class="nav-name">Samar Mahboubi</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="projects.html" style="color:var(--accent)">Projects</a></li>
+    <li><a href="about.html">About Me</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <span class="hero-tag">GovTech · National Competitiveness · UAE</span>
+  <h1>MOFA<br><em>Dashboard</em></h1>
+  <p class="hero-desc">A performance management platform for the UAE's National Competitiveness Committee — enabling federal ministries and agencies to monitor global indicators, manage improvement plans, and benchmark against G20 peers.</p>
+  <div class="meta-row">
+    <div class="meta-item"><div class="meta-label">Company</div><div class="meta-value">Eventagrate (UAE)</div></div>
+    <div class="meta-item"><div class="meta-label">Role</div><div class="meta-value">Senior Product Designer</div></div>
+    <div class="meta-item"><div class="meta-label">Timeline</div><div class="meta-value">Apr – Nov 2025</div></div>
+    <div class="meta-item"><div class="meta-label">Type</div><div class="meta-value">Web App · Government</div></div>
+    <div class="meta-item"><div class="meta-label">Client</div><div class="meta-value">UAE Ministry of Foreign Affairs</div></div>
+  </div>
+</div>
+
+<div class="cover-wrap">
+  <img
+    class="cover-img"
+    src="https://raw.githubusercontent.com/samarmahboobi/Samar-Portfolio/main/mofa_01.png"
+    alt="MOFA Entity Dashboard — overview screen"
+  >
+</div>
+
+<section class="section">
+  <p class="section-label">Overview</p>
+  <h2>One platform for a national performance challenge</h2>
+  <p>The UAE tracks its performance across dozens of global competitiveness reports — WEF Global Competitiveness Index, WHO, OECD, and others. When an indicator underperforms, responsibility for improvement is distributed across multiple ministries and agencies, each working in silos, with no shared visibility into what plans exist, who owns them, or where progress stands.</p>
+  <p>The National Competitiveness Committee needed a single platform to answer three questions at any given moment: <strong>Where are we underperforming, and against whom? What plans exist to address it, and are they on track? What needs attention this week?</strong></p>
+  <p>Eventagrate was pursuing the contract after the Ministry issued an RFP. I was the sole product designer, with roughly one month to deliver a proposal-ready design — from information architecture to complete UI specifications.</p>
+</section>
+
+<section class="section">
+  <p class="section-label">Context &amp; Constraints</p>
+  <h2>A month to design a<br><em>government platform</em></h2>
+  <p>This wasn't a typical discovery-first project. The Ministry had already defined scope through its RFP, and Eventagrate needed a proposal-ready design within a month. That meant no primary user research — I worked from the RFP, SoW, and structured UX specifications I wrote myself. Parallel workstreams: defining the IA, writing specs, and designing screens simultaneously. The design had to work across <strong>five distinct user roles</strong> with meaningfully different access levels and use cases.</p>
+  <div class="pull-quote">
+    <p>"The constraint sharpened the work. With no time to iterate widely, every decision had to be defensible from first principles."</p>
+  </div>
+</section>
+
+<div class="mockup-full">
+  <img class="mockup-img" src="https://raw.githubusercontent.com/samarmahboobi/Samar-Portfolio/main/mofa_02.png" alt="MOFA Sign In and Registration screen">
+</div>
+<p class="mockup-label">Sign In &amp; Registration — role-aware first-time setup</p>
+
+<section class="section">
+  <p class="section-label">Information Architecture</p>
+  <h2>Five roles,<br><em>one coherent system</em></h2>
+  <p>The platform's core complexity isn't data — it's access. The same indicator means something different depending on who's looking at it. The roles were established by the design lead and the client brief; my job was to translate each into a distinct, purposeful experience without fragmenting the system into five separate products.</p>
+  <table class="role-table">
+    <thead>
+      <tr><th>Role</th><th>Primary Task</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Super Admin (NCC)</td><td>Global visibility — all sectors, all entities, all plans</td></tr>
+      <tr><td>Entity Admin</td><td>Full management within their entity; approve submissions to NCC</td></tr>
+      <tr><td>Entity Contributor</td><td>Draft plans, log milestones, upload evidence</td></tr>
+      <tr><td>Analyst (NCC/PMO)</td><td>Cross-entity analysis, benchmarks, export packs</td></tr>
+      <tr><td>Viewer (Leadership)</td><td>Read-only dashboards, printable briefs</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<div class="mockup-full">
+  <img class="mockup-img" src="https://raw.githubusercontent.com/samarmahboobi/Samar-Portfolio/main/mofa_03.png" alt="MOFA Global Dashboard — NCC Super Admin view">
+</div>
+<p class="mockup-label">Global Dashboard — NCC Super Admin view with rank trend, low-performing indicators &amp; plans overview</p>
+
+<section class="section">
+  <p class="section-label">Key Design Decisions</p>
+  <h2>Role-aware landing,<br><em>not just role-filtered data</em></h2>
+  <p>Login resolves to a different dashboard depending on role. An NCC Super Admin lands on the <strong>Global Dashboard</strong> — a national-level snapshot showing overall rank trends, low-performing indicators, and cross-entity plan status. An Entity Admin lands on their <strong>Entity Dashboard</strong> — scoped to their indicators, their plans, their tasks due this week.</p>
+  <p>This wasn't a permission filter applied to the same screen. The two dashboards have different information hierarchies, different primary actions, and different registers: the NCC view is analytical and comparative; the entity view is operational and task-oriented.</p>
+</section>
+
+<div class="mockup-full">
+  <img class="mockup-img" src="https://raw.githubusercontent.com/samarmahboobi/Samar-Portfolio/main/mofa_04.png" alt="MOFA Indicators page — Entity Admin view">
+</div>
+<p class="mockup-label">Indicators Page — filterable library with visualization and table toggle, RAG status at card level</p>
+
+<section class="section">
+  <p class="section-label">Core Workflow</p>
+  <h2>The indicator → plan →<br><em>progress chain</em></h2>
+  <p>The platform's core workflow is a traceable three-step chain: a low-performing indicator gets assigned to a responsible entity → the entity drafts an improvement plan with milestones and owners → contributors log monthly progress updates that auto-roll up to plan and indicator status.</p>
+  <p>Every plan links to at least one indicator. Every progress update feeds a RAG status that surfaces back to the NCC dashboard. The chain makes accountability visible — not just to the entity, but to the NCC overseeing all of them.</p>
+  <div class="stats-row">
+    <div class="stat"><div class="stat-num">5</div><div class="stat-desc">National priority sectors covered</div></div>
+    <div class="stat"><div class="stat-num">5</div><div class="stat-desc">Distinct user roles designed for</div></div>
+    <div class="stat"><div class="stat-num">6</div><div class="stat-desc">Core modules with UX specifications</div></div>
+    <div class="stat"><div class="stat-num">1mo</div><div class="stat-desc">End-to-end design timeline</div></div>
+  </div>
+</section>
+
+<div class="mockup-grid-2">
+  <div>
+    <img class="mockup-img" src="https://raw.githubusercontent.com/samarmahboobi/Samar-Portfolio/main/mofa_05.png" alt="MOFA Improvement Plans page">
+    <p class="mockup-label">Improvement Plans — risk light, milestone progress, pending approvals</p>
+  </div>
+  <div>
+    <img class="mockup-img" src="https://raw.githubusercontent.com/samarmahboobi/Samar-Portfolio/main/mofa_06.png" alt="MOFA Reports and Analysis page">
+    <p class="mockup-label">Reports &amp; Analysis — filter panel, inline preview, export controls</p>
+  </div>
+</div>
+
+<section class="section">
+  <p class="section-label">Dashboard Architecture</p>
+  <h2>Same data,<br><em>two different lenses</em></h2>
+  <p>The Entity Dashboard uses a layered structure: KPI tiles at top → a world map showing UAE's position relative to G20 peers → tabbed indicator categories (Health Outcomes, System Capacity, Financing, Risk Factors) → improvement plans table → tasks due this week → submission status panel.</p>
+  <p>The Global Dashboard (NCC view) structures the same underlying data differently: rank trend sparkline + low-performing indicator list + plans overview donut → global comparison section with peer benchmarking. Two roles, two information hierarchies, one coherent design language.</p>
+  <div class="emotion-grid">
+    <div class="emotion-card">
+      <div class="emotion-card-label">NCC Global View</div>
+      <h4>Analytical &amp; Comparative</h4>
+      <div class="emotion-tags">
+        <span class="tag">Rank Trend Sparkline</span>
+        <span class="tag">Cross-Entity Plans</span>
+        <span class="tag">Peer Benchmarking</span>
+        <span class="tag">All Sectors</span>
+        <span class="tag">G20 Comparison</span>
+      </div>
+    </div>
+    <div class="emotion-card">
+      <div class="emotion-card-label">Entity Admin View</div>
+      <h4>Operational &amp; Task-Oriented</h4>
+      <div class="emotion-tags">
+        <span class="tag">My Indicators</span>
+        <span class="tag">Tasks Due This Week</span>
+        <span class="tag">Plan Approvals</span>
+        <span class="tag">Submission Status</span>
+        <span class="tag">Scoped Data</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <p class="section-label">Design System</p>
+  <h2>Government constraints,<br><em>systematised</em></h2>
+  <p>The visual language was built on UAE government branding constraints — gold/amber as the primary accent (echoing the UAE flag palette), clean light surfaces for data legibility, and typography scaled for dense information displays. Bilingual-ready layout throughout, with all components designed for RTL-compatible structure.</p>
+  <div class="ds-grid">
+    <div class="ds-card">
+      <div class="ds-card-title">RAG Color System</div>
+      <div class="ds-card-body">Green / Amber / Red applied consistently across indicator cards, plan status badges, risk lights in tables, and map overlays — one visual language for status across every module.</div>
+      <div class="color-swatches">
+        <div class="swatch" style="background:#2d7a3a"></div>
+        <div class="swatch" style="background:#b8860b"></div>
+        <div class="swatch" style="background:#b83232"></div>
+        <div class="swatch" style="background:#c8a84b"></div>
+        <div class="swatch" style="background:#1a1a2e"></div>
+      </div>
+    </div>
+    <div class="ds-card">
+      <div class="ds-card-title">Role-Scoped Navigation</div>
+      <div class="ds-card-body">Sidebar items differ by role. Entity Admins see Dashboard, Indicators, Improvement Plans, Reports, Tasks Due. NCC Super Admins see Global Dashboard, Entities, Administration — and the full cross-entity scope.</div>
+    </div>
+    <div class="ds-card">
+      <div class="ds-card-title">Bilingual Structure</div>
+      <div class="ds-card-body">All layouts designed with RTL-compatible structure for EN/AR support. Language switcher persistent in the top navigation across all screens.</div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <p class="section-label">Documentation</p>
+  <h2>UX specifications as<br><em>a design deliverable</em></h2>
+  <p>Because this project was for a government proposal, I produced full written UX specifications alongside the Figma designs — page by page, component by component. Each spec documented layout structure and section hierarchy, component behavior (filter interactions, table sort logic, modal triggers), empty states and error states, role-specific visibility rules, and CTA placement and workflow progression logic.</p>
+  <p>This level of documentation was deliberate: the handoff needed to be proposal-quality, readable by stakeholders who weren't designers, and precise enough for developers to build from without ambiguity. Writing the specs surfaced edge cases that the screens alone wouldn't have caught.</p>
+</section>
+
+<section class="section">
+  <p class="section-label">Reflection</p>
+  <h2>What I learned</h2>
+  <div class="reflection-grid">
+    <div class="ref-item">
+      <div class="ref-num">01</div>
+      <div class="ref-title">Five roles, one system</div>
+      <div class="ref-text">The hardest design problem was keeping a shared visual language and consistent interaction patterns while genuinely differentiating the experience by role. The platform could have become five separate products bolted together.</div>
+    </div>
+    <div class="ref-item">
+      <div class="ref-num">02</div>
+      <div class="ref-title">Specs are design</div>
+      <div class="ref-text">The UX specifications weren't a post-design formality — they were part of the design process. Writing them surfaced edge cases, permission boundaries, and error handling that the screens alone wouldn't have revealed.</div>
+    </div>
+    <div class="ref-item">
+      <div class="ref-num">03</div>
+      <div class="ref-title">Speed with structure</div>
+      <div class="ref-text">One month for a platform of this complexity meant making fast decisions. The decisions held because the IA and role model were defined before touching components. Structure first, screens second.</div>
+    </div>
+  </div>
+</section>
+
+<hr class="hdivider">
+
+<footer>
+  <p class="footer-left">© 2025 Samar Mahboubi</p>
+  <ul class="footer-links">
+    <li><a href="../index.html">← Back to Work</a></li>
+    <li><a href="https://linkedin.com/in/SamarMahboubi" target="_blank">LinkedIn</a></li>
+    <li><a href="mailto:samar.mahboubi@gmail.com">Email</a></li>
+  </ul>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.section, .img-break img').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

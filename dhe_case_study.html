@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DHE Gamification — Case Study | Samar Mahboubi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="portfolio.css" />
+  <style>
+    .cover-wrap { padding: 0 3rem; }
+    .cover-img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16/9;
+      object-fit: contain;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      max-height: none;
+      display: block;
+    }
+
+    .mockup-img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16/9;
+      object-fit: contain;
+      border-radius: 8px;
+      display: block;
+    }
+
+    .mockup-full {
+      padding: 0 3rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .mockup-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      padding: 0 3rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .mockup-label {
+      font-size: .7rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      text-align: center;
+      margin-top: .6rem;
+      margin-bottom: 2rem;
+    }
+    .mockup-grid-2 .mockup-label { margin-bottom: 0; }
+
+    .role-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1.5rem;
+      font-size: .88rem;
+    }
+    .role-table th {
+      text-align: left;
+      font-size: .65rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      padding: .75rem 1rem;
+      border-bottom: 1px solid var(--border);
+      font-weight: 500;
+    }
+    .role-table td {
+      padding: .9rem 1rem;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+      line-height: 1.5;
+      vertical-align: top;
+    }
+    .role-table td:first-child {
+      color: var(--text);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .role-table tr:last-child td { border-bottom: none; }
+
+    /* Park architecture table */
+    .park-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1.5rem;
+      font-size: .88rem;
+    }
+    .park-table th {
+      text-align: left;
+      font-size: .65rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      padding: .75rem 1rem;
+      border-bottom: 1px solid var(--border);
+      font-weight: 500;
+    }
+    .park-table td {
+      padding: .9rem 1rem;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+      line-height: 1.5;
+      vertical-align: top;
+    }
+    .park-table td:first-child {
+      color: var(--text);
+      font-weight: 500;
+    }
+    .park-table tr:last-child td { border-bottom: none; }
+
+    /* Ownership grid */
+    .ownership-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .ownership-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+    }
+    .ownership-card-label {
+      font-size: .65rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: .5rem;
+    }
+    .ownership-card h4 {
+      font-size: .95rem;
+      font-weight: 500;
+      color: var(--text);
+      margin: 0 0 .5rem;
+    }
+    .ownership-card p {
+      font-size: .85rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    /* Platform architecture cards */
+    .arch-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .arch-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+    }
+    .arch-card.arch-full {
+      grid-column: 1 / -1;
+    }
+    .arch-card-tag {
+      display: inline-block;
+      font-size: .65rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 4px;
+      padding: .2rem .5rem;
+      margin-bottom: .75rem;
+    }
+    .arch-card h4 {
+      font-size: .95rem;
+      font-weight: 500;
+      color: var(--text);
+      margin: 0 0 .4rem;
+    }
+    .arch-card p {
+      font-size: .85rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    @media(max-width: 768px) {
+      .cover-wrap,
+      .mockup-full,
+      .mockup-grid-2 { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .mockup-grid-2,
+      .ownership-grid,
+      .arch-grid { grid-template-columns: 1fr; }
+      .arch-card.arch-full { grid-column: unset; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-avatar" href="index.html">
+    <span class="nav-name">Samar Mahboubi</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="projects.html" style="color:var(--accent)">Projects</a></li>
+    <li><a href="about.html">About Me</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <span class="hero-tag">Product Design · Phygital Gamification</span>
+  <h1>Dubai Holding Entertainment — <br><em>Xplore Amazing</em></h1>
+  <p class="hero-desc">A phygital gamification platform connecting four of Dubai's major leisure destinations through AR missions, XP progression, and cross-park experiences — all from a mobile browser, no app download required.</p>
+
+  <div class="meta-row">
+    <div class="meta-item">
+      <div class="meta-label">Year</div>
+      <div class="meta-value">2025–2026</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Industry</div>
+      <div class="meta-value">Tech ·<br>Gamification</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Company</div>
+      <div class="meta-value">Dubai Holding<br>Entertainment</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Duration</div>
+      <div class="meta-value">6 months</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Role</div>
+      <div class="meta-value">Senior<br>Product Designer</div>
+    </div>
+  </div>
+</section>
+
+<!-- COVER -->
+<div class="cover-wrap">
+  <img src="https://raw.githubusercontent.com/samarmahboobi/Samar-Portfolio/main/DHE01.png" alt="DHE Xplore Amazing platform overview" class="cover-img" />
+</div>
+<p class="mockup-label">Xplore Amazing — cross-park gamification ecosystem</p>
+
+<hr class="hdivider">
+
+<!-- OVERVIEW -->
+<section class="section" id="s1">
+  <span class="section-label">01 — Overview</span>
+  <h2>One platform,<br>four parks, no app</h2>
+  <p>Xplore Amazing is a phygital gamification platform built for Dubai Holding Entertainment, connecting Global Village, Riverland Dubai, The Green Planet, and Real Madrid World through a single unified system. Visitors engage in AR-powered missions, earn XP, collect digital artifacts, and track progress across all parks — triggered entirely through QR codes placed at physical touchpoints, with no app download required.</p>
+  <p>A team of four designers worked across UX, UI, and systems design. My ownership spanned three critical areas: the overall information architecture and feature structure across all five apps, the mid-fidelity framework the design system was built on top of, and full primary ownership of the Real Madrid World module end-to-end.</p>
+
+  <div class="stats-row">
+    <div class="stat">
+      <div class="stat-num">5</div>
+      <div class="stat-desc">Apps designed<br>simultaneously</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">4</div>
+      <div class="stat-desc">Major Dubai<br>leisure parks</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">13.5K+</div>
+      <div class="stat-desc">Users four months<br>post-launch</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">2</div>
+      <div class="stat-desc">Languages<br>(EN / AR)</div>
+    </div>
+  </div>
+</section>
+
+<!-- COVER IMAGE 2 -->
+<!-- <div class="mockup-full">
+  <img src="https://raw.githubusercontent.com/samarmahboobi/Samar-Portfolio/main/DHE02.png" alt="Platform ecosystem — four park modules" class="cover-img" />
+</div>
+<p class="mockup-label">Platform ecosystem — four park modules + core hub</p> -->
+
+<!-- THE PRODUCT -->
+<section class="section" id="s2">
+  <span class="section-label">02 — The Product</span>
+  <h2>Transforming passive<br>visits into digital narratives</h2>
+  <p>DHE wanted to transform passive park visits into interactive, narrative-driven digital experiences. The business goals were clear: increase dwell time, drive repeat visitation, and capture first-party behavioral data — all while staying compliant with UAE's PDPL data regulations.</p>
+  <p>The platform had to work across four very different parks, each with its own identity, audience, and emotional atmosphere, while still feeling like one coherent ecosystem. No native app. Bilingual. Triggered entirely through QR codes placed at physical touchpoints across the venues.</p>
+
+  <div class="pull-quote">
+    <p>The challenge wasn't building four separate apps — it was building <strong>one system that could wear four different identities</strong> without losing coherence.</p>
+  </div>
+</section>
+
+<hr class="hdivider">
+
+<!-- WHAT I OWNED -->
+<section class="section" id="s3">
+  <span class="section-label">03 — What I Owned</span>
+  <h2>Four areas of<br>critical ownership</h2>
+
+  <div class="ownership-grid">
+    <div class="ownership-card">
+      <div class="ownership-card-label">Area 01</div>
+      <h4>Information Architecture</h4>
+      <p>Structural framework for all five apps: top-level navigation model, page taxonomy, and how cross-park features fit within a shared hierarchy.</p>
+    </div>
+    <div class="ownership-card">
+      <div class="ownership-card-label">Area 02</div>
+      <h4>Mid-Fidelity Wireframes</h4>
+      <p>Component-neutral frames covering core flows across all apps — the handoff specification for the design system build.</p>
+    </div>
+    <div class="ownership-card">
+      <div class="ownership-card-label">Area 03</div>
+      <h4>Real Madrid World App</h4>
+      <p>End-to-end primary ownership: visual language, UI system, every game mechanic, mini-game, and badge — designed by me.</p>
+    </div>
+    <div class="ownership-card">
+      <div class="ownership-card-label">Area 04</div>
+      <h4>Leaderboard Logic</h4>
+      <p>Flagged a structural flaw in the scoring model before launch, walked the team through the math, and led the redesign to a continuous XP accumulation model.</p>
+    </div>
+  </div>
+</section>
+
+<!-- IA SECTION -->
+<section class="section" id="s4">
+  <span class="section-label">04 — Information Architecture</span>
+  <h2>Flexibility within<br>consistency</h2>
+  <p>With four parks and a core platform to design simultaneously, the first challenge was defining what each app actually contained — what features, in what hierarchy, accessible from which surfaces.</p>
+  <p>I designed the structural framework for all five apps: the top-level navigation model, the page taxonomy (Home, Missions, Leaderboard, Collections, Rewards, Profile), and how features like the virtual passport, cross-park progression, and park-specific rewards fit within that structure. This IA became the shared foundation that all four designers worked within.</p>
+  <p>The goal was flexibility within consistency — each park needed enough room to express its own personality, but the underlying structure had to be identical so users moving between parks felt at home immediately.</p>
+</section>
+
+<div class="mockup-full">
+  <img src="https://raw.githubusercontent.com/samarmahboobi/Samar-Portfolio/main/DHE02.png" alt="Information architecture — shared navigation model" class="mockup-img" />
+</div>
+<p class="mockup-label">Shared IA — page taxonomy across all five apps</p>
+
+<!-- LEADERBOARD SECTION -->
+<section class="section" id="s5">
+  <span class="section-label">05 — Leaderboard Logic</span>
+  <h2>Correcting course<br>before it shipped</h2>
+  <p>Midway through the project, the team was converging on a discrete 0–100 point scale for the scoring system. On the surface, it seemed reasonable — clean, bounded, easy to understand.</p>
+  <p>I flagged the problem immediately, drawing on prior experience with gamification systems at scale: in a high-footfall environment like DHE's parks, which collectively draw hundreds of thousands of visitors per season, a discrete 100-point ceiling guarantees massive rank collisions. Thousands of users would share identical scores, making the leaderboard functionally meaningless — and worse, demotivating.</p>
+
+  <div class="pull-quote">
+    <p>A leaderboard where your rank is tied with 3,000 other people doesn't drive competition — <strong>it kills it.</strong></p>
+  </div>
+
+  <p>I walked the team through the math and the behavioral implications. The fix was switching to a continuous point accumulation model — where XP accrues incrementally from every micro-interaction, mission step, and AR engagement — so that meaningful rank differentiation was always possible regardless of user volume.</p>
+  <p>The team aligned after a few sessions and the system was redesigned accordingly. Four months after the first release, the platform had grown to over 13,500 users — a number that would have broken the original scoring model entirely.</p>
+
+  <div class="stats-row">
+    <div class="stat">
+      <div class="stat-num">0–100</div>
+      <div class="stat-desc">Original discrete<br>point ceiling</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">∞</div>
+      <div class="stat-desc">Continuous XP<br>accumulation model</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">13,500+</div>
+      <div class="stat-desc">Users that would've<br>broken the old model</div>
+    </div>
+  </div>
+</section>
+
+<hr class="hdivider">
+
+<!-- REAL MADRID WORLD -->
+<section class="section" id="s6">
+  <span class="section-label">06 — Real Madrid World</span>
+  <h2>Designing for a club<br><em>you've followed since adolescence</em></h2>
+  <p>My most personally significant ownership on the project was designing for the Real Madrid World app. I was the primary designer on this module end-to-end: visual language, UI system, game mechanics, and interactive experiences.</p>
+  <p>Having been a Real Madrid fan since adolescence, working directly with the club — attending coordination sessions with Madrid's team to align on brand usage, visual standards, and content direction — was an experience I wasn't expecting to have professionally.</p>
+  <p>The app leaned hard into the club's visual identity: <strong>Helvetica Neue</strong> as the type system, a high-contrast editorial aesthetic influenced by the club's official communications, and game elements designed to feel like they belonged in the stadium rather than a generic mobile experience. Every mini-game and badge in the module was designed by me — built to feel like authentic Madrid merchandise rather than generic gamification assets.</p>
+</section>
+
+<div class="mockup-grid-2">
+  <div>
+    <img src="https://raw.githubusercontent.com/samarmahboobi/Samar-Portfolio/main/DHE03.png" alt="Real Madrid World — home screen" class="cover-img" />
+    <p class="mockup-label">Missions' Cards — stadium aesthetic</p>
+  </div>
+  <div>
+    <img src="https://raw.githubusercontent.com/samarmahboobi/Samar-Portfolio/main/DHE04.png" alt="Real Madrid World — mission detail" class="cover-img" />
+    <p class="mockup-label">Badge collection — feel like authentic club merchandise</p>
+  </div>
+</div>
+
+<div class="mockup-full" style="margin-top: 1.25rem;">
+  <img src="https://raw.githubusercontent.com/samarmahboobi/Samar-Portfolio/main/DHE05.png" alt="Real Madrid World — badge collection" class="mockup-img" />
+</div>
+<p class="mockup-label">Missions — 3 Zones, 3 Pillars, 3 Games</p>
+
+<hr class="hdivider">
+
+<!-- PLATFORM ARCHITECTURE -->
+<section class="section" id="s7">
+  <span class="section-label">07 — Platform Architecture</span>
+  <h2>One system,<br>five identities</h2>
+  <p>The five-app ecosystem was structured around a shared progression layer — a core platform hub and four park-specific modules, each with its own visual language while sharing the same underlying IA, point logic, and profile system.</p>
+
+  <div class="arch-grid">
+    <div class="arch-card arch-full">
+      <span class="arch-card-tag">Core Platform</span>
+      <h4>Unified hub</h4>
+      <p>Cross-park progress, virtual passport, rewards catalog, and global leaderboard — the connective layer that turns four park visits into one ongoing narrative.</p>
+    </div>
+    <div class="arch-card">
+      <span class="arch-card-tag">Global Village</span>
+      <h4>Poppins · Festive</h4>
+      <p>Multicultural atmosphere, festive tone of voice, high-energy color palette reflecting the park's international character.</p>
+    </div>
+    <div class="arch-card">
+      <span class="arch-card-tag">Riverland Dubai</span>
+      <h4>Libre Bodoni · Heritage</h4>
+      <p>Serif-forward editorial aesthetic, exploration and discovery as the emotional register, warm heritage palette.</p>
+    </div>
+    <div class="arch-card">
+      <span class="arch-card-tag">The Green Planet</span>
+      <h4>TGP Sans · Nature</h4>
+      <p>Custom typeface, organic design language, nature and wonder as the primary emotional register.</p>
+    </div>
+    <div class="arch-card">
+      <span class="arch-card-tag">Real Madrid World</span>
+      <h4>Helvetica Neue · Athletic</h4>
+      <p>High-contrast editorial aesthetic aligned with the club's official communications. Prestigious, athletic, built for fans.</p>
+    </div>
+  </div>
+
+  <table class="park-table" style="margin-top:2rem">
+    <thead>
+      <tr>
+        <th>Park</th>
+        <th>Typography</th>
+        <th>Emotional Register</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Global Village</td>
+        <td>Poppins</td>
+        <td>Festive, multicultural</td>
+      </tr>
+      <tr>
+        <td>Riverland Dubai</td>
+        <td>Libre Bodoni</td>
+        <td>Heritage, exploration</td>
+      </tr>
+      <tr>
+        <td>The Green Planet</td>
+        <td>TGP Sans</td>
+        <td>Nature, wonder</td>
+      </tr>
+      <tr>
+        <td>Real Madrid World</td>
+        <td>Helvetica Neue</td>
+        <td>Athletic, prestigious</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<div class="mockup-full">
+  <img src="https://raw.githubusercontent.com/samarmahboobi/Samar-Portfolio/main/DHE06.png" alt="Four park modules — visual identity comparison" class="cover-img" />
+</div>
+<p class="mockup-label">Four distinct visual identities, one shared structural foundation</p>
+
+<hr class="hdivider">
+
+<!-- OUTCOME -->
+<section class="section" id="s8">
+  <span class="section-label">08 — Outcome</span>
+  <h2>Sequential rollout,<br>validated at scale</h2>
+  <p>The platform launched with a sequential, park-by-park rollout — an intentional strategy that allowed for learning and iteration between releases rather than a single high-risk launch.</p>
+  <p>Four months after the first park went live, the platform had reached <strong>13,500+ users</strong> — a result that validated the engagement model and led directly to the decision to scale across additional parks and locations.</p>
+
+  <div class="stats-row">
+    <div class="stat">
+      <div class="stat-num">13.5K+</div>
+      <div class="stat-desc">Users four months<br>post-first launch</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">4</div>
+      <div class="stat-desc">Phased park<br>releases</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">↑</div>
+      <div class="stat-desc">Decision to expand<br>to new locations</div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section class="section" id="s9">
+  <span class="section-label">09 — Tools & Stack</span>
+  <h2>How we built it</h2>
+
+  <div class="ds-grid">
+    <div class="ds-card">
+      <div class="ds-card-title">Design</div>
+      <div class="ds-card-body">Figma for IA, wireframes, UI system, and all five app modules. Component library built from mid-fi specifications.</div>
+    </div>
+    <div class="ds-card">
+      <div class="ds-card-title">Technology</div>
+      <div class="ds-card-body">WebAR for AR-powered missions. QR-triggered browser experiences — no app download. Bilingual EN/AR throughout.</div>
+    </div>
+    <div class="ds-card">
+      <div class="ds-card-title">Compliance</div>
+      <div class="ds-card-body">CRM integration with first-party data capture. Full adherence to UAE PDPL data regulations across all touchpoints.</div>
+    </div>
+  </div>
+</section>
+
+<hr class="hdivider">
+
+<!-- REFLECTION -->
+<section class="section" id="s10">
+  <span class="section-label">10 — Reflection</span>
+  <h2>Three things that<br>stayed with me</h2>
+
+  <div class="reflection-grid">
+    <div class="ref-item">
+      <div class="ref-num">01</div>
+      <div class="ref-title">The architecture work mattered more than it looked</div>
+      <div class="ref-text">Defining the IA and feature structure for five apps simultaneously — before any visual design started — was unglamorous work. But it was the decision that kept four designers moving in the same direction for six months. When the foundation is right, the rest follows.</div>
+    </div>
+    <div class="ref-item">
+      <div class="ref-num">02</div>
+      <div class="ref-title">Domain expertise travels</div>
+      <div class="ref-text">The leaderboard fix wasn't complex — it was just visible to someone who had thought about gamification systems before, and invisible to someone who hadn't. Knowing when to speak up is as important as knowing what to say.</div>
+    </div>
+    <div class="ref-item">
+      <div class="ref-num">03</div>
+      <div class="ref-title">Real Madrid World felt personal in a way that's rare</div>
+      <div class="ref-text">Designing experiences for a club you've supported since you were a teenager, in direct coordination with the club itself, is the kind of project you don't forget. It showed up in the work.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">
+    <div style="font-weight:500;color:var(--text);margin-bottom:.25rem">Samar Mahboubi</div>
+    <div>Senior Product Designer · samarmahboubi.com</div>
+  </div>
+  <ul class="footer-links">
+    <li><a href="mailto:samar.mahboubi@gmail.com">samar.mahboubi@gmail.com</a></li>
+    <li><a href="https://linkedin.com/in/SamarMahboubi">LinkedIn</a></li>
+  </ul>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+    }
+  });
+}, {threshold:0.1});
+
+document.querySelectorAll('.section,.img-break img,.mockup-full,.mockup-grid-2').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
