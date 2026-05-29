@@ -255,9 +255,52 @@
         transform: translateX(-50%) translateY(-50%) !important;
       }
     }
+
+    /* ── Preloader ── */
+    #preloader {
+      position: fixed; inset: 0; z-index: 99999;
+      background: #050208;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 28px;
+      transition: opacity 0.8s ease;
+    }
+    #preloader.done { opacity: 0; pointer-events: none; }
+    .pre-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(16px, 3vw, 22px);
+      color: var(--purple-bright);
+      letter-spacing: 0.1em;
+      opacity: 0.85;
+    }
+    .pre-bar-wrap {
+      width: min(320px, 72vw);
+      height: 2px;
+      background: rgba(192,132,252,0.12);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .pre-bar {
+      height: 100%; width: 0%;
+      background: linear-gradient(90deg, var(--purple-mid), var(--purple-bright));
+      border-radius: 2px;
+      box-shadow: 0 0 12px var(--purple-bright);
+      transition: width 0.35s ease;
+    }
+    .pre-pct {
+      font-size: 11px; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--text-dim);
+    }
   </style>
 </head>
 <body>
+
+<!-- Preloader -->
+<div id="preloader">
+  <div class="pre-title">Samar Mahboubi</div>
+  <div class="pre-bar-wrap"><div class="pre-bar" id="preBar"></div></div>
+  <div class="pre-pct" id="prePct">0%</div>
+</div>
 
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
@@ -548,8 +591,83 @@ function onScroll() {
   }
 }
 
-/* ── Preload ── */
-Object.values(allVids).forEach(v => v.load());
+/* ── Preloader ── */
+(function() {
+  const preloader = document.getElementById('preloader');
+  const preBar    = document.getElementById('preBar');
+  const prePct    = document.getElementById('prePct');
+
+  const videoSrcs = [
+    'Idle1.mp4','Idle2.mp4','Idle3.mp4','Idle4.mp4',
+    'Idle5.mp4','Idle6.mp4','Idle7.mp4',
+    'Transition1.mp4','Transition2.mp4','Transition3.mp4',
+    'Transition4.mp4','Transition5.mp4','Transition6.mp4',
+  ];
+
+  const prog = videoSrcs.map(() => ({ loaded: 0, total: 0, done: false }));
+
+  function updateBar() {
+    const knownTotal  = prog.reduce((s,p) => s + p.total,  0);
+    const knownLoaded = prog.reduce((s,p) => s + p.loaded, 0);
+    const doneCount   = prog.filter(p => p.done).length;
+
+    const pct = knownTotal > 0
+      ? Math.min(Math.round((knownLoaded / knownTotal) * 100), 100)
+      : Math.round((doneCount / videoSrcs.length) * 100);
+
+    preBar.style.width = pct + '%';
+    prePct.textContent = pct + '%';
+
+    if (doneCount === videoSrcs.length) {
+      setTimeout(() => {
+        preloader.classList.add('done');
+        setTimeout(() => preloader.remove(), 900);
+      }, 300);
+    }
+  }
+
+  // Single fetch per video: stream for progress tracking, collect chunks for blob
+  function loadVideo(src, idx) {
+    return fetch(src)
+      .then(res => {
+        prog[idx].total = parseInt(res.headers.get('Content-Length') || '0', 10);
+        const reader = res.body.getReader();
+        const chunks = [];
+
+        function pump() {
+          return reader.read().then(({ done, value }) => {
+            if (done) {
+              const blob    = new Blob(chunks, { type: 'video/mp4' });
+              const blobUrl = URL.createObjectURL(blob);
+              const el      = document.querySelector(`video[src="${src}"]`);
+              if (el) { el.src = blobUrl; el.load(); }
+              prog[idx].done = true;
+              updateBar();
+              return;
+            }
+            chunks.push(value);
+            prog[idx].loaded += value.length;
+            updateBar();
+            return pump();
+          });
+        }
+        return pump();
+      })
+      .catch(() => { prog[idx].done = true; updateBar(); });
+  }
+
+  // Lock scroll while loading
+  document.body.style.overflow = 'hidden';
+
+  videoSrcs.forEach((src, i) => loadVideo(src, i));
+
+  // Unlock scroll after preloader removed
+  const origRemove = preloader.remove.bind(preloader);
+  preloader.remove = function() {
+    document.body.style.overflow = '';
+    origRemove();
+  };
+})();
 </script>
 <footer id="footer">
   <span>© 2025 Samar Mahboubi</span>
