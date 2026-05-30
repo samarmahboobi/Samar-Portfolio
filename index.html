@@ -7,6 +7,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet" />
+  <link rel="preload" as="image" href="Idle1.jpg">
+  <link rel="preload" as="image" href="Idle2.jpg">
+  <link rel="preload" as="image" href="Idle3.jpg">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -505,7 +508,7 @@
 <div id="light-section">
 
   <div class="light-scene active" id="ls1">
-    <div class="img-crop"><img class="light-img" src="Idle1.png" alt=""></div>
+    <div class="img-crop"><img class="light-img" src="Idle1.jpg" alt=""></div>
     <div class="scene-text left visible" id="lt1">
       <p>The world of designers<br>is a <span class="keyword">Magical</span> one✨</p>
       <a class="scene-btn" href="contact.html">Let's Work Together</a>
@@ -513,7 +516,7 @@
   </div>
 
   <div class="light-scene" id="ls2">
-    <div class="img-crop"><img class="light-img" src="Idle2.png" alt=""></div>
+    <div class="img-crop"><img class="light-img" src="Idle2.jpg" alt=""></div>
     <div class="scene-text right" id="lt2">
       <p>I'm <span class="keyword">Samar</span>,<br>Welcome to my world 💜</p>
       <a class="scene-btn" href="projects.html">See My Work</a>
@@ -521,7 +524,7 @@
   </div>
 
   <div class="light-scene" id="ls3">
-    <div class="img-crop"><img class="light-img" src="Idle3.png" alt=""></div>
+    <div class="img-crop"><img class="light-img" src="Idle3.jpg" alt=""></div>
     <div class="scene-text left" id="lt3">
       <p>Every business holds a <span class="keyword">Tangle</span> —<br>waiting to be Unraveled</p>
       <a class="scene-btn" href="projects.html">View Case Studies</a>
@@ -529,7 +532,7 @@
   </div>
 
   <div class="light-scene" id="ls4">
-    <div class="img-crop"><img class="light-img" src="Idle4.png" alt=""></div>
+    <div class="img-crop"><img class="light-img" src="Idle4.jpg" alt=""></div>
     <div class="scene-text right" id="lt4">
       <p>I turn tangles into<br>
       <span class="keyword">Opportunities</span> —<br>
@@ -539,7 +542,7 @@
   </div>
 
   <div class="light-scene" id="ls5">
-    <div class="img-crop"><img class="light-img" src="Idle5.png" alt=""></div>
+    <div class="img-crop"><img class="light-img" src="Idle5.jpg" alt=""></div>
     <div class="scene-text left" id="lt5">
       <p>where users <span class="keyword">Thrive</span><br>
       and businesses <span class="keyword">Grow</span> —<br>
@@ -549,7 +552,7 @@
   </div>
 
   <div class="light-scene" id="ls6">
-    <div class="img-crop"><img class="light-img" src="Idle6.png" alt=""></div>
+    <div class="img-crop"><img class="light-img" src="Idle6.jpg" alt=""></div>
     <div class="scene-text left" id="lt6">
       <p>fun fact: I'm finally learning<br>
       the <span class="keyword">PIAnO</span> —<br>
@@ -559,7 +562,7 @@
   </div>
 
   <div class="light-scene" id="ls7">
-    <div class="img-crop"><img class="light-img" src="Idle7.png" alt=""></div>
+    <div class="img-crop"><img class="light-img" src="Idle7.jpg" alt=""></div>
     <div class="scene-text right" id="lt7">
       <p>If you'd like to<br>
       <span class="keyword">Collaborate</span>,<br>
@@ -764,12 +767,39 @@ function initVideoMode() {
    LIGHT MODE — Image + crossfade
 ══════════════════════════════════════════ */
 function startLightMode() {
-  document.getElementById('light-section').style.display = 'block';
   document.getElementById('progressDots').style.display = 'flex';
   document.getElementById('footer').style.display = 'none';
   document.documentElement.style.overflow = 'hidden';
   document.body.style.overflow = 'hidden';
-  initLightMode();
+
+  const preloader = document.getElementById('preloader');
+  const preBar    = document.getElementById('preBar');
+  const prePct    = document.getElementById('prePct');
+  preloader.classList.add('active');
+
+  const imgs = ['Idle1.jpg','Idle2.jpg','Idle3.jpg','Idle4.jpg','Idle5.jpg','Idle6.jpg','Idle7.jpg'];
+  let loaded = 0;
+  function onLoad() {
+    loaded++;
+    const pct = Math.round(loaded / imgs.length * 100);
+    preBar.style.width = pct + '%';
+    prePct.textContent = pct + '%';
+    if (loaded === imgs.length) {
+      setTimeout(() => {
+        preloader.classList.add('done');
+        setTimeout(() => {
+          preloader.remove();
+          document.getElementById('light-section').style.display = 'block';
+          initLightMode();
+        }, 900);
+      }, 300);
+    }
+  }
+  imgs.forEach(src => {
+    const img = new Image();
+    img.onload = img.onerror = onLoad;
+    img.src = src;
+  });
 }
 
 function initLightMode() {
