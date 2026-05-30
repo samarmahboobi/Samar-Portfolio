@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet" />
+  <link rel="preload" as="image" href="modal-bg.jpg">
   <link rel="preload" as="image" href="Idle1.jpg">
   <link rel="preload" as="image" href="Idle2.jpg">
   <link rel="preload" as="image" href="Idle3.jpg">
@@ -249,8 +250,9 @@
     #perf-modal {
       position: fixed; inset: 0; z-index: 999999;
       display: flex; align-items: center; justify-content: center;
-      transition: opacity 0.6s ease; overflow: hidden;
+      opacity: 0; transition: opacity 0.6s ease; overflow: hidden;
     }
+    #perf-modal.ready { opacity: 1; }
     #perf-modal.hide { opacity: 0; pointer-events: none; }
     #perf-modal-bg {
       position: absolute; inset: 0;
@@ -635,6 +637,11 @@ if (window.matchMedia('(hover: hover)').matches) {
    Performance Modal
 ══════════════════════════════════════════ */
 const perfModal = document.getElementById('perf-modal');
+
+const modalBgImg = new Image();
+modalBgImg.src = 'modal-bg.jpg';
+modalBgImg.onload = () => perfModal.classList.add('ready');
+modalBgImg.onerror = () => perfModal.classList.add('ready');
 
 function hidePerfModal(cb) {
   perfModal.classList.add('hide');
