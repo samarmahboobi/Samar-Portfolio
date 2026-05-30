@@ -153,7 +153,18 @@
     <li><a href="about.html">About Me</a></li>
     <li><a href="contact.html" style="color:var(--accent)">Contact</a></li>
   </ul>
+  <button class="hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<div id="nav-overlay" role="dialog" aria-modal="true" aria-label="Navigation">
+  <a href="index.html"    class="overlay-link">Home</a>
+  <a href="projects.html" class="overlay-link">Projects</a>
+  <a href="about.html"    class="overlay-link">About Me</a>
+  <a href="contact.html"  class="overlay-link">Contact</a>
+  <button class="overlay-close" id="overlay-close">Close</button>
+</div>
 
 <div class="contact-wrap">
   <div class="contact-left">
@@ -247,6 +258,13 @@
     document.getElementById('formSuccess').style.display = 'block';
     this.reset();
   });
+
+const hamburger = document.getElementById('hamburger');
+const navOverlay = document.getElementById('nav-overlay');
+const overlayClose = document.getElementById('overlay-close');
+hamburger.addEventListener('click', () => navOverlay.classList.add('open'));
+overlayClose.addEventListener('click', () => navOverlay.classList.remove('open'));
+document.querySelectorAll('.overlay-link').forEach(l => l.addEventListener('click', () => navOverlay.classList.remove('open')));
 </script>
 </body>
 </html>
