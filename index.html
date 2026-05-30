@@ -278,11 +278,6 @@
     .perf-btn--high .perf-btn-title { color: var(--purple-bright); }
     .perf-btn--low  .perf-btn-title { color: var(--text); }
     .perf-btn-sub { font-size: 10px; color: var(--text-dim); letter-spacing: 0.14em; text-transform: uppercase; }
-    .perf-reset {
-      margin-top: 20px; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
-      color: rgba(155,143,187,0.4); background: none; border: none; cursor: pointer; transition: color 0.3s;
-    }
-    @media (hover: hover) { .perf-reset:hover { color: var(--text-dim); } }
 
     /* ── Preloader ── */
     #preloader {
@@ -387,7 +382,6 @@
         <span class="perf-btn-sub">Static images · Works on any connection</span>
       </button>
     </div>
-    <button class="perf-reset" id="btn-reset">Reset preference on next visit</button>
   </div>
 </div>
 
@@ -622,24 +616,8 @@ function hidePerfModal(cb) {
   setTimeout(() => { perfModal.remove(); if (cb) cb(); }, 650);
 }
 
-document.getElementById('btn-high').addEventListener('click', () => {
-  localStorage.setItem('perfMode', 'high');
-  hidePerfModal(startHighPerf);
-});
-document.getElementById('btn-low').addEventListener('click', () => {
-  localStorage.setItem('perfMode', 'low');
-  hidePerfModal(startLightMode);
-});
-document.getElementById('btn-reset').addEventListener('click', () => {
-  localStorage.removeItem('perfMode');
-});
-
-/* ══════════════════════════════════════════
-   Entry point
-══════════════════════════════════════════ */
-const stored = localStorage.getItem('perfMode');
-if      (stored === 'high') { perfModal.remove(); startHighPerf(); }
-else if (stored === 'low')  { perfModal.remove(); startLightMode(); }
+document.getElementById('btn-high').addEventListener('click', () => hidePerfModal(startHighPerf));
+document.getElementById('btn-low').addEventListener('click',  () => hidePerfModal(startLightMode));
 
 /* ══════════════════════════════════════════
    HIGH PERF — Video mode
