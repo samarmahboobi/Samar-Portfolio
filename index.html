@@ -862,7 +862,7 @@ function initLightMode() {
     const atLast = current === TOTAL - 1;
     scrollHint.style.opacity = atLast ? '0' : '1';
     scrollHint.style.pointerEvents = atLast ? 'none' : 'auto';
-    footer.style.display = atLast ? 'block' : 'none';
+    footer.style.display = atLast ? 'flex' : 'none';
 
     setTimeout(() => {
       const newText = scenes[current].querySelector('.scene-text');
