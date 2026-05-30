@@ -148,9 +148,10 @@
 
     /* ── Scroll hint ── */
     .scroll-hint {
-      position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+      position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%);
       display: flex; flex-direction: column; align-items: center; gap: 8px; z-index: 10;
     }
+    #lightScrollHint { display: none; }
     .scroll-hint span { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim); }
     .scroll-arrow {
       width: 1px; height: 40px;
@@ -504,6 +505,11 @@
 ════════════════════════════════════════════ -->
 <div id="light-section">
 
+  <div class="scroll-hint" id="lightScrollHint">
+    <span>Scroll</span>
+    <div class="scroll-arrow"></div>
+  </div>
+
   <div class="light-scene active" id="ls1">
     <div class="img-crop"><img class="light-img" src="Idle1.jpg" alt=""></div>
     <div class="scene-text left visible" id="lt1">
@@ -749,7 +755,7 @@ function initVideoMode() {
 ══════════════════════════════════════════ */
 function startLightMode() {
   document.getElementById('progressDots').style.display = 'flex';
-  document.getElementById('footer').style.display = 'none';
+  document.getElementById('lightScrollHint').style.display = 'flex';
   document.documentElement.style.overflow = 'hidden';
   document.body.style.overflow = 'hidden';
 
@@ -784,11 +790,16 @@ function startLightMode() {
 }
 
 function initLightMode() {
-  const scenes  = document.querySelectorAll('.light-scene');
-  const dots    = document.querySelectorAll('.dot');
-  const TOTAL   = scenes.length;
-  let current   = 0;
-  let animating = false;
+  const scenes     = document.querySelectorAll('.light-scene');
+  const dots       = document.querySelectorAll('.dot');
+  const scrollHint = document.getElementById('lightScrollHint');
+  const footer     = document.getElementById('footer');
+  const TOTAL      = scenes.length;
+  let current      = 0;
+  let animating    = false;
+
+  // Hide footer until last scene
+  footer.style.display = 'none';
 
   // First scene text already visible
   document.getElementById('lt1').classList.add('visible');
@@ -804,6 +815,11 @@ function initLightMode() {
     scenes[idx].classList.add('active');
     dots.forEach((d,i) => d.classList.toggle('active', i===idx));
     current = idx;
+
+    const atLast = current === TOTAL - 1;
+    scrollHint.style.opacity = atLast ? '0' : '1';
+    scrollHint.style.pointerEvents = atLast ? 'none' : 'auto';
+    footer.style.display = atLast ? 'flex' : 'none';
 
     setTimeout(() => {
       const newText = scenes[current].querySelector('.scene-text');
