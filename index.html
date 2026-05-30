@@ -327,42 +327,43 @@
       }
       .scene-text.visible { transform: translateX(-50%) translateY(-50%) !important; }
 
-      /* Light mode mobile: vertical flex layout */
+      /* Light mode mobile: full-viewport scene */
       .light-scene {
         position: relative !important;
         inset: auto !important;
-        display: flex; flex-direction: column; align-items: stretch;
+        height: 100svh;
+        overflow: hidden;
         opacity: 1 !important; pointer-events: all !important;
-        padding-top: 64px;
       }
       .light-scene:not(.active) { display: none !important; }
 
-      /* Image: 3:4 crop, removes sides */
+      /* Image fills the whole scene */
       .img-crop {
-        width: 100%; aspect-ratio: 3 / 4;
-        overflow: hidden; flex-shrink: 0; position: relative;
+        position: absolute !important; inset: 0;
+        width: 100%; height: 100%;
+        overflow: hidden;
       }
       .light-img {
-        position: relative !important;
-        top: auto !important; left: auto !important; transform: none !important;
+        position: absolute !important;
+        top: 0 !important; left: 0 !important; transform: none !important;
         width: 100%; height: 100%; object-fit: cover; object-position: center;
       }
-      /* Gradient: bottom 164px of image */
+      /* Gradient: bottom 220px fade */
       .img-crop::after {
         content: ''; position: absolute; bottom: 0; left: 0; right: 0;
-        height: 164px;
-        background: linear-gradient(to bottom, rgba(5,2,8,0) 0%, rgba(5,2,8,1) 40%);
+        height: 220px;
+        background: linear-gradient(to bottom, rgba(5,2,8,0) 0%, rgba(5,2,8,1) 55%);
         pointer-events: none; z-index: 1;
       }
 
-      /* Text: overlaps image by 140px */
+      /* Text anchored to fixed bottom distance */
       .light-scene .scene-text {
-        position: relative !important;
-        top: auto !important; left: auto !important; right: auto !important;
-        transform: none !important;
+        position: absolute !important;
+        bottom: 112px; left: 0; right: 0;
+        top: auto !important; transform: none !important;
         opacity: 0; transition: opacity 0.6s ease 0.3s;
-        max-width: 100%; width: 100%; text-align: center !important;
-        padding: 16px 24px 40px; margin-top: -140px; z-index: 2;
+        width: 100%; text-align: center !important;
+        padding: 0 24px; z-index: 2;
         background: none !important; border: none !important;
         backdrop-filter: none !important; box-shadow: none !important;
         border-radius: 0 !important;
