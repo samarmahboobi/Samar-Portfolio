@@ -4,9 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Golrang Gamification — Case Study | Samar Mahboubi</title>
+
+  <!-- Open Graph / Link Preview -->
+  <meta property="og:type"        content="article" />
+  <meta property="og:url"         content="https://samarmahboubi.com/golrang_case_study.html" />
+  <meta property="og:title"       content="Golrang Industrial Group — Habit by Design | Samar Mahboubi" />
+  <meta property="og:description" content="Two gamification campaigns, eleven days each — turning a neglected HR app into a daily habit. Case study by Samar Mahboubi." />
+  <meta property="og:image"       content="https://samarmahboubi.com/Golrang_Banner_1.png" />
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="Golrang Industrial Group — Habit by Design | Samar Mahboubi" />
+  <meta name="twitter:description" content="Two gamification campaigns, eleven days each — turning a neglected HR app into a daily habit. Case study by Samar Mahboubi." />
+  <meta name="twitter:image"       content="https://samarmahboubi.com/Golrang_Banner_1.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="portfolio.css" />
   <style>
     .cover-wrap { padding: 0 3rem; }
@@ -127,6 +138,9 @@
   <link rel="preload" as="image" href="https://raw.githubusercontent.com/samarmahboobi/Samar-Portfolio/main/golrang_01.png">
 </head>
 <body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
 
 <nav>
   <a class="nav-avatar" href="index.html">
@@ -549,13 +563,8 @@
     observer.observe(el);
   });
 
-const hamburger = document.getElementById('hamburger');
-const navOverlay = document.getElementById('nav-overlay');
-const overlayClose = document.getElementById('overlay-close');
-hamburger.addEventListener('click', () => navOverlay.classList.add('open'));
-overlayClose.addEventListener('click', () => navOverlay.classList.remove('open'));
-document.querySelectorAll('.overlay-link').forEach(l => l.addEventListener('click', () => navOverlay.classList.remove('open')));
 </script>
+<script src="scripts.js"></script>
 
 </body>
 </html>
