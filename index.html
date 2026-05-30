@@ -606,72 +606,55 @@ function onScroll() {
     'Transition4.mp4','Transition5.mp4','Transition6.mp4',
   ];
 
-  // Track bytes per file for smooth progress
-  const prog = srcs.map(() => ({ loaded: 0, total: 0, done: false }));
+  const total = srcs.length;
+  let done = 0;
 
-  function updateBar() {
-    const totalBytes  = prog.reduce((s, p) => s + p.total,  0);
-    const loadedBytes = prog.reduce((s, p) => s + p.loaded, 0);
-    const doneCount   = prog.filter(p => p.done).length;
-
-    // Use byte progress if sizes are known, otherwise count files
-    const pct = totalBytes > 0
-      ? Math.min(Math.round((loadedBytes / totalBytes) * 100), 99) // stay at 99 until all done
-      : Math.round((doneCount / srcs.length) * 100);
-
-    preBar.style.width  = pct + '%';
-    prePct.textContent  = pct + '%';
-
-    if (doneCount === srcs.length) {
-      // All fully downloaded — show 100% then dismiss
-      preBar.style.width = '100%';
-      prePct.textContent = '100%';
-      setTimeout(() => {
-        document.body.style.overflow = '';
-        preloader.classList.add('done');
-        // After fade, reload videos from cache (now instant)
-        document.querySelectorAll('video').forEach(v => v.load());
-        setTimeout(() => preloader.remove(), 900);
-      }, 400);
-    }
+  function setBar(pct) {
+    preBar.style.width = pct + '%';
+    prePct.textContent = Math.round(pct) + '%';
   }
 
-  function fetchVideo(src, idx) {
-    fetch(src, { cache: 'force-cache' })
-      .then(res => {
-        prog[idx].total = parseInt(res.headers.get('Content-Length') || '0', 10);
-        const reader = res.body.getReader();
-        function pump() {
-          return reader.read().then(({ done, value }) => {
-            if (done) {
-              prog[idx].done = true;
-              updateBar();
-              return;
-            }
-            prog[idx].loaded += value.length;
-            updateBar();
-            return pump();
-          });
-        }
-        return pump();
-      })
-      .catch(() => {
-        // On network error don't block forever
-        prog[idx].done = true;
-        updateBar();
-      });
-  }
-
-  srcs.forEach((src, i) => fetchVideo(src, i));
-
-  // Absolute hard timeout — 60s on very slow connections
-  setTimeout(() => {
-    if (document.getElementById('preloader')) {
+  function dismiss() {
+    setBar(100);
+    setTimeout(() => {
       document.body.style.overflow = '';
       preloader.classList.add('done');
       setTimeout(() => preloader.remove(), 900);
-    }
-  }, 60000);
+    }, 400);
+  }
+
+  function onDone() {
+    done++;
+    setBar((done / total) * 100);
+    if (done === total) dismiss();
+  }
+
+  srcs.forEach(src => {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', src, true);
+    xhr.responseType = 'blob';
+
+    xhr.onprogress = e => {
+      if (!e.lengthComputable) return;
+      // Smooth per-file progress contribution
+      const filePct = e.loaded / e.total;
+      // Approximate overall: completed files + current file fraction
+      const overall = ((done + filePct) / total) * 100;
+      setBar(overall);
+    };
+
+    xhr.onload = () => {
+      // Set blob as video src so it's guaranteed in memory
+      const blobUrl = URL.createObjectURL(xhr.response);
+      const el = document.querySelector(`video[src="${src}"]`);
+      if (el) { el.src = blobUrl; el.load(); }
+      onDone();
+    };
+
+    xhr.onerror = xhr.onabort = () => onDone(); // don't block on error
+
+    xhr.send();
+  });
 })();
 </script>
 <footer id="footer">
