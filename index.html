@@ -597,76 +597,55 @@ function onScroll() {
   const preBar    = document.getElementById('preBar');
   const prePct    = document.getElementById('prePct');
 
-  const videoSrcs = [
-    'Idle1.mp4','Idle2.mp4','Idle3.mp4','Idle4.mp4',
-    'Idle5.mp4','Idle6.mp4','Idle7.mp4',
-    'Transition1.mp4','Transition2.mp4','Transition3.mp4',
-    'Transition4.mp4','Transition5.mp4','Transition6.mp4',
-  ];
-
-  const prog = videoSrcs.map(() => ({ loaded: 0, total: 0, done: false }));
-
-  function updateBar() {
-    const knownTotal  = prog.reduce((s,p) => s + p.total,  0);
-    const knownLoaded = prog.reduce((s,p) => s + p.loaded, 0);
-    const doneCount   = prog.filter(p => p.done).length;
-
-    const pct = knownTotal > 0
-      ? Math.min(Math.round((knownLoaded / knownTotal) * 100), 100)
-      : Math.round((doneCount / videoSrcs.length) * 100);
-
-    preBar.style.width = pct + '%';
-    prePct.textContent = pct + '%';
-
-    if (doneCount === videoSrcs.length) {
-      setTimeout(() => {
-        preloader.classList.add('done');
-        setTimeout(() => preloader.remove(), 900);
-      }, 300);
-    }
-  }
-
-  // Single fetch per video: stream for progress tracking, collect chunks for blob
-  function loadVideo(src, idx) {
-    return fetch(src)
-      .then(res => {
-        prog[idx].total = parseInt(res.headers.get('Content-Length') || '0', 10);
-        const reader = res.body.getReader();
-        const chunks = [];
-
-        function pump() {
-          return reader.read().then(({ done, value }) => {
-            if (done) {
-              const blob    = new Blob(chunks, { type: 'video/mp4' });
-              const blobUrl = URL.createObjectURL(blob);
-              const el      = document.querySelector(`video[src="${src}"]`);
-              if (el) { el.src = blobUrl; el.load(); }
-              prog[idx].done = true;
-              updateBar();
-              return;
-            }
-            chunks.push(value);
-            prog[idx].loaded += value.length;
-            updateBar();
-            return pump();
-          });
-        }
-        return pump();
-      })
-      .catch(() => { prog[idx].done = true; updateBar(); });
-  }
-
   // Lock scroll while loading
   document.body.style.overflow = 'hidden';
 
-  videoSrcs.forEach((src, i) => loadVideo(src, i));
+  const allVideoEls = Array.from(document.querySelectorAll('video'));
+  const total = allVideoEls.length;
+  let ready = 0;
 
-  // Unlock scroll after preloader removed
-  const origRemove = preloader.remove.bind(preloader);
-  preloader.remove = function() {
+  function dismiss() {
     document.body.style.overflow = '';
-    origRemove();
-  };
+    preloader.classList.add('done');
+    setTimeout(() => preloader.remove(), 900);
+  }
+
+  function onVideoReady() {
+    ready++;
+    const pct = Math.round((ready / total) * 100);
+    preBar.style.width = pct + '%';
+    prePct.textContent = pct + '%';
+    if (ready >= total) {
+      setTimeout(dismiss, 300);
+    }
+  }
+
+  // iOS Safari sometimes never fires canplaythrough — fallback timeout per video
+  allVideoEls.forEach(v => {
+    // Set preload auto so browser actually downloads
+    v.preload = 'auto';
+
+    // Already enough data → count immediately
+    if (v.readyState >= 3) { onVideoReady(); return; }
+
+    let counted = false;
+    function markDone() {
+      if (counted) return;
+      counted = true;
+      onVideoReady();
+    }
+
+    v.addEventListener('canplaythrough', markDone, { once: true });
+    v.addEventListener('loadeddata',     markDone, { once: true });
+    // Fallback: if stalled/error, don't block the loader forever
+    v.addEventListener('error',  markDone, { once: true });
+    v.addEventListener('stalled', () => setTimeout(markDone, 3000), { once: true });
+
+    v.load();
+  });
+
+  // Hard timeout: show site after 15s no matter what (slow connections)
+  setTimeout(dismiss, 15000);
 })();
 </script>
 <footer id="footer">
