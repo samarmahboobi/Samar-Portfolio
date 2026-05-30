@@ -597,55 +597,81 @@ function onScroll() {
   const preBar    = document.getElementById('preBar');
   const prePct    = document.getElementById('prePct');
 
-  // Lock scroll while loading
   document.body.style.overflow = 'hidden';
 
-  const allVideoEls = Array.from(document.querySelectorAll('video'));
-  const total = allVideoEls.length;
-  let ready = 0;
+  const srcs = [
+    'Idle1.mp4','Idle2.mp4','Idle3.mp4','Idle4.mp4',
+    'Idle5.mp4','Idle6.mp4','Idle7.mp4',
+    'Transition1.mp4','Transition2.mp4','Transition3.mp4',
+    'Transition4.mp4','Transition5.mp4','Transition6.mp4',
+  ];
 
-  function dismiss() {
-    document.body.style.overflow = '';
-    preloader.classList.add('done');
-    setTimeout(() => preloader.remove(), 900);
-  }
+  // Track bytes per file for smooth progress
+  const prog = srcs.map(() => ({ loaded: 0, total: 0, done: false }));
 
-  function onVideoReady() {
-    ready++;
-    const pct = Math.round((ready / total) * 100);
-    preBar.style.width = pct + '%';
-    prePct.textContent = pct + '%';
-    if (ready >= total) {
-      setTimeout(dismiss, 300);
+  function updateBar() {
+    const totalBytes  = prog.reduce((s, p) => s + p.total,  0);
+    const loadedBytes = prog.reduce((s, p) => s + p.loaded, 0);
+    const doneCount   = prog.filter(p => p.done).length;
+
+    // Use byte progress if sizes are known, otherwise count files
+    const pct = totalBytes > 0
+      ? Math.min(Math.round((loadedBytes / totalBytes) * 100), 99) // stay at 99 until all done
+      : Math.round((doneCount / srcs.length) * 100);
+
+    preBar.style.width  = pct + '%';
+    prePct.textContent  = pct + '%';
+
+    if (doneCount === srcs.length) {
+      // All fully downloaded — show 100% then dismiss
+      preBar.style.width = '100%';
+      prePct.textContent = '100%';
+      setTimeout(() => {
+        document.body.style.overflow = '';
+        preloader.classList.add('done');
+        // After fade, reload videos from cache (now instant)
+        document.querySelectorAll('video').forEach(v => v.load());
+        setTimeout(() => preloader.remove(), 900);
+      }, 400);
     }
   }
 
-  // iOS Safari sometimes never fires canplaythrough — fallback timeout per video
-  allVideoEls.forEach(v => {
-    // Set preload auto so browser actually downloads
-    v.preload = 'auto';
+  function fetchVideo(src, idx) {
+    fetch(src, { cache: 'force-cache' })
+      .then(res => {
+        prog[idx].total = parseInt(res.headers.get('Content-Length') || '0', 10);
+        const reader = res.body.getReader();
+        function pump() {
+          return reader.read().then(({ done, value }) => {
+            if (done) {
+              prog[idx].done = true;
+              updateBar();
+              return;
+            }
+            prog[idx].loaded += value.length;
+            updateBar();
+            return pump();
+          });
+        }
+        return pump();
+      })
+      .catch(() => {
+        // On network error don't block forever
+        prog[idx].done = true;
+        updateBar();
+      });
+  }
 
-    // Already enough data → count immediately
-    if (v.readyState >= 3) { onVideoReady(); return; }
+  srcs.forEach((src, i) => fetchVideo(src, i));
 
-    let counted = false;
-    function markDone() {
-      if (counted) return;
-      counted = true;
-      onVideoReady();
+  // Absolute hard timeout — 60s on very slow connections
+  setTimeout(() => {
+    if (document.getElementById('preloader')) {
+      document.body.style.overflow = '';
+      preloader.classList.add('done');
+      setTimeout(() => preloader.remove(), 900);
     }
-
-    v.addEventListener('canplaythrough', markDone, { once: true });
-    v.addEventListener('loadeddata',     markDone, { once: true });
-    // Fallback: if stalled/error, don't block the loader forever
-    v.addEventListener('error',  markDone, { once: true });
-    v.addEventListener('stalled', () => setTimeout(markDone, 3000), { once: true });
-
-    v.load();
-  });
-
-  // Hard timeout: show site after 15s no matter what (slow connections)
-  setTimeout(dismiss, 15000);
+  }, 60000);
 })();
 </script>
 <footer id="footer">
