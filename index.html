@@ -635,8 +635,8 @@ else if (stored === 'low')  { perfModal.remove(); startLightMode(); }
    HIGH PERF — Video mode
 ══════════════════════════════════════════ */
 function startHighPerf() {
-  document.getElementById('main-section').style.display = '';
-  document.getElementById('progressDots').style.display = '';
+  document.getElementById('main-section').style.display = 'block';
+  document.getElementById('progressDots').style.display = 'flex';
   startPreloader();
 }
 
@@ -760,8 +760,9 @@ function initVideoMode() {
    LIGHT MODE — Image + crossfade
 ══════════════════════════════════════════ */
 function startLightMode() {
-  document.getElementById('light-section').style.display = '';
-  document.getElementById('progressDots').style.display = '';
+  document.getElementById('light-section').style.display = 'block';
+  document.getElementById('progressDots').style.display = 'flex';
+  document.getElementById('footer').style.display = 'none';
   initLightMode();
 }
 
