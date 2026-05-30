@@ -413,16 +413,6 @@ footer{
   margin:0; border-top:1px solid var(--border);
   min-height:340px;
 }
-.next-project-bg{
-  position:absolute; inset:0;
-  background-size:cover; background-position:center;
-  transition:transform .7s ease, filter .7s ease;
-  filter:brightness(.28) saturate(.6);
-}
-.next-project:hover .next-project-bg{
-  transform:scale(1.04);
-  filter:brightness(.38) saturate(.7);
-}
 .next-project-inner{
   position:relative; z-index:1;
   max-width:1100px; margin:0 auto;
