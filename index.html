@@ -152,6 +152,12 @@
       display: flex; flex-direction: column; align-items: center; gap: 8px; z-index: 10;
     }
     #lightScrollHint { display: none; }
+    #footer.footer--light {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 90;
+      max-width: 100%; background: rgba(5,2,8,0.92); backdrop-filter: blur(16px);
+      border-top: 1px solid var(--border);
+      padding: 1.25rem 3rem;
+    }
     .scroll-hint span { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim); }
     .scroll-arrow {
       width: 1px; height: 40px;
@@ -798,7 +804,7 @@ function initLightMode() {
   let current      = 0;
   let animating    = false;
 
-  // Hide footer until last scene
+  footer.classList.add('footer--light');
   footer.style.display = 'none';
 
   // First scene text already visible
@@ -819,7 +825,7 @@ function initLightMode() {
     const atLast = current === TOTAL - 1;
     scrollHint.style.opacity = atLast ? '0' : '1';
     scrollHint.style.pointerEvents = atLast ? 'none' : 'auto';
-    footer.style.display = atLast ? 'flex' : 'none';
+    footer.style.display = atLast ? 'block' : 'none';
 
     setTimeout(() => {
       const newText = scenes[current].querySelector('.scene-text');
