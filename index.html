@@ -250,12 +250,12 @@
     #perf-modal {
       position: fixed; inset: 0; z-index: 999999;
       display: flex; align-items: center; justify-content: center;
-      opacity: 0; transition: opacity 0.6s ease; overflow: hidden;
+      transition: opacity 0.6s ease; overflow: hidden;
     }
-    #perf-modal.ready { opacity: 1; }
     #perf-modal.hide { opacity: 0; pointer-events: none; }
     #perf-modal-bg {
       position: absolute; inset: 0;
+      background-color: #0a0514;
       background-image: url('modal-bg.jpg');
       background-size: cover; background-position: center top;
     }
@@ -638,10 +638,6 @@ if (window.matchMedia('(hover: hover)').matches) {
 ══════════════════════════════════════════ */
 const perfModal = document.getElementById('perf-modal');
 
-const modalBgImg = new Image();
-modalBgImg.src = 'modal-bg.jpg';
-modalBgImg.onload = () => perfModal.classList.add('ready');
-modalBgImg.onerror = () => perfModal.classList.add('ready');
 
 function hidePerfModal(cb) {
   perfModal.classList.add('hide');
