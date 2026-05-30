@@ -152,7 +152,9 @@
     @keyframes scrollPulse {
       0%,100% { opacity: 0.3; } 50% { opacity: 1; }
     }
-    #main-section { position: relative; }
+
+    /* ── Video Mode ── */
+    #main-section { position: relative; display: none; }
     #stage {
       position: sticky; top: 0;
       width: 100vw; height: 100vh;
@@ -169,7 +171,7 @@
     }
     .v.show { opacity: 1; }
 
-    /* TEXT */
+    /* ── Shared scene text ── */
     .scene-text {
       position: absolute;
       top: 50%;
@@ -183,7 +185,6 @@
       opacity: 1;
       transform: translateY(-50%) translateX(0);
     }
-    /* odd = left, even = right */
     .scene-text.left  { left: calc(5vw + 80px); }
     .scene-text.right {
       left: auto; right: calc(5vw + 80px);
@@ -191,7 +192,6 @@
       transform: translateY(-50%) translateX(20px);
     }
     .scene-text.right.visible { transform: translateY(-50%) translateX(0); }
-
     .scene-text p {
       font-family: 'Cinzel Decorative', serif;
       font-size: clamp(22px, 2.5vw, 32px);
@@ -224,6 +224,28 @@
       background: rgba(192,132,252,0.15);
     }
 
+    /* ── Light Mode ── */
+    #light-section { display: none; }
+    .light-scene {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+    .light-img {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      height: 100vh; width: auto;
+      object-fit: contain;
+      opacity: 1;
+    }
+    /* In light mode scene-text is position:absolute same as video mode */
+    .light-scene .scene-text {
+      position: absolute;
+    }
+
     footer {
       position: relative; z-index: 10;
       text-align: center;
@@ -234,37 +256,86 @@
       color: var(--text-dim);
       border-top: 1px solid rgba(192,132,252,0.08);
     }
-    /* Mobile */
-    @media (max-width: 768px) {
-      nav { padding: 16px 20px; }
-      .nav-links { display: none; }
-      .hamburger { display: flex; }
-      .scene-text {
-        left: 50% !important; right: auto !important;
-        text-align: center !important;
-        transform: translateX(-50%) translateY(-50%) translateY(16px) !important;
-        width: 85vw; max-width: 85vw;
-        background: rgba(5,2,12,0.55);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border: 1px solid rgba(192,132,252,0.15);
-        border-radius: 16px; padding: 20px 24px;
-        box-shadow: 0 0 40px rgba(124,58,237,0.1), inset 0 1px 0 rgba(192,132,252,0.1);
-      }
-      .scene-text.visible {
-        transform: translateX(-50%) translateY(-50%) !important;
-      }
+
+    /* ── Performance Modal ── */
+    #perf-modal {
+      position: fixed; inset: 0; z-index: 999999;
+      background: rgba(5,2,8,0.96);
+      backdrop-filter: blur(24px);
+      display: flex; align-items: center; justify-content: center;
+      transition: opacity 0.6s ease;
     }
+    #perf-modal.hide { opacity: 0; pointer-events: none; }
+    #perf-box {
+      text-align: center;
+      max-width: 480px; width: 90vw;
+      padding: 52px 44px;
+      background: rgba(255,255,255,0.018);
+      border: 1px solid rgba(192,132,252,0.2);
+      border-radius: 24px;
+      box-shadow: 0 0 100px rgba(124,58,237,0.12),
+                  inset 0 1px 0 rgba(192,132,252,0.1);
+    }
+    .perf-sub {
+      font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--text-dim); margin-bottom: 14px;
+    }
+    .perf-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(18px, 3vw, 26px);
+      color: var(--purple-bright); margin-bottom: 16px;
+      text-shadow: 0 0 30px rgba(192,132,252,0.35);
+    }
+    .perf-desc {
+      font-size: 14px; color: var(--text-dim); line-height: 1.75;
+      margin-bottom: 40px;
+    }
+    .perf-btns {
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .perf-btn {
+      display: flex; flex-direction: column; gap: 5px; align-items: flex-start;
+      padding: 18px 24px; border-radius: 14px;
+      border: 1px solid rgba(192,132,252,0.2);
+      background: rgba(192,132,252,0.04);
+      cursor: pointer; transition: all 0.3s ease;
+      text-align: left; width: 100%;
+    }
+    .perf-btn:hover {
+      border-color: var(--purple-bright);
+      background: rgba(192,132,252,0.1);
+      box-shadow: 0 0 24px rgba(192,132,252,0.12);
+      transform: translateY(-1px);
+    }
+    .perf-btn--high { border-color: rgba(192,132,252,0.4); }
+    .perf-btn-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 14px; letter-spacing: 0.04em;
+    }
+    .perf-btn--high .perf-btn-title { color: var(--purple-bright); }
+    .perf-btn--low  .perf-btn-title { color: var(--text); }
+    .perf-btn-sub {
+      font-size: 10px; color: var(--text-dim);
+      letter-spacing: 0.14em; text-transform: uppercase;
+    }
+    .perf-reset {
+      margin-top: 20px;
+      font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+      color: rgba(155,143,187,0.4); background: none; border: none;
+      cursor: pointer; transition: color 0.3s;
+    }
+    .perf-reset:hover { color: var(--text-dim); }
 
     /* ── Preloader ── */
     #preloader {
       position: fixed; inset: 0; z-index: 99999;
       background: #050208;
-      display: flex; flex-direction: column;
+      display: none; flex-direction: column;
       align-items: center; justify-content: center;
       gap: 28px;
       transition: opacity 0.8s ease;
     }
+    #preloader.active { display: flex; }
     #preloader.done { opacity: 0; pointer-events: none; }
     .pre-title {
       font-family: 'Cinzel Decorative', serif;
@@ -285,17 +356,63 @@
       background: linear-gradient(90deg, var(--purple-mid), var(--purple-bright));
       border-radius: 2px;
       box-shadow: 0 0 12px var(--purple-bright);
-      transition: width 0.35s ease;
+      transition: width 0.3s ease;
     }
     .pre-pct {
       font-size: 11px; letter-spacing: 0.2em;
       text-transform: uppercase; color: var(--text-dim);
     }
+
+    /* ── Mobile ── */
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .progress-dots { display: none; }
+      .scene-text {
+        left: 50% !important; right: auto !important;
+        text-align: center !important;
+        transform: translateX(-50%) translateY(-50%) translateY(16px) !important;
+        width: 85vw; max-width: 85vw;
+        background: rgba(5,2,12,0.55);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(192,132,252,0.15);
+        border-radius: 16px; padding: 20px 24px;
+        box-shadow: 0 0 40px rgba(124,58,237,0.1), inset 0 1px 0 rgba(192,132,252,0.1);
+      }
+      .scene-text.visible {
+        transform: translateX(-50%) translateY(-50%) !important;
+      }
+      .light-scene { height: auto; min-height: 100vh; padding: 100px 0 60px; }
+      .light-img { height: 60vw; width: auto; top: 30px; transform: translate(-50%, 0); }
+      #perf-box { padding: 36px 24px; }
+    }
   </style>
 </head>
 <body>
 
-<!-- Preloader -->
+<!-- Performance Modal -->
+<div id="perf-modal">
+  <div id="perf-box">
+    <p class="perf-sub">Welcome</p>
+    <h2 class="perf-title">Choose Your Experience</h2>
+    <p class="perf-desc">This site features scroll-mapped video animations. Choose based on your device and connection speed.</p>
+    <div class="perf-btns">
+      <button class="perf-btn perf-btn--high" id="btn-high">
+        <span class="perf-btn-title">Full Experience ✨</span>
+        <span class="perf-btn-sub">Animated videos · Fast connection recommended</span>
+      </button>
+      <button class="perf-btn perf-btn--low" id="btn-low">
+        <span class="perf-btn-title">Light Mode</span>
+        <span class="perf-btn-sub">Static images · Works on any connection</span>
+      </button>
+    </div>
+    <button class="perf-reset" id="btn-reset">Reset preference on next visit</button>
+  </div>
+</div>
+
+<!-- Preloader (shown only for Full Experience) -->
 <div id="preloader">
   <div class="pre-title">Samar Mahboubi</div>
   <div class="pre-bar-wrap"><div class="pre-bar" id="preBar"></div></div>
@@ -318,9 +435,7 @@
     <li><a href="contact.html">Contact</a></li>
   </ul>
   <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
-    <span></span>
-    <span></span>
-    <span></span>
+    <span></span><span></span><span></span>
   </button>
 </nav>
 
@@ -331,7 +446,7 @@
   <a href="contact.html" class="mobile-link">Contact</a>
 </div>
 
-<div class="progress-dots">
+<div class="progress-dots" id="progressDots">
   <div class="dot active"></div>
   <div class="dot"></div>
   <div class="dot"></div>
@@ -341,65 +456,60 @@
   <div class="dot"></div>
 </div>
 
+<!-- ═══════════════════════════════════════════
+     VIDEO MODE
+════════════════════════════════════════════ -->
 <div id="main-section">
   <div id="stage">
 
     <!-- IDLE VIDEOS -->
-    <video class="v show" id="i1" src="Idle1.mp4"      autoplay loop muted playsinline preload="metadata"></video>
-    <video class="v"      id="i2" src="Idle2.mp4"      loop muted playsinline preload="none"></video>
-    <video class="v"      id="i3" src="Idle3.mp4"      loop muted playsinline preload="none"></video>
-    <video class="v"      id="i4" src="Idle4.mp4"      loop muted playsinline preload="none"></video>
-    <video class="v"      id="i5" src="Idle5.mp4"      loop muted playsinline preload="none"></video>
-    <video class="v"      id="i6" src="Idle6.mp4"      loop muted playsinline preload="none"></video>
-    <video class="v"      id="i7" src="Idle7.mp4"      loop muted playsinline preload="none"></video>
+    <video class="v show" id="i1" src="Idle1.mp4" loop muted playsinline preload="none"></video>
+    <video class="v"      id="i2" src="Idle2.mp4" loop muted playsinline preload="none"></video>
+    <video class="v"      id="i3" src="Idle3.mp4" loop muted playsinline preload="none"></video>
+    <video class="v"      id="i4" src="Idle4.mp4" loop muted playsinline preload="none"></video>
+    <video class="v"      id="i5" src="Idle5.mp4" loop muted playsinline preload="none"></video>
+    <video class="v"      id="i6" src="Idle6.mp4" loop muted playsinline preload="none"></video>
+    <video class="v"      id="i7" src="Idle7.mp4" loop muted playsinline preload="none"></video>
 
     <!-- TRANSITION VIDEOS -->
-    <video class="v" id="t1" src="Transition1.mp4" muted playsinline preload="auto"></video>
-    <video class="v" id="t2" src="Transition2.mp4" muted playsinline preload="auto"></video>
-    <video class="v" id="t3" src="Transition3.mp4" muted playsinline preload="auto"></video>
-    <video class="v" id="t4" src="Transition4.mp4" muted playsinline preload="auto"></video>
-    <video class="v" id="t5" src="Transition5.mp4" muted playsinline preload="auto"></video>
-    <video class="v" id="t6" src="Transition6.mp4" muted playsinline preload="auto"></video>
+    <video class="v" id="t1" src="Transition1.mp4" muted playsinline preload="none"></video>
+    <video class="v" id="t2" src="Transition2.mp4" muted playsinline preload="none"></video>
+    <video class="v" id="t3" src="Transition3.mp4" muted playsinline preload="none"></video>
+    <video class="v" id="t4" src="Transition4.mp4" muted playsinline preload="none"></video>
+    <video class="v" id="t5" src="Transition5.mp4" muted playsinline preload="none"></video>
+    <video class="v" id="t6" src="Transition6.mp4" muted playsinline preload="none"></video>
 
     <!-- TEXTS -->
-    <!-- 1: left — unicorn -->
     <div class="scene-text left visible" id="text1">
       <p>The world of designers<br>is a <span class="keyword">Magical</span> one✨</p>
       <a class="scene-btn" href="contact.html">Let's Work Together</a>
     </div>
-    <!-- 2: right — samar -->
     <div class="scene-text right" id="text2">
       <p>I'm <span class="keyword">Samar</span>,<br>Welcome to my world 💜</p>
       <a class="scene-btn" href="projects.html">See My Work</a>
     </div>
-    <!-- 3: left — tangle -->
     <div class="scene-text left" id="text3">
-      <p>Every business holds a <span class="keyword">Tangle</span> —<br>
-      waiting to be Unraveled</p>
+      <p>Every business holds a <span class="keyword">Tangle</span> —<br>waiting to be Unraveled</p>
       <a class="scene-btn" href="projects.html">View Case Studies</a>
     </div>
-    <!-- 4: right — chest -->
     <div class="scene-text right" id="text4">
       <p>I turn tangles into<br>
       <span class="keyword">Opportunities</span> —<br>
       unlocking their hidden value</p>
       <a class="scene-btn" href="projects.html">See How</a>
     </div>
-    <!-- 5: left — coins / business -->
     <div class="scene-text left" id="text5">
       <p>where users <span class="keyword">Thrive</span><br>
       and businesses <span class="keyword">Grow</span> —<br>
       that's where I design.</p>
       <a class="scene-btn" href="projects.html">View Case Studies</a>
     </div>
-    <!-- 6: left — piano / life -->
     <div class="scene-text left" id="text6">
-      <p>fun fact: I'm inally learning<br>
+      <p>fun fact: I'm finally learning<br>
       the <span class="keyword">PIAnO</span> —<br>
       a dream I've carried<br>since childhood.</p>
       <a class="scene-btn" href="about.html">More About Me</a>
     </div>
-    <!-- 7: right — envelope / contact -->
     <div class="scene-text right" id="text7">
       <p>If you'd like to<br>
       <span class="keyword">Collaborate</span>,<br>
@@ -414,19 +524,95 @@
   </div>
 </div>
 
-<script>
-/* ── Hamburger Menu ── */
-const hamburger = document.getElementById('hamburger');
-const mobileMenu = document.getElementById('mobileMenu');
-const mobileLinks = document.querySelectorAll('.mobile-link');
+<!-- ═══════════════════════════════════════════
+     LIGHT MODE (image version)
+════════════════════════════════════════════ -->
+<div id="light-section">
 
+  <!-- Scene 1: no image, dark ambient bg -->
+  <div class="light-scene" id="ls1">
+    <div class="scene-text left">
+      <p>The world of designers<br>is a <span class="keyword">Magical</span> one✨</p>
+      <a class="scene-btn" href="contact.html">Let's Work Together</a>
+    </div>
+  </div>
+
+  <!-- Scene 2 -->
+  <div class="light-scene" id="ls2">
+    <img class="light-img" src="Transition1.png" alt="">
+    <div class="scene-text right">
+      <p>I'm <span class="keyword">Samar</span>,<br>Welcome to my world 💜</p>
+      <a class="scene-btn" href="projects.html">See My Work</a>
+    </div>
+  </div>
+
+  <!-- Scene 3 -->
+  <div class="light-scene" id="ls3">
+    <img class="light-img" src="Transition2.png" alt="">
+    <div class="scene-text left">
+      <p>Every business holds a <span class="keyword">Tangle</span> —<br>waiting to be Unraveled</p>
+      <a class="scene-btn" href="projects.html">View Case Studies</a>
+    </div>
+  </div>
+
+  <!-- Scene 4 -->
+  <div class="light-scene" id="ls4">
+    <img class="light-img" src="Transition3.png" alt="">
+    <div class="scene-text right">
+      <p>I turn tangles into<br>
+      <span class="keyword">Opportunities</span> —<br>
+      unlocking their hidden value</p>
+      <a class="scene-btn" href="projects.html">See How</a>
+    </div>
+  </div>
+
+  <!-- Scene 5 -->
+  <div class="light-scene" id="ls5">
+    <img class="light-img" src="Transition4.png" alt="">
+    <div class="scene-text left">
+      <p>where users <span class="keyword">Thrive</span><br>
+      and businesses <span class="keyword">Grow</span> —<br>
+      that's where I design.</p>
+      <a class="scene-btn" href="projects.html">View Case Studies</a>
+    </div>
+  </div>
+
+  <!-- Scene 6 -->
+  <div class="light-scene" id="ls6">
+    <img class="light-img" src="Transition5.png" alt="">
+    <div class="scene-text left">
+      <p>fun fact: I'm finally learning<br>
+      the <span class="keyword">PIAnO</span> —<br>
+      a dream I've carried<br>since childhood.</p>
+      <a class="scene-btn" href="about.html">More About Me</a>
+    </div>
+  </div>
+
+  <!-- Scene 7 -->
+  <div class="light-scene" id="ls7">
+    <img class="light-img" src="Transition6.png" alt="">
+    <div class="scene-text right">
+      <p>If you'd like to<br>
+      <span class="keyword">Collaborate</span>,<br>
+      i'd love to connect.</p>
+      <a class="scene-btn" href="contact.html">Get In Touch</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+/* ══════════════════════════════════════════
+   Hamburger
+══════════════════════════════════════════ */
+const hamburger  = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
 hamburger.addEventListener('click', () => {
   hamburger.classList.toggle('active');
   mobileMenu.classList.toggle('active');
   hamburger.setAttribute('aria-expanded', hamburger.classList.contains('active'));
 });
-
-mobileLinks.forEach(link => {
+document.querySelectorAll('.mobile-link').forEach(link => {
   link.addEventListener('click', () => {
     hamburger.classList.remove('active');
     mobileMenu.classList.remove('active');
@@ -434,169 +620,69 @@ mobileLinks.forEach(link => {
   });
 });
 
-/* ── Cursor ── */
+/* ══════════════════════════════════════════
+   Cursor
+══════════════════════════════════════════ */
 const cursor = document.getElementById('cursor');
 const ring   = document.getElementById('cursorRing');
-let mx=0,my=0,rx=0,ry=0;
+let mx=0, my=0, rx=0, ry=0;
 document.addEventListener('mousemove', e => {
-  mx=e.clientX; my=e.clientY;
-  cursor.style.left=mx+'px'; cursor.style.top=my+'px';
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
 });
-(function loop(){ rx+=(mx-rx)*.12; ry+=(my-ry)*.12;
-  ring.style.left=rx+'px'; ring.style.top=ry+'px';
-  requestAnimationFrame(loop); })();
+(function loop() {
+  rx += (mx - rx) * .12; ry += (my - ry) * .12;
+  ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+  requestAnimationFrame(loop);
+})();
 
-/* ── Elements ── */
-const section    = document.getElementById('main-section');
-const scrollHint = document.getElementById('scrollHint');
-const dots       = document.querySelectorAll('.dot');
+/* ══════════════════════════════════════════
+   Performance Modal
+══════════════════════════════════════════ */
+const perfModal = document.getElementById('perf-modal');
 
-const idles = {
-  i1: document.getElementById('i1'),
-  i2: document.getElementById('i2'),
-  i3: document.getElementById('i3'),
-  i4: document.getElementById('i4'),
-  i5: document.getElementById('i5'),
-  i6: document.getElementById('i6'),
-  i7: document.getElementById('i7'),
-};
-const trans = {
-  t1: document.getElementById('t1'),
-  t2: document.getElementById('t2'),
-  t3: document.getElementById('t3'),
-  t4: document.getElementById('t4'),
-  t5: document.getElementById('t5'),
-  t6: document.getElementById('t6'),
-};
-const allVids = { ...idles, ...trans };
+function hidePerfModal(cb) {
+  perfModal.classList.add('hide');
+  setTimeout(() => { perfModal.remove(); if (cb) cb(); }, 650);
+}
 
-const texts = Array.from({length:7}, (_,i) =>
-  document.getElementById('text'+(i+1))
-);
-
-/* ── Idle Video Loop States ── */
-const idleStates = {
-  i1: { reverse: false },
-  i2: { reverse: false },
-  i3: { reverse: false },
-  i4: { reverse: false },
-  i5: { reverse: false },
-  i6: { reverse: false },
-  i7: { reverse: false }
-};
-
-Object.entries(idles).forEach(([key, video]) => {
-  video.addEventListener('ended', function() {
-    idleStates[key].reverse = !idleStates[key].reverse;
-
-    if (idleStates[key].reverse) {
-      video.currentTime = video.duration;
-      video.playbackRate = -1;
-      video.play().catch(()=>{});
-    } else {
-      video.currentTime = 0;
-      video.playbackRate = 1;
-      video.play().catch(()=>{});
-    }
-  });
+document.getElementById('btn-high').addEventListener('click', () => {
+  localStorage.setItem('perfMode', 'high');
+  hidePerfModal(startHighPerf);
 });
 
-/* ── Config ── */
-const SCRUB_PX   = 1000; // px per transition
-const IDLE_PX    = 500;  // px of idle breathing room between transitions
-const LEAD_IN_PX = Math.round(window.innerHeight * 0.4);
+document.getElementById('btn-low').addEventListener('click', () => {
+  localStorage.setItem('perfMode', 'low');
+  hidePerfModal(startLightMode);
+});
 
-// Build scroll zones dynamically
-// zones: array of { type:'idle'|'scrub', idleIdx, transIdx, startPx }
-let zones = [];
-let cursor_px = LEAD_IN_PX;
+document.getElementById('btn-reset').addEventListener('click', () => {
+  localStorage.removeItem('perfMode');
+});
 
-for (let i = 0; i < 7; i++) {
-  zones.push({ type:'idle', idleIdx: i+1, startPx: cursor_px });
-  cursor_px += IDLE_PX;
-  if (i < 6) {
-    zones.push({ type:'scrub', transIdx: i+1, startPx: cursor_px });
-    cursor_px += SCRUB_PX;
-  }
+/* ══════════════════════════════════════════
+   Entry point
+══════════════════════════════════════════ */
+const stored = localStorage.getItem('perfMode');
+if      (stored === 'high') { perfModal.remove(); startHighPerf(); }
+else if (stored === 'low')  { perfModal.remove(); startLightMode(); }
+// else: modal stays visible
+
+/* ══════════════════════════════════════════
+   HIGH PERF — Video mode
+══════════════════════════════════════════ */
+function startHighPerf() {
+  document.getElementById('main-section').style.display = '';
+  document.getElementById('progressDots').style.display = '';
+  startPreloader();
 }
 
-const SECTION_H = cursor_px + window.innerHeight;
-section.style.height = SECTION_H + 'px';
-
-/* ── State ── */
-// state: { type:'idle'|'scrub', idx }
-let state = { type:'idle', idx:1 };
-
-/* ── Helpers ── */
-function showOnly(id) {
-  Object.entries(allVids).forEach(([k,v]) => v.classList.toggle('show', k===id));
-}
-function showText(idx) {
-  texts.forEach((t,i) => t.classList.toggle('visible', i===idx-1));
-}
-function setDot(idx) {
-  dots.forEach((d,i) => d.classList.toggle('active', i===idx-1));
-}
-function enterIdle(idx) {
-  if (state.type==='idle' && state.idx===idx) return;
-  state = { type:'idle', idx };
-  showOnly('i'+idx);
-  showText(idx);
-  setDot(idx);
-  idles['i'+idx].currentTime = 0;
-  idles['i'+idx].play().catch(()=>{});
-  // Hide scroll hint on last idle
-  scrollHint.style.opacity = idx === 7 ? '0' : '1';
-  scrollHint.style.pointerEvents = idx === 7 ? 'none' : 'auto';
-}
-function enterScrub(idx) {
-  if (state.type==='scrub' && state.idx===idx) return;
-  state = { type:'scrub', idx };
-  showOnly('t'+idx);
-  showText(-1);
-  trans['t'+idx].pause();
-}
-
-/* ── Scroll ── */
-window.addEventListener('scroll', onScroll, { passive:true });
-
-function onScroll() {
-  const sy = window.scrollY;
-
-  // Find current zone
-  let zone = zones[0];
-  for (let z of zones) {
-    if (sy >= z.startPx) zone = z;
-    else break;
-  }
-
-  if (zone.type === 'idle') {
-    enterIdle(zone.idleIdx);
-  } else {
-    // scrub
-    const progress = Math.min((sy - zone.startPx) / SCRUB_PX, 1);
-    const tid = 't' + zone.transIdx;
-    const dur = trans[tid].duration;
-
-    enterScrub(zone.transIdx);
-
-    if (isFinite(dur) && dur > 0) {
-      trans[tid].currentTime = progress * dur;
-    }
-
-    // At end of scrub → enter next idle
-    if (progress >= 1) {
-      enterIdle(zone.transIdx + 1);
-    }
-  }
-}
-
-/* ── Preloader ── */
-(function() {
+function startPreloader() {
   const preloader = document.getElementById('preloader');
   const preBar    = document.getElementById('preBar');
   const prePct    = document.getElementById('prePct');
 
+  preloader.classList.add('active');
   document.body.style.overflow = 'hidden';
 
   const srcs = [
@@ -608,55 +694,198 @@ function onScroll() {
 
   const total = srcs.length;
   let done = 0;
+  // per-file progress for smooth bar
+  const fileProg = srcs.map(() => 0); // 0..1
 
-  function setBar(pct) {
-    preBar.style.width = pct + '%';
-    prePct.textContent = Math.round(pct) + '%';
+  function setBar() {
+    const avg = fileProg.reduce((s, v) => s + v, 0) / total;
+    const pct = Math.round(avg * 100);
+    preBar.style.width  = pct + '%';
+    prePct.textContent  = pct + '%';
   }
 
-  function dismiss() {
-    setBar(100);
+  function onFileDone(idx, blobUrl, originalSrc) {
+    fileProg[idx] = 1;
+    done++;
+    setBar();
+    // Swap src to blob so video is in memory
+    const el = document.querySelector(`video[src="${originalSrc}"]`);
+    if (el && blobUrl) { el.src = blobUrl; el.load(); }
+    if (done === total) dismissPreloader();
+  }
+
+  function dismissPreloader() {
+    preBar.style.width = '100%';
+    prePct.textContent = '100%';
     setTimeout(() => {
       document.body.style.overflow = '';
       preloader.classList.add('done');
-      setTimeout(() => preloader.remove(), 900);
+      setTimeout(() => {
+        preloader.remove();
+        initVideoMode(); // start video logic after preload
+      }, 900);
     }, 400);
   }
 
-  function onDone() {
-    done++;
-    setBar((done / total) * 100);
-    if (done === total) dismiss();
-  }
-
-  srcs.forEach(src => {
+  srcs.forEach((src, idx) => {
     const xhr = new XMLHttpRequest();
     xhr.open('GET', src, true);
     xhr.responseType = 'blob';
 
     xhr.onprogress = e => {
-      if (!e.lengthComputable) return;
-      // Smooth per-file progress contribution
-      const filePct = e.loaded / e.total;
-      // Approximate overall: completed files + current file fraction
-      const overall = ((done + filePct) / total) * 100;
-      setBar(overall);
+      if (e.lengthComputable) {
+        fileProg[idx] = e.loaded / e.total;
+        setBar();
+      }
     };
 
     xhr.onload = () => {
-      // Set blob as video src so it's guaranteed in memory
       const blobUrl = URL.createObjectURL(xhr.response);
-      const el = document.querySelector(`video[src="${src}"]`);
-      if (el) { el.src = blobUrl; el.load(); }
-      onDone();
+      onFileDone(idx, blobUrl, src);
     };
 
-    xhr.onerror = xhr.onabort = () => onDone(); // don't block on error
+    xhr.onerror = xhr.onabort = () => onFileDone(idx, null, src);
 
     xhr.send();
   });
-})();
+}
+
+function initVideoMode() {
+  const section    = document.getElementById('main-section');
+  const scrollHint = document.getElementById('scrollHint');
+  const dots       = document.querySelectorAll('.dot');
+
+  const idles = {};
+  const trans = {};
+  for (let i = 1; i <= 7; i++) idles['i'+i] = document.getElementById('i'+i);
+  for (let i = 1; i <= 6; i++) trans['t'+i] = document.getElementById('t'+i);
+  const allVids = { ...idles, ...trans };
+
+  const texts = Array.from({length:7}, (_, i) => document.getElementById('text'+(i+1)));
+
+  // Idle reverse-loop
+  const idleStates = {};
+  for (let i = 1; i <= 7; i++) idleStates['i'+i] = { reverse: false };
+  Object.entries(idles).forEach(([key, video]) => {
+    video.addEventListener('ended', function() {
+      idleStates[key].reverse = !idleStates[key].reverse;
+      if (idleStates[key].reverse) {
+        video.currentTime = video.duration;
+        video.playbackRate = -1;
+      } else {
+        video.currentTime = 0;
+        video.playbackRate = 1;
+      }
+      video.play().catch(()=>{});
+    });
+  });
+
+  // Scroll zones
+  const SCRUB_PX   = 1000;
+  const IDLE_PX    = 500;
+  const LEAD_IN_PX = Math.round(window.innerHeight * 0.4);
+  let zones = [], cur = LEAD_IN_PX;
+  for (let i = 0; i < 7; i++) {
+    zones.push({ type:'idle', idleIdx: i+1, startPx: cur });
+    cur += IDLE_PX;
+    if (i < 6) { zones.push({ type:'scrub', transIdx: i+1, startPx: cur }); cur += SCRUB_PX; }
+  }
+  section.style.height = (cur + window.innerHeight) + 'px';
+
+  let state = { type:'idle', idx:1 };
+
+  function showOnly(id) {
+    Object.entries(allVids).forEach(([k,v]) => v.classList.toggle('show', k===id));
+  }
+  function showText(idx) {
+    texts.forEach((t,i) => t.classList.toggle('visible', i===idx-1));
+  }
+  function setDot(idx) {
+    dots.forEach((d,i) => d.classList.toggle('active', i===idx-1));
+  }
+  function enterIdle(idx) {
+    if (state.type==='idle' && state.idx===idx) return;
+    state = { type:'idle', idx };
+    showOnly('i'+idx);
+    showText(idx);
+    setDot(idx);
+    idles['i'+idx].currentTime = 0;
+    idles['i'+idx].play().catch(()=>{});
+    scrollHint.style.opacity = idx===7 ? '0' : '1';
+    scrollHint.style.pointerEvents = idx===7 ? 'none' : 'auto';
+  }
+  function enterScrub(idx) {
+    if (state.type==='scrub' && state.idx===idx) return;
+    state = { type:'scrub', idx };
+    showOnly('t'+idx);
+    showText(-1);
+    trans['t'+idx].pause();
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  function onScroll() {
+    const sy = window.scrollY;
+    let zone = zones[0];
+    for (let z of zones) { if (sy >= z.startPx) zone = z; else break; }
+    if (zone.type === 'idle') {
+      enterIdle(zone.idleIdx);
+    } else {
+      const progress = Math.min((sy - zone.startPx) / SCRUB_PX, 1);
+      const tid = 't' + zone.transIdx;
+      enterScrub(zone.transIdx);
+      const dur = trans[tid].duration;
+      if (isFinite(dur) && dur > 0) trans[tid].currentTime = progress * dur;
+      if (progress >= 1) enterIdle(zone.transIdx + 1);
+    }
+  }
+
+  // Kick off first idle
+  idles['i1'].play().catch(()=>{});
+}
+
+/* ══════════════════════════════════════════
+   LIGHT MODE — Image version
+══════════════════════════════════════════ */
+function startLightMode() {
+  document.getElementById('light-section').style.display = '';
+  document.getElementById('progressDots').style.display = '';
+  initLightMode();
+}
+
+function initLightMode() {
+  const scenes = document.querySelectorAll('.light-scene');
+  const dots   = document.querySelectorAll('.dot');
+
+  // Animate texts in with IntersectionObserver
+  const textObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      const txt = e.target.querySelector('.scene-text');
+      if (txt) txt.classList.toggle('visible', e.isIntersecting);
+    });
+  }, { threshold: 0.35 });
+
+  // First scene text visible immediately
+  const firstText = scenes[0].querySelector('.scene-text');
+  if (firstText) firstText.classList.add('visible');
+
+  scenes.forEach(s => textObserver.observe(s));
+
+  // Progress dots via IntersectionObserver
+  const dotObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const idx = parseInt(e.target.dataset.idx);
+      dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+    });
+  }, { threshold: 0.5 });
+
+  scenes.forEach((s, i) => {
+    s.dataset.idx = i;
+    dotObserver.observe(s);
+  });
+}
 </script>
+
 <footer id="footer">
   <span>© 2025 Samar Mahboubi</span>
 </footer>
