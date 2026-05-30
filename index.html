@@ -348,18 +348,18 @@
         top: 0 !important; left: 0 !important; transform: none !important;
         width: 100%; height: 100%; object-fit: cover; object-position: center;
       }
-      /* Gradient: bottom 220px fade */
+      /* Gradient: covers text area at bottom of scene */
       .img-crop::after {
         content: ''; position: absolute; bottom: 0; left: 0; right: 0;
-        height: 220px;
-        background: linear-gradient(to bottom, rgba(5,2,8,0) 0%, rgba(5,2,8,1) 55%);
+        height: 55%;
+        background: linear-gradient(to bottom, rgba(5,2,8,0) 0%, rgba(5,2,8,0.98) 60%);
         pointer-events: none; z-index: 1;
       }
 
       /* Text anchored to fixed bottom distance */
       .light-scene .scene-text {
         position: absolute !important;
-        bottom: 112px; left: 0; right: 0;
+        bottom: 112px; left: 0 !important; right: 0 !important;
         top: auto !important; transform: none !important;
         opacity: 0; transition: opacity 0.6s ease 0.3s;
         width: 100%; text-align: center !important;
@@ -368,6 +368,8 @@
         backdrop-filter: none !important; box-shadow: none !important;
         border-radius: 0 !important;
       }
+      .light-scene .scene-text.left,
+      .light-scene .scene-text.right { left: 0 !important; right: 0 !important; }
       .light-scene .scene-text.visible { opacity: 1; transform: none !important; }
     }
   </style>
