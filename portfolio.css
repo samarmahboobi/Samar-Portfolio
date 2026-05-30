@@ -406,6 +406,67 @@ footer{
 }
 .overlay-close:active{border-color:var(--accent);color:var(--accent);}
 
+/* NEXT PROJECT CARD */
+.next-project{
+  display:block; text-decoration:none;
+  position:relative; overflow:hidden;
+  margin:0; border-top:1px solid var(--border);
+  min-height:340px;
+}
+.next-project-bg{
+  position:absolute; inset:0;
+  background-size:cover; background-position:center;
+  transition:transform .7s ease, filter .7s ease;
+  filter:brightness(.28) saturate(.6);
+}
+.next-project:hover .next-project-bg{
+  transform:scale(1.04);
+  filter:brightness(.38) saturate(.7);
+}
+.next-project-inner{
+  position:relative; z-index:1;
+  max-width:1100px; margin:0 auto;
+  padding:4rem 3rem;
+  display:flex; flex-direction:column; gap:1.25rem;
+}
+.next-project-eyebrow{
+  font-size:.68rem; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--accent); font-weight:500;
+  display:flex; align-items:center; gap:.6rem;
+}
+.next-project-eyebrow::after{
+  content:''; display:block;
+  width:32px; height:1px; background:var(--accent); opacity:.6;
+}
+.next-project-title{
+  font-family:var(--serif);
+  font-size:clamp(1.8rem, 4vw, 3rem);
+  font-weight:400; line-height:1.1;
+  color:var(--text);
+  text-shadow:0 0 40px rgba(192,132,252,.2);
+  max-width:680px;
+}
+.next-project-desc{
+  font-size:.88rem; color:var(--text-muted);
+  line-height:1.75; max-width:520px;
+}
+.next-project-cta{
+  display:inline-flex; align-items:center; gap:.6rem;
+  margin-top:.5rem;
+  font-size:.75rem; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--text-dim);
+  transition:color .3s, gap .3s;
+}
+.next-project-cta svg{
+  transition:transform .3s;
+}
+.next-project:hover .next-project-cta{
+  color:var(--accent); gap:.9rem;
+}
+.next-project:hover .next-project-cta svg{
+  transform:translateX(4px);
+}
+
 /* RESPONSIVE */
 @media(max-width:768px){
   nav{padding:1.2rem 1.5rem}
@@ -421,4 +482,6 @@ footer{
   .stat{border-right:none;border-bottom:1px solid var(--border)}
   .stat:last-child{border-bottom:none}
   footer{flex-direction:column;align-items:flex-start}
+  .next-project-inner{padding:3rem 1.5rem}
+  .next-project{min-height:280px}
 }
