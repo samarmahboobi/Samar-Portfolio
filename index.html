@@ -324,6 +324,35 @@
       font-family: 'Cinzel Decorative', serif; font-size: clamp(16px, 3vw, 22px);
       color: var(--purple-bright); letter-spacing: 0.1em; opacity: 0.85;
     }
+    .pre-patience {
+      font-size: clamp(11px, 1.5vw, 13px); letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--text-dim); opacity: 0; transition: opacity 0.8s ease;
+    }
+    .pre-patience.visible { opacity: 1; }
+    .pre-fun-wrap {
+      position: relative;
+      width: min(420px, 88vw); height: 0; overflow: hidden;
+      transition: height 0.6s ease;
+    }
+    .pre-fun-wrap.visible { height: 110px; }
+    .pre-fun {
+      position: absolute; inset: 0;
+      text-align: center; padding: 1.25rem 1.75rem;
+      border: 1px solid rgba(192,132,252,0.18); border-radius: 12px;
+      background: rgba(192,132,252,0.05);
+      opacity: 0; transform: translateY(8px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+      pointer-events: none;
+    }
+    .pre-fun.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    .pre-fun-label {
+      font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--purple-bright); margin-bottom: 0.6rem; display: block;
+    }
+    .pre-fun p {
+      font-size: clamp(13px, 1.8vw, 15px); color: var(--text-dim);
+      line-height: 1.75; margin: 0;
+    }
     .pre-bar-wrap { width: min(320px, 72vw); height: 2px; background: rgba(192,132,252,0.12); border-radius: 2px; overflow: hidden; }
     .pre-bar {
       height: 100%; width: 0%;
@@ -426,6 +455,25 @@
   <div class="pre-title">Samar Mahboubi</div>
   <div class="pre-bar-wrap"><div class="pre-bar" id="preBar"></div></div>
   <div class="pre-pct" id="prePct">0%</div>
+  <div class="pre-patience" id="prePatience">Thanks for your patience</div>
+  <div class="pre-fun-wrap">
+    <div class="pre-fun" id="preFun1">
+      <span class="pre-fun-label">✦ Fun Fact</span>
+      <p>I designed and developed this entire website — alone, no developer, just me and AI — in 60 hours 🌟</p>
+    </div>
+    <div class="pre-fun" id="preFun2">
+      <span class="pre-fun-label">✦ By the way</span>
+      <p>Developers are my good friends and we're totally cool 😁</p>
+    </div>
+    <div class="pre-fun" id="preFun3">
+      <span class="pre-fun-label">✦ I promise</span>
+      <p>The weight of this site has nothing to do with the code — it's all the animations 🤪</p>
+    </div>
+    <div class="pre-fun" id="preFun4">
+      <span class="pre-fun-label">✦ Psst</span>
+      <p>Want to refresh and try the Lighter Version instead? 😅</p>
+    </div>
+  </div>
 </div>
 
 <div class="cursor" id="cursor"></div>
@@ -685,6 +733,26 @@ function startPreloader() {
   preloader.classList.add('active');
   document.body.style.overflow = 'hidden';
 
+  // Timed messages
+  const patience = document.getElementById('prePatience');
+  const fun1 = document.getElementById('preFun1');
+  const fun2 = document.getElementById('preFun2');
+  const fun3 = document.getElementById('preFun3');
+  const fun4 = document.getElementById('preFun4');
+  const funWrap = document.querySelector('.pre-fun-wrap');
+  const timerIds = [];
+  const funCards = [fun1, fun2, fun3, fun4];
+  function showFun(el) {
+    funCards.forEach(c => c.classList.remove('visible'));
+    funWrap.classList.add('visible');
+    requestAnimationFrame(() => el.classList.add('visible'));
+  }
+  timerIds.push(setTimeout(() => patience.classList.add('visible'), 5000));
+  timerIds.push(setTimeout(() => showFun(fun1),  5000));
+  timerIds.push(setTimeout(() => showFun(fun2), 15000));
+  timerIds.push(setTimeout(() => showFun(fun3), 30000));
+  timerIds.push(setTimeout(() => showFun(fun4), 45000));
+
   const srcs = [
     'Idle1.mp4','Idle2.mp4','Idle3.mp4','Idle4.mp4',
     'Idle5.mp4','Idle6.mp4','Idle7.mp4',
@@ -709,6 +777,7 @@ function startPreloader() {
   }
 
   function dismissPreloader() {
+    timerIds.forEach(id => clearTimeout(id));
     preBar.style.width = '100%'; prePct.textContent = '100%';
     setTimeout(() => {
       document.body.style.overflow = '';
