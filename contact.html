@@ -31,7 +31,8 @@
       gap: 6rem;
       align-items: start;
     }
-    .contact-left { position: relative; }
+    .contact-left { }
+    .contact-photo-wrap { position: relative; }
     .contact-photo {
       width: 100%; aspect-ratio: 3/4;
       object-fit: cover; object-position: center top;
@@ -176,8 +177,10 @@
 
 <div class="contact-wrap">
   <div class="contact-left">
-    <img class="contact-photo" src="contact_photo.jpg" alt="Samar Mahboubi" />
-    <div class="contact-hi">Hi</div>
+    <div class="contact-photo-wrap">
+      <img class="contact-photo" src="contact_photo.jpg" alt="Samar Mahboubi" />
+      <div class="contact-hi">Hi</div>
+    </div>
     <div class="contact-quick">
       <a class="contact-quick-link" href="mailto:samar.mahboubi@gmail.com">
         <div class="contact-quick-icon">@</div>
