@@ -325,7 +325,7 @@
       color: var(--purple-bright); letter-spacing: 0.1em; opacity: 0.85;
     }
     .pre-patience {
-      font-size: clamp(11px, 1.5vw, 13px); letter-spacing: 0.15em; text-transform: uppercase;
+      font-size: clamp(12px, 1.5vw, 14px); letter-spacing: 0.15em; text-transform: uppercase;
       color: var(--text-dim); opacity: 0; transition: opacity 0.8s ease;
     }
     .pre-patience.visible { opacity: 1; }
@@ -334,7 +334,7 @@
       width: min(420px, 88vw); height: 0; overflow: hidden;
       transition: height 0.6s ease;
     }
-    .pre-fun-wrap.visible { height: 110px; }
+    .pre-fun-wrap.visible { height: 130px; }
     .pre-fun {
       position: absolute; inset: 0;
       text-align: center; padding: 1.25rem 1.75rem;
@@ -346,11 +346,11 @@
     }
     .pre-fun.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
     .pre-fun-label {
-      font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+      font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;
       color: var(--purple-bright); margin-bottom: 0.6rem; display: block;
     }
     .pre-fun p {
-      font-size: clamp(13px, 1.8vw, 15px); color: var(--text-dim);
+      font-size: clamp(14px, 1.8vw, 16px); color: var(--text-dim);
       line-height: 1.75; margin: 0;
     }
     .pre-bar-wrap { width: min(320px, 72vw); height: 2px; background: rgba(192,132,252,0.12); border-radius: 2px; overflow: hidden; }
@@ -470,8 +470,16 @@
       <p>The weight of this site has nothing to do with the code — it's all the animations 🤪</p>
     </div>
     <div class="pre-fun" id="preFun4">
+      <span class="pre-fun-label">✦ True story</span>
+      <p>Developers always say "that'll be heavy, we can't do it" — and they're right. But here they couldn't stop me 😄</p>
+    </div>
+    <div class="pre-fun" id="preFun5">
       <span class="pre-fun-label">✦ Psst</span>
       <p>Want to refresh and try the Lighter Version instead? 😅</p>
+    </div>
+    <div class="pre-fun" id="preFun6">
+      <span class="pre-fun-label">✦ Seriously though</span>
+      <p>Thank you for waiting — you're making me emotional 🥹 I promise once it loads, everything works perfectly.</p>
     </div>
   </div>
 </div>
@@ -739,19 +747,23 @@ function startPreloader() {
   const fun2 = document.getElementById('preFun2');
   const fun3 = document.getElementById('preFun3');
   const fun4 = document.getElementById('preFun4');
+  const fun5 = document.getElementById('preFun5');
+  const fun6 = document.getElementById('preFun6');
   const funWrap = document.querySelector('.pre-fun-wrap');
   const timerIds = [];
-  const funCards = [fun1, fun2, fun3, fun4];
+  const funCards = [fun1, fun2, fun3, fun4, fun5, fun6];
   function showFun(el) {
     funCards.forEach(c => c.classList.remove('visible'));
     funWrap.classList.add('visible');
     requestAnimationFrame(() => el.classList.add('visible'));
   }
-  timerIds.push(setTimeout(() => patience.classList.add('visible'), 5000));
+  timerIds.push(setTimeout(() => patience.classList.add('visible'),  5000));
   timerIds.push(setTimeout(() => showFun(fun1),  5000));
   timerIds.push(setTimeout(() => showFun(fun2), 15000));
   timerIds.push(setTimeout(() => showFun(fun3), 30000));
   timerIds.push(setTimeout(() => showFun(fun4), 45000));
+  timerIds.push(setTimeout(() => showFun(fun5), 70000));
+  timerIds.push(setTimeout(() => showFun(fun6), 90000));
 
   const srcs = [
     'Idle1.mp4','Idle2.mp4','Idle3.mp4','Idle4.mp4',
