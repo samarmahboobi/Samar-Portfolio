@@ -248,40 +248,50 @@
     /* ── Performance Modal ── */
     #perf-modal {
       position: fixed; inset: 0; z-index: 999999;
-      background: rgba(5,2,8,0.96); backdrop-filter: blur(24px);
       display: flex; align-items: center; justify-content: center;
-      transition: opacity 0.6s ease;
+      transition: opacity 0.6s ease; overflow: hidden;
     }
     #perf-modal.hide { opacity: 0; pointer-events: none; }
+    #perf-modal-bg {
+      position: absolute; inset: 0;
+      background-image: url('modal-bg.jpg');
+      background-size: cover; background-position: center top;
+    }
+    #perf-modal-bg::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(10,5,20,0.1) 0%, rgba(10,5,20,1.0) 100%);
+    }
     #perf-box {
-      text-align: center; max-width: 480px; width: 90vw; padding: 52px 44px;
-      background: rgba(255,255,255,0.018); border: 1px solid rgba(192,132,252,0.2);
-      border-radius: 24px;
-      box-shadow: 0 0 100px rgba(124,58,237,0.12), inset 0 1px 0 rgba(192,132,252,0.1);
+      position: relative; z-index: 1;
+      text-align: center; max-width: 520px; width: 90vw;
+      padding: 48px 44px 56px;
+      background: rgba(5,2,12,0.55); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(192,132,252,0.15); border-radius: 16px;
+      box-shadow: 0 0 40px rgba(124,58,237,0.1), inset 0 1px 0 rgba(192,132,252,0.1);
     }
-    .perf-sub { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 14px; }
     .perf-title {
-      font-family: 'Cinzel Decorative', serif; font-size: clamp(18px, 3vw, 26px);
-      color: var(--purple-bright); margin-bottom: 16px;
-      text-shadow: 0 0 30px rgba(192,132,252,0.35);
+      font-family: 'Cinzel Decorative', serif; font-size: clamp(22px, 3.5vw, 32px);
+      color: var(--purple-bright); margin-bottom: 18px;
+      text-shadow: 0 0 40px rgba(192,132,252,0.5);
     }
-    .perf-desc { font-size: 14px; color: var(--text-dim); line-height: 1.75; margin-bottom: 40px; }
+    .perf-desc { font-size: 18px; color: var(--text-dim); line-height: 1.8; margin-bottom: 36px; }
     .perf-btns { display: flex; flex-direction: column; gap: 12px; }
     .perf-btn {
       display: flex; flex-direction: column; gap: 5px; align-items: flex-start;
       padding: 18px 24px; border-radius: 14px;
-      border: 1px solid rgba(192,132,252,0.2); background: rgba(192,132,252,0.04);
+      border: 1px solid rgba(192,132,252,0.2); background: rgba(10,5,20,0.45);
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
       cursor: pointer; transition: all 0.3s ease; text-align: left; width: 100%;
     }
     @media (hover: hover) {
       .perf-btn:hover {
         border-color: var(--purple-bright); background: rgba(192,132,252,0.1);
-        box-shadow: 0 0 24px rgba(192,132,252,0.12); transform: translateY(-1px);
+        box-shadow: 0 0 28px rgba(192,132,252,0.18); transform: translateY(-1px);
       }
     }
     .perf-btn:active { background: rgba(192,132,252,0.1); border-color: var(--purple-bright); }
-    .perf-btn--high { border-color: rgba(192,132,252,0.4); }
-    .perf-btn-title { font-family: 'Cinzel Decorative', serif; font-size: 14px; letter-spacing: 0.04em; }
+    .perf-btn--high { border-color: rgba(192,132,252,0.45); }
+    .perf-btn-title { font-family: 'Cinzel Decorative', serif; font-size: 16px; letter-spacing: 0.04em; font-weight: 700; }
     .perf-btn--high .perf-btn-title { color: var(--purple-bright); }
     .perf-btn--low  .perf-btn-title { color: var(--text); }
     .perf-btn-sub { font-size: 10px; color: var(--text-dim); letter-spacing: 0.14em; text-transform: uppercase; }
@@ -378,18 +388,18 @@
 
 <!-- Performance Modal -->
 <div id="perf-modal">
+  <div id="perf-modal-bg"></div>
   <div id="perf-box">
-    <p class="perf-sub">Welcome</p>
-    <h2 class="perf-title">Choose Your Experience</h2>
-    <p class="perf-desc">This site features scroll-mapped video animations. Choose based on your device and connection speed.</p>
+    <h2 class="perf-title">Choose your experience</h2>
+    <p class="perf-desc">Glad you stepped into a designer's magical world.<br>Choose the version that best suits your device and connection.</p>
     <div class="perf-btns">
       <button class="perf-btn perf-btn--high" id="btn-high">
         <span class="perf-btn-title">Full Experience ✨</span>
-        <span class="perf-btn-sub">Animated videos · Fast connection recommended</span>
+        <span class="perf-btn-sub">Immersive animations · Best on fast connections</span>
       </button>
       <button class="perf-btn perf-btn--low" id="btn-low">
         <span class="perf-btn-title">Light Mode</span>
-        <span class="perf-btn-sub">Static images · Works on any connection</span>
+        <span class="perf-btn-sub">Clean &amp; smooth · Works on any device</span>
       </button>
     </div>
   </div>
