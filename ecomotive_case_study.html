@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoMotive — Ride-Hailing Meets Micro-Mobility | Samar Mahboubi</title>
+
+  <!-- Open Graph / Link Preview -->
+  <meta property="og:type"        content="article" />
+  <meta property="og:site_name"   content="Samar Mahboubi" />
+  <meta property="og:url"         content="https://samarmahboubi.com/ecomotive_case_study.html" />
+  <meta property="og:title"       content="EcoMotive — Ride-Hailing Meets Micro-Mobility | Samar Mahboubi" />
+  <meta property="og:description" content="A UX case study merging ride-hailing and micro-mobility into one eco-conscious platform — built on user research, shaped by four rounds of usability testing." />
+  <meta property="og:image"       content="https://samarmahboubi.com/ecomotive_01.png" />
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="EcoMotive — Ride-Hailing Meets Micro-Mobility | Samar Mahboubi" />
+  <meta name="twitter:description" content="A UX case study merging ride-hailing and micro-mobility into one eco-conscious platform — built on user research, shaped by four rounds of usability testing." />
+  <meta name="twitter:image"       content="https://samarmahboubi.com/ecomotive_01.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="portfolio.css" />
+  <style>
+    .cover-wrap { padding: 0 3rem; }
+    .cover-img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      max-height: none;
+      display: block;
+    }
+
+    .mockup-img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      border-radius: 8px;
+      display: block;
+    }
+
+    .mockup-full {
+      padding: 0 3rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .mockup-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      padding: 0 3rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .mockup-grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1.25rem;
+      padding: 0 3rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .mockup-label {
+      font-size: .7rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      text-align: center;
+      margin-top: .6rem;
+      margin-bottom: 2rem;
+    }
+
+    .role-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1.5rem;
+      font-size: .88rem;
+    }
+    .role-table th {
+      text-align: left;
+      font-size: .65rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      padding: .75rem 1rem;
+      border-bottom: 1px solid var(--border);
+      font-weight: 500;
+    }
+    .role-table td {
+      padding: .9rem 1rem;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+      line-height: 1.5;
+      vertical-align: top;
+    }
+    .role-table td:first-child {
+      color: var(--text);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .role-table tr:last-child td { border-bottom: none; }
+
+    .challenge-list {
+      list-style: none;
+      padding: 0;
+      margin: 2rem 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .challenge-item {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+    }
+    .challenge-num {
+      font-size: .65rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: .4rem;
+    }
+    .challenge-title {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: .5rem;
+    }
+    .challenge-desc {
+      font-size: .88rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .insight-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1.25rem;
+      margin-top: 2rem;
+    }
+    .insight-card {
+      background: var(--card-bg, rgba(255,255,255,.03));
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+    }
+    .insight-num {
+      font-size: .65rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: .4rem;
+    }
+    .insight-title {
+      font-size: .95rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: .5rem;
+    }
+    .insight-desc {
+      font-size: .83rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .problem-block {
+      border-top: 1px solid var(--border);
+      padding: 2rem 0;
+    }
+    .problem-block:last-child { border-bottom: 1px solid var(--border); }
+    .problem-label {
+      font-size: .65rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: .6rem;
+    }
+    .problem-title {
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+    .problem-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .problem-col-label {
+      font-size: .65rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: .4rem;
+    }
+    .problem-col p {
+      font-size: .88rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    .achievement-list {
+      list-style: none;
+      padding: 0;
+      margin: 1.5rem 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+    }
+    .achievement-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: .75rem;
+      font-size: .9rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .achievement-list li::before {
+      content: "→";
+      color: var(--accent);
+      flex-shrink: 0;
+      margin-top: .05em;
+    }
+
+    /* contained screen wrap for landscape/document screenshots */
+    .screen-wrap {
+      padding: 0 3rem;
+      max-width: 1100px;
+      margin: 0 auto 0;
+    }
+    .screen-wrap img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      display: block;
+      background: #111;
+    }
+    .screen-label {
+      font-size: .7rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      text-align: center;
+      margin-top: .6rem;
+      margin-bottom: 2.5rem;
+    }
+
+    /* single centered phone */
+    .phone-solo {
+      display: flex;
+      justify-content: center;
+      padding: 3rem 3rem;
+    }
+    .phone-solo .phone {
+      width: 260px;
+    }
+
+    @media(max-width: 768px) {
+      .cover-wrap,
+      .mockup-full,
+      .mockup-grid-2,
+      .mockup-grid-3,
+      .screen-wrap { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .mockup-grid-2,
+      .mockup-grid-3 { grid-template-columns: 1fr; }
+      .insight-grid { grid-template-columns: 1fr; }
+      .problem-body { grid-template-columns: 1fr; }
+      .phone-solo .phone { width: 200px; }
+    }
+  </style>
+
+  <link rel="preload" as="image" href="ecomotive_01.png">
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav>
+  <a class="nav-avatar" href="index.html">
+    <span class="nav-name">Samar Mahboubi</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="projects.html" style="color:var(--accent)">Projects</a></li>
+    <li><a href="about.html">About Me</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div id="nav-overlay" role="dialog" aria-modal="true" aria-label="Navigation">
+  <a href="index.html"    class="overlay-link">Home</a>
+  <a href="projects.html" class="overlay-link">Projects</a>
+  <a href="about.html"    class="overlay-link">About Me</a>
+  <a href="contact.html"  class="overlay-link">Contact</a>
+  <button class="overlay-close" id="overlay-close">Close</button>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <span class="hero-tag">UX/UI Design · Sustainable Mobility</span>
+  <h1>EcoMotive — <em>Ride-Hailing<br>Meets Micro-Mobility</em></h1>
+  <p class="hero-desc">A UX case study merging ride-hailing and micro-mobility into one eco-conscious platform — built on user research, shaped by four rounds of usability testing.</p>
+
+  <div class="meta-row">
+    <div class="meta-item">
+      <div class="meta-label">Year</div>
+      <div class="meta-value">2023</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Industry</div>
+      <div class="meta-value">Sustainable Transport</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Platform</div>
+      <div class="meta-value">Mobile App</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Role</div>
+      <div class="meta-value">UX/UI & Interactive Designer</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Tools</div>
+      <div class="meta-value">Figma · Miro · Photoshop · Maze</div>
+    </div>
+  </div>
+</section>
+
+<!-- COVER -->
+<div class="cover-wrap">
+  <img class="cover-img" src="ecomotive_01.png" alt="EcoMotive Hero" style="object-fit:cover;">
+</div>
+
+<!-- CONCEPT -->
+<section class="section" id="s1">
+  <span class="section-label">01 — Concept</span>
+  <h2>One platform for<br>every green journey</h2>
+  <p>London's air pollution and urban congestion are growing problems — and fragmented transport apps aren't helping. EcoMotive merges ride-hailing and micro-mobility into one platform, offering <strong>bikes, e-bikes, scooters, and full electric cars</strong> under a single interface.</p>
+  <p>The mission is twofold: make sustainable transport the easiest option, and reward users for choosing it.</p>
+</section>
+
+<!-- CONCEPT IMAGE — portrait phone -->
+<div class="phone-solo">
+  <div class="phone"><img loading="lazy" src="ecomotive_02.png" alt="EcoMotive app screen"></div>
+</div>
+
+<!-- CHALLENGES -->
+<section class="section" id="s2">
+  <span class="section-label">02 — Challenges</span>
+  <h2>Three problems<br>to solve from the start</h2>
+  <p>Designing a unified mobility platform isn't just a UI problem — it's a mental model problem. The project surfaced three core design challenges before a single wireframe was drawn.</p>
+
+  <ul class="challenge-list">
+    <li class="challenge-item">
+      <div class="challenge-num">Challenge 01</div>
+      <div class="challenge-title">Merging two mental models</div>
+      <div class="challenge-desc">Renting a bike and hailing a ride are fundamentally different interactions. Combining them without confusing users required a completely unified navigation model.</div>
+    </li>
+    <li class="challenge-item">
+      <div class="challenge-num">Challenge 02</div>
+      <div class="challenge-title">Behaviour change by design</div>
+      <div class="challenge-desc">Sustainable choices had to feel natural and rewarding — not preachy. Gamification needed to drive real engagement without making the app feel like a game.</div>
+    </li>
+    <li class="challenge-item">
+      <div class="challenge-num">Challenge 03</div>
+      <div class="challenge-title">Progressive data disclosure</div>
+      <div class="challenge-desc">Carbon emissions, pricing, battery level, distance — all relevant, all competing for space. The challenge was showing the right information at the right moment, nothing more.</div>
+    </li>
+  </ul>
+</section>
+
+<div class="screen-wrap">
+  <img loading="lazy" src="ecomotive_03.png" alt="EcoMotive challenges overview">
+</div>
+
+<!-- RESEARCH -->
+<section class="section" id="s3">
+  <span class="section-label">03 — Research &amp; Insights</span>
+  <h2>Research that<br>shaped every decision</h2>
+  <p>Research included a survey of 88 participants, 10 user interviews, and an affinity diagram across 4 pain point categories. Card sorting with 9 participants shaped the information architecture. From this, one primary persona emerged: an environmentally conscious urban professional who finds existing micro-mobility apps fragmented and difficult to trust.</p>
+
+  <div class="stats-row">
+    <div class="stat">
+      <div class="stat-num">88</div>
+      <div class="stat-desc">Survey<br>participants</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">10</div>
+      <div class="stat-desc">User<br>interviews</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">9</div>
+      <div class="stat-desc">Card sorting<br>participants</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">4</div>
+      <div class="stat-desc">Pain point<br>categories</div>
+    </div>
+  </div>
+
+  <div class="insight-grid">
+    <div class="insight-card">
+      <div class="insight-num">Insight 01</div>
+      <div class="insight-title">Fragmentation is the core frustration</div>
+      <div class="insight-desc">Users switch between multiple apps for different vehicles. A unified platform was the most-requested improvement across both surveys and interviews.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-num">Insight 02</div>
+      <div class="insight-title">Eco intent is there — the tools aren't</div>
+      <div class="insight-desc">Most participants wanted to make greener choices but had no way to compare environmental impact across transport options in real time.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-num">Insight 03</div>
+      <div class="insight-title">Payment breaks the experience</div>
+      <div class="insight-desc">Users found payment flows unclear — especially when switching vehicles, applying rewards, or returning to a station. This became a primary design focus.</div>
+    </div>
+  </div>
+</section>
+
+<div class="screen-wrap">
+  <img loading="lazy" src="ecomotive_04.png" alt="Research affinity mapping">
+</div>
+
+<!-- USER FLOW -->
+<section class="section" id="s4">
+  <span class="section-label">04 — User Flow</span>
+  <h2>Mapping the journey<br>before the interface</h2>
+  <p>Before wireframing, I mapped the complete user journey — from onboarding through vehicle selection, group ride, reward redemption, and return to station. This surfaced two critical decision points early: how users switch between vehicle types, and how the payment and reward flow connect. Both became central to the iteration process.</p>
+</section>
+
+<div class="screen-wrap">
+  <img loading="lazy" src="ecomotive_05.png" alt="User flow map">
+</div>
+
+<!-- EXPLORATION -->
+<section class="section" id="s5">
+  <span class="section-label">05 — Exploration &amp; Iterations</span>
+  <h2>Four problems.<br>Four rounds of testing.</h2>
+  <p>Four rounds of usability testing uncovered three recurring design problems. Each went through multiple iterations before landing on a solution that felt right for users and true to the product's eco mission.</p>
+
+  <div style="margin-top: 2.5rem;">
+
+    <div class="problem-block">
+      <div class="problem-label">Problem 01</div>
+      <div class="problem-title">Landing page clarity</div>
+      <div class="problem-body">
+        <div class="problem-col">
+          <div class="problem-col-label">Problem</div>
+          <p>Users were overwhelmed by all vehicle options at once. The map — the most important tool for selecting a vehicle — was buried beneath the feature grid.</p>
+        </div>
+        <div class="problem-col">
+          <div class="problem-col-label">Solution</div>
+          <p>Made the map the primary interface. Vehicle type switching moved to a segment control bar at the bottom. 4 iterations led to a final design where spatial context comes first — users see where vehicles are before they decide what to take.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="problem-block">
+      <div class="problem-label">Problem 02</div>
+      <div class="problem-title">Group ride confusion</div>
+      <div class="problem-body">
+        <div class="problem-col">
+          <div class="problem-col-label">Problem</div>
+          <p>Users couldn't simultaneously choose a group ride and select individual vehicles. The scooter option also raised a security concern — it required uploading a driving licence, which users were uncomfortable sharing.</p>
+        </div>
+        <div class="problem-col">
+          <div class="problem-col-label">Solution</div>
+          <p>Introduced a dedicated group ride button to separate the two decisions. Removed scooter from group ride options entirely. In the final version, users can start a group ride in two ways: by tapping the group ride button, or by scanning a second vehicle after their first.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="problem-block">
+      <div class="problem-label">Problem 03</div>
+      <div class="problem-title">Gamification without the gimmick</div>
+      <div class="problem-body">
+        <div class="problem-col">
+          <div class="problem-col-label">Problem</div>
+          <p>Integrating the ecopoint reward system into the landing page without making the app feel like a game. Users needed to understand it quickly — but it couldn't dominate the core transport experience.</p>
+        </div>
+        <div class="problem-col">
+          <div class="problem-col-label">Solution</div>
+          <p>After 5 icon placement iterations, the final version uses a persistent but subtle ecopoint icon on the map screen. Tapping it expands into the full gamification layer — journey history, leaderboard, badges, and saved CO₂ — without ever disrupting the primary booking flow.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="problem-block">
+      <div class="problem-label">Problem 04</div>
+      <div class="problem-title">Vehicle information at selection</div>
+      <div class="problem-body">
+        <div class="problem-col">
+          <div class="problem-col-label">Problem</div>
+          <p>Users struggled to access comprehensive vehicle details during selection — battery level, pricing, saved carbon, distance, and station name were all needed before committing to a vehicle.</p>
+        </div>
+        <div class="problem-col">
+          <div class="problem-col-label">Solution</div>
+          <p>Introduced a card design that surfaces all key vehicle information in a compact, scannable format. The card appears when a vehicle is tapped on the map — keeping the map uncluttered until the user needs the detail.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ITERATION IMAGES -->
+<div class="screen-wrap" style="margin-bottom:.75rem;">
+  <img loading="lazy" src="ecomotive_06.png" alt="Landing page iterations">
+</div>
+
+<div class="screen-wrap" style="margin-bottom:.75rem;">
+  <img loading="lazy" src="ecomotive_07.png" alt="Group ride iterations">
+</div>
+
+<div class="mockup-grid-2" style="margin-bottom:.75rem;">
+  <div>
+    <div class="screen-wrap" style="padding:0;">
+      <img loading="lazy" src="ecomotive_08.png" alt="Gamification iterations">
+    </div>
+  </div>
+  <div>
+    <div class="screen-wrap" style="padding:0;">
+      <img loading="lazy" src="ecomotive_09.png" alt="Vehicle card iterations">
+    </div>
+  </div>
+</div>
+
+<hr class="hdivider">
+
+<!-- INTERFACE SYSTEM -->
+<section class="section" id="s6">
+  <span class="section-label">06 — Interface System</span>
+  <h2>Built for trust,<br>designed for nature</h2>
+  <p>The visual direction draws from natural environments and premium brand references — resulting in a palette that feels both eco-conscious and trustworthy. A purple primary signals the ecopoint gamification layer while neutral tones keep the map-first experience calm and focused.</p>
+  <p>The full component system was built in Figma and tested for <strong>WCAG AA compliance</strong> across 5 colour vision types.</p>
+
+  <div class="ds-grid" style="margin-top: 2rem;">
+    <div class="ds-card">
+      <div class="ds-card-title">Visual Language</div>
+      <div class="ds-card-body">Draws from natural environments and premium brand references. Palette feels eco-conscious and trustworthy without relying on clichéd green.</div>
+    </div>
+    <div class="ds-card">
+      <div class="ds-card-title">Colour System</div>
+      <div class="ds-card-body">Purple primary for the ecopoint gamification layer. Neutral tones keep the map-first experience calm and focused on spatial context.</div>
+    </div>
+    <div class="ds-card">
+      <div class="ds-card-title">Accessibility</div>
+      <div class="ds-card-body">Full component system built in Figma. WCAG AA compliance tested across 5 colour vision types. Developer handoff with full token documentation.</div>
+    </div>
+  </div>
+</section>
+
+<div class="screen-wrap" style="margin-bottom:.75rem;">
+  <img loading="lazy" src="ecomotive_10.png" alt="Interface system overview">
+</div>
+
+<div class="mockup-grid-2" style="margin-bottom:.75rem;">
+  <div>
+    <div class="screen-wrap" style="padding:0;">
+      <img loading="lazy" src="ecomotive_11.png" alt="Component system">
+    </div>
+  </div>
+  <div>
+    <div class="screen-wrap" style="padding:0;">
+      <img loading="lazy" src="ecomotive_14.png" alt="Colour tokens">
+    </div>
+  </div>
+</div>
+
+<!-- FINAL DESIGN -->
+<section class="section" id="s7">
+  <span class="section-label">07 — Final Design</span>
+  <h2>Four vehicles.<br>One seamless experience.</h2>
+  <p>EcoMotive delivers a unified micro-mobility experience across four vehicle types, with built-in gamification that makes sustainable choices feel rewarding rather than obligatory. The final design emerged from four usability test phases and over 15 design iterations across the core user journeys.</p>
+
+  <ul class="achievement-list">
+    <li>4 vehicle types unified under one navigation model</li>
+    <li>Gamification system designed to feel purposeful, not game-like</li>
+    <li>WCAG AA-compliant UI tested across 5 colour vision types</li>
+  </ul>
+</section>
+
+<div class="screen-wrap" style="margin-bottom:.75rem;">
+  <img loading="lazy" src="Ecomotive-banner.png" alt="EcoMotive final design">
+</div>
+
+
+<hr class="hdivider">
+
+<!-- REFLECTION -->
+<section class="section" id="s8">
+  <span class="section-label">08 — Reflection</span>
+  <h2>What this project<br>taught me</h2>
+
+  <div class="reflection-grid">
+    <div class="ref-item">
+      <div class="ref-num">01</div>
+      <div class="ref-title">Restraint is the skill</div>
+      <div class="ref-text">Merging two mental models — renting and riding — into one interface requires extreme restraint. Every feature we added needed to earn its place, because the moment the app felt complex, the eco mission failed.</div>
+    </div>
+    <div class="ref-item">
+      <div class="ref-num">02</div>
+      <div class="ref-title">Research surfaced the invisible</div>
+      <div class="ref-text">Usability testing across four rounds revealed that users didn't struggle with the eco concept — they struggled with trust. Building confidence in the map, pricing, and return flow was as important as the environmental mission itself.</div>
+    </div>
+    <div class="ref-item">
+      <div class="ref-num">03</div>
+      <div class="ref-title">Gamification must serve the core</div>
+      <div class="ref-text">The ecopoint system only works because it never competes with the primary booking flow. Sustainable behaviour change happens at the margins — a persistent icon, a satisfying number, a badge earned quietly.</div>
+    </div>
+  </div>
+
+  <div class="pull-quote" style="margin-top:3rem;">
+    <p>"Every feature we added needed to earn its place — because the moment the app felt complex, the eco mission failed."</p>
+  </div>
+</section>
+
+<!-- NEXT PROJECT -->
+<a class="next-project" href="gathero_case_study.html">
+<div class="next-project-inner">
+    <span class="next-project-eyebrow">Next Project</span>
+    <h2 class="next-project-title">GatherO — <em>From Gambling to Social Play</em></h2>
+    <p class="next-project-desc">A research-driven platform pivot that transformed a crypto gambling concept into a social gaming platform where friends compete together.</p>
+    <span class="next-project-cta">
+      View Case Study
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </span>
+  </div>
+</a>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">
+    <div style="font-weight:500;color:var(--text);margin-bottom:.25rem">Samar Mahboubi</div>
+    <div>Senior Product Designer · samarmahboubi.com</div>
+  </div>
+  <ul class="footer-links">
+    <li><a href="mailto:samar.mahboubi@gmail.com">samar.mahboubi@gmail.com</a></li>
+    <li><a href="https://www.linkedin.com/in/samar-mahboubi/">LinkedIn</a></li>
+  </ul>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+    }
+  });
+}, {threshold:0.1});
+
+document.querySelectorAll('.section,.img-break img,.phone-wrap').forEach(el => observer.observe(el));
+</script>
+<script src="scripts.js"></script>
+</body>
+</html>

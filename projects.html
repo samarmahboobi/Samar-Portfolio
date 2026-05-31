@@ -49,8 +49,8 @@
       max-width: 1100px; margin: 0 auto;
       padding: 0 3rem 6rem;
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
     }
 
     .project-card {
@@ -162,7 +162,7 @@
     /* Responsive */
     @media (max-width: 768px) {
       .page-hero { padding: 8rem 1.5rem 3rem; }
-      .projects-grid { grid-template-columns: 1fr; padding: 0 1.5rem 4rem; }
+      .projects-grid { grid-template-columns: 1fr; padding: 0 1.5rem 4rem; gap: 20px; }
       .project-card-body { padding: 1.25rem 1.5rem 1.5rem; }
     }
 
@@ -266,7 +266,23 @@
     </div>
   </a>
 
-  <!-- 4. Golrang -->
+  <!-- 4. EcoMotive -->
+  <a class="project-card" href="ecomotive_case_study.html">
+    <div style="overflow:hidden">
+      <img loading="lazy" class="project-card-img" src="Ecomotive-banner.png" alt="EcoMotive" style="object-fit:contain;background:transparent;" />
+    </div>
+    <div class="project-card-body">
+      <span class="project-card-tag">UX/UI Design · Sustainable Mobility · Mobile</span>
+      <h2 class="project-card-title">EcoMotive — Ride-Hailing Meets Micro-Mobility</h2>
+      <p class="project-card-desc">A UX case study merging ride-hailing and micro-mobility into one eco-conscious platform — built on user research, shaped by four rounds of usability testing.</p>
+      <div class="project-card-footer">
+        <span class="project-card-year">2023</span>
+        <div class="project-card-arrow">→</div>
+      </div>
+    </div>
+  </a>
+
+  <!-- 5. Golrang -->
   <a class="project-card" href="golrang_case_study.html">
     <div style="overflow:hidden">
       <img loading="lazy" class="project-card-img" src="Golrang_Banner_1.png" alt="Golrang Industrial Group" />
