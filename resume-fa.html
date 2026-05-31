@@ -442,19 +442,92 @@
 
     /* ── PRINT ── */
     @media print {
-      body { background: #fff; color: #111; }
-      :root {
-        --bg:#fff; --bg2:#f9f6ff; --bg3:#f1ebff;
-        --text:#111; --text-muted:#444; --text-dim:#777;
-        --accent:#7c3aed; --border:rgba(124,58,237,0.18);
+      /* صفحه A4 */
+      @page {
+        size: A4 portrait;
+        margin: 0;
       }
-      nav, .cursor, .cursor-ring, footer { display: none; }
-      .page { padding: 1.5rem; }
+
+      /* تم تاریک حفظ بشه */
+      * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+
+      /* پنهان کردن عناصر غیرضروری */
+      nav, .cursor, .cursor-ring, footer, #nav-overlay,
+      .nav-print, .hamburger { display: none !important; }
+
+      /* انیمیشن‌ها */
       .cv-hero, .cv-section { opacity: 1 !important; transform: none !important; }
+      .cv-photo-wrap::before { animation: none !important; display: none; }
+      .exp-card::before { display: none; }
+
+      html, body { height: auto; overflow: visible; background: #050208; }
+
+      /* ── هدر ثابت روی هر صفحه ── */
+      .cv-hero {
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        background: #050208;
+        border-bottom: 1px solid rgba(192,132,252,0.18);
+        padding: .55cm 1.2cm .45cm;
+        margin: 0;
+        grid-template-columns: auto 1fr;
+        gap: 1.2rem;
+        z-index: 999;
+      }
+      .cv-photo-wrap { width: 72px; height: 72px; }
+      .cv-photo { width: 72px; height: 72px; }
+      .cv-name { font-size: 1.5rem; margin-bottom: .2rem; }
+      .cv-role { font-size: .8rem; margin-bottom: .6rem; }
+      .cv-eyebrow { font-size: .65rem; margin-bottom: .4rem; }
+      .cv-contact-row { gap: .4rem .9rem; }
+      .cv-contact-row a { font-size: .68rem; }
+      .portfolio-btn { font-size: .68rem; padding: .2rem .6rem; }
+
+      /* فضای بالا برای هدر ثابت */
+      .page {
+        padding: 3.8cm 1.2cm 1cm;
+        max-width: 100%;
+      }
+
+      /* گرید */
+      .cv-grid {
+        grid-template-columns: 195px 1fr;
+        gap: 0 1.4rem;
+      }
       .cv-sidebar { position: static; }
-      .cv-grid { grid-template-columns: 240px 1fr; gap: 0 2rem; }
-      .exp-card { break-inside: avoid; }
-      .cv-photo-wrap::before { display: none; }
+
+      /* سکشن‌ها */
+      .cv-section { margin-bottom: 1.2rem; }
+      .section-label { font-size: .6rem; margin-bottom: .8rem; }
+
+      /* درباره‌ی من */
+      .about-text { font-size: .76rem; line-height: 1.7; }
+
+      /* کارت‌های تجربه */
+      .exp-card {
+        break-inside: avoid;
+        page-break-inside: avoid;
+        padding: .9rem 1rem;
+        margin-bottom: .55rem;
+      }
+      .exp-title { font-size: .88rem; }
+      .exp-company { font-size: .72rem; }
+      .exp-date { font-size: .65rem; }
+      .exp-body { font-size: .75rem; line-height: 1.75; }
+      .case-study-btn { display: none; } /* دکمه‌ها در پرینت نیازی نیستن */
+
+      /* sidebar مهارت‌ها */
+      .skill-tag { font-size: .7rem; padding: .3rem .65rem; }
+      .skill-group { margin-bottom: 1rem; }
+      .skill-group-title { font-size: .55rem; }
+      .edu-mini-card { padding: .6rem .8rem; margin-bottom: .4rem; }
+      .edu-mini-title { font-size: .78rem; }
+      .edu-mini-type { font-size: .58rem; }
+      .edu-mini-inst { font-size: .68rem; }
+      .edu-more-btn { display: none; }
+      .lang-item { margin-bottom: .6rem; }
+      .lang-header { font-size: .72rem; }
+      .divider { margin: .8rem 0; }
     }
 
     /* ── RESPONSIVE ── */
