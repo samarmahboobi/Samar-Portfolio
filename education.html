@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Education — Samar Mahboubi</title>
+
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://samarmahboubi.com/education.html" />
+  <meta property="og:site_name"   content="Samar Mahboubi" />
+  <meta property="og:title"       content="Education — Samar Mahboubi" />
+  <meta property="og:description" content="Academic background and professional training of Samar Mahboubi — Product Designer & APM." />
+  <meta property="og:image"       content="https://samarmahboubi.com/me.png" />
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="Education — Samar Mahboubi" />
+  <meta name="twitter:description" content="Academic background and professional training of Samar Mahboubi." />
+  <meta name="twitter:image"       content="https://samarmahboubi.com/me.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="portfolio.css" />
+
+  <style>
+    /* ── PAGE HERO ── */
+    .edu-hero {
+      max-width: 1100px; margin: 0 auto;
+      padding: 10rem 3rem 5rem;
+    }
+    .edu-hero-tag {
+      display: inline-block;
+      font-size: .7rem; letter-spacing: .15em; text-transform: uppercase;
+      color: var(--accent); font-weight: 500;
+      margin-bottom: 1.2rem;
+    }
+    .edu-hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      font-weight: 400; line-height: 1.15;
+      color: var(--text);
+      text-shadow: 0 0 40px rgba(192,132,252,0.15);
+      margin-bottom: 1.25rem;
+    }
+    .edu-hero-desc {
+      font-size: 1rem; color: var(--text-muted);
+      max-width: 520px; line-height: 1.85;
+    }
+
+    /* ── TIMELINE WRAPPER ── */
+    .timeline-section {
+      max-width: 1100px; margin: 0 auto;
+      padding: 2rem 3rem 8rem;
+      position: relative;
+    }
+
+    /* Centre spine */
+    .timeline-spine {
+      position: absolute;
+      left: 50%; top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        var(--border) 6%,
+        var(--border) 94%,
+        transparent 100%
+      );
+      transform: translateX(-50%);
+    }
+
+    /* ── TIMELINE ITEM ── */
+    .tl-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+      margin-bottom: 5rem;
+      position: relative;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .tl-item.visible { opacity: 1; transform: translateY(0); }
+
+    /* Dot on the spine */
+    .tl-item::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 2.4rem;
+      transform: translate(-50%, -50%);
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 2px solid var(--accent);
+      box-shadow: 0 0 10px rgba(192,132,252,0.5);
+      z-index: 2;
+    }
+
+    /* Left card (even items) */
+    .tl-item.left .tl-card { margin-right: calc(50% + 2.5rem); margin-left: 0; }
+    .tl-item.left           { flex-direction: row-reverse; }
+
+    /* Right card (odd items) */
+    .tl-item.right .tl-card { margin-left: calc(50% + 2.5rem); margin-right: 0; }
+
+    /* ── CARD ── */
+    .tl-card {
+      flex: 1;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem 2.25rem;
+      position: relative;
+      transition: border-color .3s, box-shadow .3s;
+    }
+    .tl-card:hover {
+      border-color: rgba(192,132,252,0.35);
+      box-shadow: 0 8px 40px rgba(192,132,252,0.07);
+    }
+
+    /* Arrow pointing toward spine */
+    .tl-item.right .tl-card::before {
+      content: '';
+      position: absolute;
+      top: 2rem;
+      left: -7px;
+      width: 12px; height: 12px;
+      background: var(--bg3);
+      border-left: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      transform: rotate(45deg);
+    }
+    .tl-item.left .tl-card::before {
+      content: '';
+      position: absolute;
+      top: 2rem;
+      right: -7px;
+      width: 12px; height: 12px;
+      background: var(--bg3);
+      border-right: 1px solid var(--border);
+      border-top: 1px solid var(--border);
+      transform: rotate(45deg);
+    }
+
+    .tl-card-type {
+      font-size: .68rem; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--accent); font-weight: 500;
+      margin-bottom: .6rem;
+    }
+    .tl-card-title {
+      font-family: var(--serif);
+      font-size: clamp(1rem, 1.5vw, 1.25rem);
+      font-weight: 400; color: var(--text);
+      line-height: 1.3;
+      margin-bottom: .5rem;
+      text-shadow: 0 0 20px rgba(192,132,252,0.12);
+    }
+    .tl-card-institution {
+      font-size: .85rem; color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+    .tl-card-institution strong {
+      color: var(--text); font-weight: 400;
+    }
+    .tl-card-desc {
+      font-size: .88rem; color: var(--text-muted);
+      line-height: 1.75;
+    }
+    .tl-tags {
+      display: flex; flex-wrap: wrap; gap: .45rem;
+      margin-top: 1.1rem;
+    }
+
+    /* Year label — opposite side of card, near the spine dot */
+    .tl-year {
+      position: absolute;
+      top: 1.75rem;
+      font-size: .75rem; letter-spacing: .1em;
+      color: var(--text-muted); font-weight: 400;
+      font-family: var(--serif);
+    }
+    .tl-item.right .tl-year { right: calc(50% + 1.75rem); text-align: right; }
+    .tl-item.left  .tl-year { left: calc(50% + 1.75rem); text-align: left; }
+
+    /* ── MOBILE: single column ── */
+    @media (max-width: 768px) {
+      .edu-hero     { padding: 8rem 1.5rem 3rem; }
+      .timeline-section { padding: 2rem 1.5rem 6rem; }
+
+      .timeline-spine { left: 20px; }
+
+      .tl-item,
+      .tl-item.left,
+      .tl-item.right {
+        flex-direction: column;
+        padding-left: 48px;
+      }
+      .tl-item::before {
+        left: 20px;
+        top: 1.8rem;
+      }
+      .tl-item.left  .tl-card,
+      .tl-item.right .tl-card {
+        margin: 0; width: 100%;
+      }
+      .tl-item.left  .tl-card::before,
+      .tl-item.right .tl-card::before {
+        display: none;
+      }
+      .tl-year {
+        position: static;
+        margin: 0 0 .5rem;
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-avatar" href="index.html">
+    <span class="nav-name">Samar Mahboubi</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="about.html">About Me</a></li>
+    <li><a href="education.html" style="color:var(--accent)">Education</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div id="nav-overlay" role="dialog" aria-modal="true" aria-label="Navigation">
+  <a href="index.html"     class="overlay-link">Home</a>
+  <a href="projects.html"  class="overlay-link">Projects</a>
+  <a href="about.html"     class="overlay-link">About Me</a>
+  <a href="education.html" class="overlay-link">Education</a>
+  <a href="contact.html"   class="overlay-link">Contact</a>
+  <button class="overlay-close" id="overlay-close">Close</button>
+</div>
+
+<!-- HERO -->
+<div class="edu-hero">
+  <span class="edu-hero-tag">Education</span>
+  <h1>Learning,<br><em style="font-style:italic;color:var(--accent)">by design.</em></h1>
+  <p class="edu-hero-desc">
+    A timeline of academic degrees, boot camps, and courses — spanning business strategy, product design, interface design, data science, and product management.
+  </p>
+</div>
+
+<!-- TIMELINE -->
+<div class="timeline-section">
+  <div class="timeline-spine"></div>
+
+  <!-- 1 — PRSES Design System 2025 (LEFT) -->
+  <div class="tl-item left">
+    <span class="tl-year">2025</span>
+
+    <div class="tl-card">
+      <div class="tl-card-type">Boot Camp Online · Design Systems</div>
+      <h2 class="tl-card-title">PRSES Design System</h2>
+      <p class="tl-card-institution"><strong>Arman Khajehvand</strong> — Online Boot Camp</p>
+      <div class="tl-tags">
+        <span class="tag">Design Systems</span>
+        <span class="tag">Component Architecture</span>
+        <span class="tag">Design Tokens</span>
+        <span class="tag">Developer Handoff</span>
+        <span class="tag">Auto-compilation</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2 — Product Management, Diginext 2025 (RIGHT) -->
+  <div class="tl-item right">
+    <span class="tl-year">2025</span>
+
+    <div class="tl-card">
+      <div class="tl-card-type">Boot Camp · Product</div>
+      <h2 class="tl-card-title">Product Management</h2>
+      <p class="tl-card-institution"><strong>Diginext</strong> — Boot Camp</p>
+      <div class="tl-tags">
+        <span class="tag">Problem Identification</span>
+        <span class="tag">Product Research</span>
+        <span class="tag">Product Strategy</span>
+        <span class="tag">PRD Writing</span>
+        <span class="tag">Roadmapping</span>
+        <span class="tag">Prioritisation</span>
+        <span class="tag">Go-to-Market</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3 — Python & SQL, Zharfa Academy 2025 (LEFT) -->
+  <div class="tl-item left">
+    <span class="tl-year">2025</span>
+
+    <div class="tl-card">
+      <div class="tl-card-type">Private Class · Development</div>
+      <h2 class="tl-card-title">Python &amp; SQL</h2>
+      <p class="tl-card-institution"><strong>Zharfa Academy</strong> — Private Class</p>
+      <div class="tl-tags">
+        <span class="tag">Python</span>
+        <span class="tag">SQL</span>
+        <span class="tag">Scripting</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4 — Product Management, UXLand 2024 (RIGHT) -->
+  <div class="tl-item right">
+    <span class="tl-year">2024</span>
+
+    <div class="tl-card">
+      <div class="tl-card-type">Boot Camp · Product</div>
+      <h2 class="tl-card-title">Product Management</h2>
+      <p class="tl-card-institution"><strong>UXLand School</strong> — Boot Camp</p>
+      <div class="tl-tags">
+        <span class="tag">Product Strategy</span>
+        <span class="tag">User Stories</span>
+        <span class="tag">Agile</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5 — Advanced UI, UXLand 2023 (LEFT) -->
+  <div class="tl-item left">
+    <span class="tl-year">2023</span>
+
+    <div class="tl-card">
+      <div class="tl-card-type">Boot Camp · UX/UI Design</div>
+      <h2 class="tl-card-title">Advanced UI</h2>
+      <p class="tl-card-institution"><strong>UXLand School</strong> — Boot Camp</p>
+      <div class="tl-tags">
+        <span class="tag">Advanced UI Design</span>
+        <span class="tag">Unity</span>
+        <span class="tag">Interaction Design</span>
+        <span class="tag">Interactive Experiences</span>
+        <span class="tag">Design Systems</span>
+        <span class="tag">Figma</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6 — Agile Planning & Estimation, Scrum.ir 2023 (RIGHT) -->
+  <div class="tl-item right">
+    <span class="tl-year">2023</span>
+
+    <div class="tl-card">
+      <div class="tl-card-type">Online Course · Product</div>
+      <h2 class="tl-card-title">Agile Planning &amp; Estimation</h2>
+      <p class="tl-card-institution"><strong>Scrum.ir</strong> — Online Course</p>
+      <div class="tl-tags">
+        <span class="tag">Scrum</span>
+        <span class="tag">Sprint Planning</span>
+        <span class="tag">Estimation</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7 — UX/UI In Action, UXLand 2022 (LEFT) -->
+  <div class="tl-item left">
+    <span class="tl-year">2022</span>
+
+    <div class="tl-card">
+      <div class="tl-card-type">Boot Camp · UX/UI Design</div>
+      <h2 class="tl-card-title">UX/UI In Action</h2>
+      <p class="tl-card-institution"><strong>UXLand School</strong> — Boot Camp</p>
+      <div class="tl-tags">
+        <span class="tag">UX Research</span>
+        <span class="tag">Prototyping</span>
+        <span class="tag">Usability Testing</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8 — UX Fundamental, UXLand 2022 (RIGHT) -->
+  <div class="tl-item right">
+    <span class="tl-year">2022</span>
+
+    <div class="tl-card">
+      <div class="tl-card-type">Boot Camp · UX/UI Design</div>
+      <h2 class="tl-card-title">UX Fundamental</h2>
+      <p class="tl-card-institution"><strong>UXLand School</strong> — Boot Camp</p>
+      <div class="tl-tags">
+        <span class="tag">UX Principles</span>
+        <span class="tag">Information Architecture</span>
+        <span class="tag">Wireframing</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9 — HTML, CSS, JS, Zharfa Academy 2022 (LEFT) -->
+  <div class="tl-item left">
+    <span class="tl-year">2022</span>
+
+    <div class="tl-card">
+      <div class="tl-card-type">Private Class · Development</div>
+      <h2 class="tl-card-title">HTML, CSS &amp; JavaScript</h2>
+      <p class="tl-card-institution"><strong>Zharfa Academy</strong> — Private Class</p>
+      <div class="tl-tags">
+        <span class="tag">HTML</span>
+        <span class="tag">CSS</span>
+        <span class="tag">JavaScript</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10 — Data Analytics & ML, UXLand 2022 (RIGHT) -->
+  <div class="tl-item right">
+    <span class="tl-year">2022</span>
+
+    <div class="tl-card">
+      <div class="tl-card-type">Boot Camp · Data Analysis</div>
+      <h2 class="tl-card-title">Data Analytics &amp; Machine Learning</h2>
+      <p class="tl-card-institution"><strong>UXLand School</strong> — Boot Camp</p>
+      <div class="tl-tags">
+        <span class="tag">Data Analysis</span>
+        <span class="tag">Machine Learning</span>
+        <span class="tag">KPI Monitoring</span>
+        <span class="tag">SQL</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 11 — UX Design, Rahnema College 2021 (LEFT) -->
+  <div class="tl-item left">
+    <span class="tl-year">2021</span>
+
+    <div class="tl-card">
+      <div class="tl-card-type">Online School · UX/UI Design</div>
+      <h2 class="tl-card-title">UX Design</h2>
+      <p class="tl-card-institution"><strong>Rahnema College</strong> — Online School</p>
+      <div class="tl-tags">
+        <span class="tag">UX Design</span>
+        <span class="tag">Research Methods</span>
+        <span class="tag">Interaction Design</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 12 — UX/UI Design, Niaz Zia 2020 (RIGHT) -->
+  <div class="tl-item right">
+    <span class="tl-year">2020</span>
+
+    <div class="tl-card">
+      <div class="tl-card-type">Online School · UX/UI Design</div>
+      <h2 class="tl-card-title">UX/UI Design</h2>
+      <p class="tl-card-institution"><strong>Niaz Zia Design School</strong> — Online School</p>
+      <div class="tl-tags">
+        <span class="tag">UI Design</span>
+        <span class="tag">UX Foundations</span>
+        <span class="tag">Visual Design</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 13 — EMBA, Azad University 2016 (LEFT) -->
+  <div class="tl-item left">
+    <span class="tl-year">2016</span>
+
+    <div class="tl-card">
+      <div class="tl-card-type">Master's Degree · Academic</div>
+      <h2 class="tl-card-title">Executive MBA (EMBA)</h2>
+      <p class="tl-card-institution"><strong>Azad University</strong> — Urmia Branch</p>
+      <div class="tl-tags">
+        <span class="tag">Strategy</span>
+        <span class="tag">Marketing</span>
+        <span class="tag">Finance</span>
+        <span class="tag">Organisational Behaviour</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 14 — Materials Engineering, Tabriz University 2009 (RIGHT) -->
+  <div class="tl-item right">
+    <span class="tl-year">2009</span>
+
+    <div class="tl-card">
+      <div class="tl-card-type">Bachelor's Degree · Academic</div>
+      <h2 class="tl-card-title">Materials Engineering</h2>
+      <p class="tl-card-institution"><strong>Tabriz University</strong></p>
+      <div class="tl-tags">
+        <span class="tag">Engineering</span>
+        <span class="tag">Analytical Thinking</span>
+        <span class="tag">Problem Solving</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-left">© 2025 Samar Mahboubi</span>
+  <ul class="footer-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</footer>
+
+<script>
+  /* Scroll reveal */
+  const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.tl-item').forEach(el => revealObserver.observe(el));
+</script>
+<script src="scripts.js"></script>
+</body>
+</html>
