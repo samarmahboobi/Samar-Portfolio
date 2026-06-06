@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Resume — Samar Mahboubi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:     #050208;
+      --bg2:    #0c0912;
+      --bg3:    #130f1a;
+      --text:   #EDE9F6;
+      --muted:  #9B8FBB;
+      --dim:    #7a6e95;
+      --accent: #C084FC;
+      --accent2:#A855F7;
+      --border: rgba(192,132,252,0.18);
+    }
+
+    /* ── A4 exact ── */
+    @page {
+      size: A4 portrait;
+      margin: 0;
+    }
+
+    html, body {
+      width: 210mm;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Vazirmatn', sans-serif;
+      font-size: 8.5pt;
+      font-weight: 300;
+      line-height: 1.55;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* ── HEADER (repeated on every page via fixed) ── */
+    .hdr {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 2.2cm;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      gap: 10pt;
+      padding: 0 1cm;
+      z-index: 100;
+    }
+    .hdr-photo {
+      width: 52pt; height: 52pt;
+      border-radius: 50%; object-fit: cover;
+      border: 2pt solid rgba(192,132,252,0.3);
+    }
+    .hdr-name {
+      font-size: 15pt; font-weight: 700;
+      color: var(--text); direction: ltr; text-align: right;
+      letter-spacing: -.02em; line-height: 1;
+      margin-bottom: 2pt;
+    }
+    .hdr-role { font-size: 7pt; color: var(--muted); margin-bottom: 4pt; }
+    .hdr-contacts {
+      display: flex; flex-wrap: wrap;
+      gap: 2pt 10pt;
+    }
+    .hdr-contacts a {
+      font-size: 6.5pt; color: var(--dim);
+      text-decoration: none;
+      display: flex; align-items: center; gap: 2pt;
+    }
+    .hdr-contacts .pf-btn {
+      color: var(--accent);
+      border: 1pt solid rgba(192,132,252,0.3);
+      padding: 1pt 6pt; border-radius: 8pt;
+    }
+
+    /* ── BODY ── */
+    .body-wrap {
+      padding-top: 2.4cm; /* header height + gap */
+      padding-bottom: .6cm;
+      padding-left: 1cm;
+      padding-right: 1cm;
+      display: grid;
+      grid-template-columns: 5.2cm 1fr;
+      gap: 0 .9cm;
+      align-items: start;
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {}
+
+    .s-label {
+      font-size: 6pt; font-weight: 600;
+      color: var(--accent); text-transform: none;
+      letter-spacing: 0;
+      margin-bottom: 5pt;
+      display: flex; align-items: center; gap: 4pt;
+    }
+    .s-label::after {
+      content: ''; flex: 1; height: .5pt;
+      background: var(--border);
+    }
+    .s-block { margin-bottom: 9pt; }
+
+    /* About in sidebar */
+    .about-p {
+      font-size: 7pt; color: var(--muted); line-height: 1.6;
+      margin-bottom: 4pt;
+    }
+    .about-p:last-child { margin-bottom: 0; }
+
+    /* Edu cards */
+    .edu-card {
+      background: var(--bg2);
+      border: .5pt solid var(--border);
+      border-radius: 4pt;
+      padding: 4pt 6pt;
+      margin-bottom: 3pt;
+    }
+    .edu-type { font-size: 5.5pt; color: var(--accent); margin-bottom: 1pt; }
+    .edu-title { font-size: 7pt; font-weight: 600; color: var(--text); margin-bottom: 1pt; }
+    .edu-inst { font-size: 6pt; color: var(--muted); }
+
+    /* Skills */
+    .skill-tag {
+      display: block;
+      font-size: 6.2pt; color: var(--muted);
+      padding: 2.5pt 5pt;
+      border: .5pt solid var(--border);
+      border-radius: 3pt;
+      background: var(--bg2);
+      margin-bottom: 2pt;
+    }
+
+    /* Language */
+    .lang-row { margin-bottom: 5pt; }
+    .lang-top {
+      display: flex; justify-content: space-between;
+      font-size: 6.5pt; margin-bottom: 2pt;
+    }
+    .lang-name { color: var(--text); font-weight: 500; }
+    .lang-level { color: var(--dim); }
+    .lang-bar {
+      height: 2pt; background: var(--bg3); border-radius: 1pt; overflow: hidden;
+    }
+    .lang-fill {
+      height: 100%; border-radius: 1pt;
+      background: linear-gradient(to right, var(--accent2), var(--accent));
+    }
+
+    hr.div {
+      border: none; border-top: .5pt solid rgba(192,132,252,0.2);
+      margin: 6pt 0;
+    }
+
+    /* ── MAIN ── */
+    .main {}
+
+    /* Experience cards */
+    .exp-card {
+      background: linear-gradient(135deg, var(--bg2), var(--bg));
+      border: .5pt solid var(--border);
+      border-radius: 5pt;
+      padding: 6pt 7pt;
+      margin-bottom: 4pt;
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+    .exp-meta {
+      display: flex; justify-content: space-between;
+      align-items: flex-start; margin-bottom: 4pt;
+    }
+    .exp-right { display: flex; align-items: center; gap: 3pt; }
+    .exp-title { font-size: 8pt; font-weight: 600; color: var(--text); }
+    .exp-co {
+      font-size: 6.5pt; color: var(--accent);
+      margin-top: 1.5pt; font-weight: 400;
+      display: flex; align-items: center; gap: 2pt;
+    }
+    .exp-flag { font-size: 6.5pt; }
+    .exp-date { font-size: 6pt; color: var(--dim); direction: ltr; text-align: left; margin-top: 1pt; }
+    .exp-body { font-size: 7pt; color: var(--muted); line-height: 1.6; }
+    .exp-body strong { color: var(--text); font-weight: 600; }
+
+    .main-label {
+      font-size: 6pt; font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 6pt;
+      display: flex; align-items: center; gap: 4pt;
+    }
+    .main-label::after {
+      content: ''; flex: 1; height: .5pt;
+      background: var(--border);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── FIXED HEADER ── -->
+  <div class="hdr">
+    <img class="hdr-photo" src="me.png" alt="Samar"/>
+    <div>
+      <div class="hdr-name">Samar Mahboubi</div>
+      <div class="hdr-role">سمر محبوبی · طراح محصول ارشد · Senior Product Designer</div>
+      <div class="hdr-contacts">
+        <a href="mailto:samar.mahboubi@gmail.com">✉ samar.mahboubi@gmail.com</a>
+        <a href="tel:+989129636294">☎ <span dir="ltr">+98 912 963 6294</span></a>
+        <a href="https://linkedin.com/in/samar-mahboubi">in samar-mahboubi</a>
+        <a class="pf-btn" href="https://samarmahboubi.com">🌐 مشاهده پورتفولیو ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── BODY ── -->
+  <div class="body-wrap">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+
+      <!-- ABOUT -->
+      <div class="s-block">
+        <div class="s-label">درباره‌ی من</div>
+        <p class="about-p">طراح محصول با بیش از ۶ سال تجربه در طراحی تجربه‌های دیجیتال، از پلتفرم گیمینگ، گیمیفیکیشن جذب توریست، حمل‌ونقل هوشمند تا ای‌کامرس و داشبورد دولتی.</p>
+        <p class="about-p">تخصص اصلی من بر ترکیب طراحی و داده است تا محصولاتی بسازم که در عین چشم‌نوازی هم نیاز واقعی کاربران را برطرف کنند و هم رشد بیزینس را شتاب دهند.</p>
+      </div>
+
+      <!-- EDUCATION -->
+      <div class="s-block">
+        <div class="s-label">آموزش</div>
+        <div class="edu-card">
+          <div class="edu-type">Boot Camp · Design Systems · 2025</div>
+          <div class="edu-title">PRSES Design System</div>
+          <div class="edu-inst">Arman Khajehvand — Online</div>
+        </div>
+        <div class="edu-card">
+          <div class="edu-type">Boot Camp · UX/UI Design · 2023</div>
+          <div class="edu-title">Advanced UI</div>
+          <div class="edu-inst">UXLand School — Boot Camp</div>
+        </div>
+      </div>
+
+      <!-- SKILLS -->
+      <div class="s-block">
+        <div class="s-label">طراحی محصول</div>
+        <span class="skill-tag">Figma · Google Material Design · Apple HIG · ShadCN</span>
+        <span class="skill-tag">Design System PRSES — کامپایلر خودکار</span>
+        <span class="skill-tag">Wireframe · Prototype · Usability · Card Sorting · Tree Testing</span>
+      </div>
+
+      <div class="s-block">
+        <div class="s-label">گیمیفیکیشن</div>
+        <span class="skill-tag">Octalysis Framework (Yu-kai Chou)</span>
+        <span class="skill-tag">Plutchik's Emotion Wheel</span>
+      </div>
+
+      <div class="s-block">
+        <div class="s-label">تحلیل داده</div>
+        <span class="skill-tag">Tableau · Radiant · Google Apps Script · SQL</span>
+        <span class="skill-tag">A/B Testing · KPI Dashboard · Funnel Analysis</span>
+        <span class="skill-tag">North Star · DAU/MAU · CLV · CAC · RFM · CSAT</span>
+      </div>
+
+      <div class="s-block">
+        <div class="s-label">استراتژی محصول</div>
+        <span class="skill-tag">Impact vs. Effort Matrix · Decision Tree</span>
+        <span class="skill-tag">PRD · Design Doc · Confluence · Jira · Zoho</span>
+        <span class="skill-tag">Cohort Retention · Funnel Experimentation</span>
+      </div>
+
+      <hr class="div"/>
+
+      <!-- LANGUAGE -->
+      <div class="s-block">
+        <div class="s-label">زبان</div>
+        <div class="lang-row">
+          <div class="lang-top"><span class="lang-name">فارسی</span><span class="lang-level">زبان مادری</span></div>
+          <div class="lang-bar"><div class="lang-fill" style="width:100%"></div></div>
+        </div>
+        <div class="lang-row">
+          <div class="lang-top"><span class="lang-name">English</span><span class="lang-level">IELTS ~6.5–7 · Professional</span></div>
+          <div class="lang-bar"><div class="lang-fill" style="width:82%"></div></div>
+        </div>
+      </div>
+
+    </div>
+    <!-- /sidebar -->
+
+    <!-- MAIN -->
+    <div class="main">
+      <div class="main-label">تجارب کاری</div>
+
+      <!-- Eventagrate -->
+      <div class="exp-card">
+        <div class="exp-meta">
+          <div>
+            <div class="exp-title">طراح محصول ارشد</div>
+            <div class="exp-co"><span class="exp-flag">🇦🇪</span>Eventagrate (UAE)</div>
+          </div>
+          <div class="exp-right">
+            <div class="exp-date">اردیبهشت ۱۴۰۱ — آبان ۱۴۰۴</div>
+          </div>
+        </div>
+        <div class="exp-body">طراح ارشد پروژه‌های: <strong>داشبورد وزارت امور خارجه‌ی امارات</strong>، <strong>۵ اپلیکیشن گیمیفای‌شده Dubai Holding Entertainment</strong> برای پارک‌های توریستی رئال مادرید، گلوبال ویلج، ریورلندز و گرین پلنت، <strong>پلتفرم تعاملی جاب‌فر</strong> (نمایشگاه کاریابی عربستان)، <strong>وب‌اپلیکیشن استریمینگ جام جهانی فوتبال</strong>.</div>
+      </div>
+
+      <!-- Golrang -->
+      <div class="exp-card">
+        <div class="exp-meta">
+          <div>
+            <div class="exp-title">طراح محصول ارشد</div>
+            <div class="exp-co"><span class="exp-flag">🇮🇷</span>پروژه سازمانی گلرنگ</div>
+          </div>
+          <div class="exp-right">
+            <div class="exp-date">آذر ۱۴۰۳ — اردیبهشت ۱۴۰۴</div>
+          </div>
+        </div>
+        <div class="exp-body">طراحی <strong>بازی رقابتی آنلاین</strong> با لیدربرد و جوایز روزانه؛ جذب <strong>۱۰ هزار بازیکن فعال و ۵۰۰ هزار بازی در ۱۰ روز</strong> با مکانیزم‌های گیمیفیکیشن؛ <strong>رشد ۱۶۲٪ لاگین‌ها</strong> در اپلیکیشن «گلرنگ من».</div>
+      </div>
+
+      <!-- GatherO -->
+      <div class="exp-card">
+        <div class="exp-meta">
+          <div>
+            <div class="exp-title">طراح محصول ارشد</div>
+            <div class="exp-co"><span class="exp-flag">🇮🇷🇦🇪</span>Ledgersi (GatherO)</div>
+          </div>
+          <div class="exp-right">
+            <div class="exp-date">اردیبهشت ۱۴۰۲ — تا کنون</div>
+          </div>
+        </div>
+        <div class="exp-body">طراحی <strong>پلتفرم اجتماعی بازی</strong>؛ <strong>تغییر استراتژی محصول</strong> از مینی‌گیم به پلتفرم اجتماعی با تست‌های کاربری؛ ایجاد <strong>مدل درآمدی سکه و اشتراک</strong>؛ ساخت <strong>Design System کراس‌پلتفرم</strong> مبتنی بر Material و iOS HIG.</div>
+      </div>
+
+      <!-- EcoMotive -->
+      <div class="exp-card">
+        <div class="exp-meta">
+          <div>
+            <div class="exp-title">طراح محصول</div>
+            <div class="exp-co"><span class="exp-flag">🇬🇧</span>EcoMotive</div>
+          </div>
+          <div class="exp-right">
+            <div class="exp-date">اردیبهشت ۱۴۰۱ — اسفند ۱۴۰۱</div>
+          </div>
+        </div>
+        <div class="exp-body">طراحی <strong>اپلیکیشن حمل‌ونقل سبز</strong> با محوریت <strong>کاهش اثر کربنی</strong>؛ تعریف <strong>سیستم امتیازدهی</strong> با Octalysis Framework (Yu-kai Chou)؛ استفاده از <strong>Plutchik's Emotion Wheel</strong> برای افزایش اینگیجمنت.</div>
+      </div>
+
+      <!-- Ekomedia -->
+      <div class="exp-card">
+        <div class="exp-meta">
+          <div>
+            <div class="exp-title">طراح UX/UI</div>
+            <div class="exp-co"><span class="exp-flag">🇮🇷</span>آژانس خلاقیت اکومدیا</div>
+          </div>
+          <div class="exp-right">
+            <div class="exp-date">۱۳۹۹ — ۱۴۰۰</div>
+          </div>
+        </div>
+        <div class="exp-body">طراحی <strong>وب‌سایت‌های کاربرمحور</strong> برای مشتریان مارکتینگ؛ <strong>بهبود نرخ تبدیل کمپین‌ها</strong> با بازطراحی جریان کاربر.</div>
+      </div>
+
+      <!-- Organic Dreams -->
+      <div class="exp-card">
+        <div class="exp-meta">
+          <div>
+            <div class="exp-title">طراح محصول</div>
+            <div class="exp-co"><span class="exp-flag">🇮🇷</span>Organic Dreams</div>
+          </div>
+          <div class="exp-right">
+            <div class="exp-date">۱۳۹۹ — ۱۴۰۰</div>
+          </div>
+        </div>
+        <div class="exp-body">طراحی <strong>پلتفرم ای‌کامرس</strong> در حوزه محصولات خواب؛ <strong>مصاحبه، کارت‌سورتینگ و تست کاربردپذیری</strong>؛ طراحی <strong>جریان کاربر و پروتوتایپ</strong>؛ استفاده از <strong>Material Design System</strong> برای مقیاس‌پذیری.</div>
+      </div>
+
+    </div>
+    <!-- /main -->
+
+  </div>
+  <!-- /body-wrap -->
+
+</body>
+</html>
